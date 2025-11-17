@@ -17,6 +17,10 @@ const subtitleEl = ref(null)
 const skillsContainer = ref(null)
 const videoEl = ref(null)
 const descEl = ref(null)
+const ctaEl = ref(null)
+const secondDescriptionEl = ref(null)
+const contactEl = ref(null)
+const galleryContainer = ref(null)
 
 // Lightbox
 const lightboxImage = ref(null)
@@ -78,35 +82,34 @@ onMounted(async () => {
   //
   // --- DESCRIZIONE TESTO ---
   //
-  gsap.from(descEl.value, {
+
+  gsap.from(galleryContainer.value, {
     opacity: 0,
-    y: 200,
-    duration: 1.5,
-    delay: 0.8,
+    duration: 1,
+    delay: 3,
     ease: 'power3.out',
     scrollTrigger: {
-      trigger: descEl.value,
-      start: 'top 80%',
-      end: 'bottom 60%',
-      scrub: 1,
-      toggleActions: 'play none none reverse',
+      trigger: galleryContainer.value,
+      start: 'top 85%',
+      toggleActions: 'play none none reverse', // 👈 non torna indietro
+      once: true, // 👈 si attiva solo una volta
     },
   })
 
   gsap.to(descEl.value, {
-    y: 450,
-    ease: 'power3.out',
+    y: 420,
+    duration: 1.8,
+    ease: 'power2.inOut', // transizione in/out più vellutata
     scrollTrigger: {
       trigger: descEl.value,
-      start: 'top 20%',
+      start: 'top 30%',   // inizia a spostarsi più tardi
       end: 'bottom top',
-      scrub: 1,
+      scrub: 1.4,         // rallenta lo spostamento
       toggleActions: 'play none none reverse',
     },
   })
-
   //
-  // --- GALLERIA CINEMATICA MIGLIORATA ---
+  // --- GALLERIA CINEMATICA ---
   //
   const images = gsap.utils.toArray('.gallery-item')
 
@@ -137,7 +140,62 @@ onMounted(async () => {
       i * 5 + 3.8
     )
   })
+
+    //
+  // --- CTA (entrata bilanciata + uscita elegante) ---
+  //
+  gsap.from(ctaEl.value, {
+    opacity: 0,
+    y: 100,
+    duration: 1.6,
+    ease: 'power3.out',
+    scrollTrigger: {
+      trigger: ctaEl.value,
+      start: 'top 85%',
+      end: 'bottom 60%',
+      toggleActions: 'play none none reverse',
+    },
+  })
+
+  gsap.from(secondDescriptionEl.value, {
+    opacity: 0,
+    x: -80,
+    duration: 1.4,
+    delay: 0.2,
+    ease: 'power3.out',
+    scrollTrigger: {
+      trigger: ctaEl.value,
+      start: 'top 90%',
+      toggleActions: 'play none none reverse',
+    },
+  })
+
+  gsap.from(contactEl.value, {
+    opacity: 0,
+    x: 80,
+    duration: 1.4,
+    delay: 0.4,
+    ease: 'power3.out',
+    scrollTrigger: {
+      trigger: ctaEl.value,
+      start: 'top 90%',
+      toggleActions: 'play none none reverse',
+    },
+  })
+
+  gsap.to(ctaEl.value, {
+    opacity: 0.5,
+    y: -50,
+    ease: 'power1.inOut',
+    scrollTrigger: {
+      trigger: ctaEl.value,
+      start: 'top 30%',
+      end: 'bottom top',
+      scrub: 1,
+    },
+  })
 })
+
 </script>
 
 <template>
@@ -177,17 +235,17 @@ onMounted(async () => {
     </div>
 
     <!-- GALLERIA CINEMATICA -->
-    <section class="flex flex-col lg:flex-row gap-24 relative gallery-container h-[66vh]">
+    <section ref="galleryContainer" class="flex flex-col lg:flex-row gap-24 relative gallery-container">
       <!-- Testo Sticky -->
       <div
         ref="descEl"
-        class="w-full lg:w-1/2 text-base-300 leading-relaxed lg:sticky self-start will-change-transform"
+        class="w-full lg:w-1/2 text-base-300 leading-relaxed  self-start will-change-transform"
       >
         <p class="max-w-md text-lg">{{ project.description }}</p>
       </div>
 
       <!-- Galleria -->
-      <div class="w-full lg:w-1/2 flex items-center justify-center relative h-full">
+      <div class="w-full lg:w-1/2 flex items-center justify-center relative h-[66vh]">
         <div
           v-for="(img, i) in project.galleryImages"
           :key="i"
@@ -204,13 +262,13 @@ onMounted(async () => {
     </section>
 
     <!-- CTA -->
-    <div class="flex flex-col lg:flex-row gap-16 border-t border-base-600 pt-24">
-      <div class="w-full lg:w-2/3 text-base-300 leading-relaxed">
+    <div ref="ctaEl" class="flex flex-col lg:flex-row gap-16 border-t border-base-600 pt-24">
+      <div ref="secondDescriptionEl" class="w-full lg:w-2/3 text-base-300 leading-relaxed">
         <p>{{ project.secondDescription }}</p>
       </div>
-      <div class="w-full lg:w-1/3 flex justify-start lg:justify-end items-end">
+      <div ref="contactEl" class="w-full lg:w-1/3 flex justify-start lg:justify-end items-end">
         <router-link
-          :to="'/contact'"
+          :to="'/about'"
           class="inline-flex items-center gap-3 px-8 py-4 bg-white rounded-full font-semibold text-lg transition text-black hover:bg-accent hover:text-white"
         >
           <span class="font-display !text-black">Get in touch</span>
