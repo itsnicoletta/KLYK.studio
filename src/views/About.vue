@@ -1,11 +1,11 @@
 <template>
   <Navbar />
 
-  <main class="w-full h-svh flex items-center justify-center px-6 pt-28 pb-24 lg:px-40">
+  <main class="w-full lg:h-svh flex items-center justify-center px-6 pt-28 pb-24 lg:px-40">
     <section class="w-full h-[50vh] max-w-4xl flex flex-col items-center justify-center text-center gap-8">
       <header class="flex flex-col items-center gap-4">
         <h1 class="font-display font-semibold leading-tight text-[clamp(2.6rem,6vw,4rem)]">
-          About us
+          About usdig +short klyk.studio A
         </h1>
 
         <p class="text-base sm:text-lg text-base-300 leading-relaxed max-w-2xl">
