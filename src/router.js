@@ -6,7 +6,6 @@ import About from './views/About.vue'
 import ProjectDetail from './views/ProjectDetail.vue'
 import Projects from './views/Projects.vue'
 import Contacts from './views/Contacts.vue'
-import NotFound from './views/NotFound.vue'
 import ServicesDetail from './views/ServicesDetail.vue'
 
 const routes = [
@@ -39,12 +38,6 @@ const routes = [
         path: '/contacts',
         name: 'Contacts',
         component: Contacts
-    },
-    {
-        //  pagina 404 personalizzata
-        path: '/:pathMatch(.*)*',
-        name: 'NotFound',
-        component: NotFound
     }
 ]
 
