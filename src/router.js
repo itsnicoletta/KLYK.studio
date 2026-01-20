@@ -1,13 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 // Importa le tue view principali
-import Home from '../src/views/Home.vue'
-import About from '../src/views/About.vue'
+import Home from './views/Home.vue'
+import About from './views/About.vue'
 import ProjectDetail from './views/ProjectDetail.vue'
-import Projects from '../src/views/Projects.vue'
-import Contacts from '../src/views/Contacts.vue'
-import NotFound from '../src/views/NotFound.vue'
-import ServicesDetail from '../src/views/ServicesDetail.vue'
+import Projects from './views/Projects.vue'
+import Contacts from './views/Contacts.vue'
+import NotFound from './views/NotFound.vue'
+import ServicesDetail from './views/ServicesDetail.vue'
 
 const routes = [
     {
