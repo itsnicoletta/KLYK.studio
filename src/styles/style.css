@@ -11,4 +11,35 @@
 :root {
   --font-display: 'Clash Display', sans-serif;
   --font-sans: 'Satoshi', 'Inter', sans-serif;
+  --sb-size: 10px;
+  --sb-thumb: rgba(255, 255, 255, .25);
+  --sb-thumb-hover: rgba(255, 255, 255, .40);
+}
+
+/* Firefox */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--sb-thumb) transparent;
+}
+
+/* Chromium/Safari */
+html::-webkit-scrollbar {
+  width: var(--sb-size);
+  height: var(--sb-size);
+}
+
+html::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+html::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb);
+  border-radius: 9999px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background: var(--sb-thumb-hover);
+  background-clip: content-box;
 }

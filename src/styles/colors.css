@@ -1,11 +1,15 @@
 :root {
-     --color-bg-body: #141414;
-  /* sfondo principale */
-  --color-text-primary: #f5f5f5;
-  /* testo principale */
-  --color-text-secondary: #bdbdbd;
-  /* testo secondario */
-  --color-accent: #019cd9;
+    --color-bg-body: #141414;
+    /* sfondo principale */
+    --color-text-primary: #f5f5f5;
+    /* testo principale */
+    --color-text-secondary: #bdbdbd;
+    /* testo secondario */
+    --color-accent: #019cd9;
+    /* colore di accento */
+
+    --color-bg-secondary: #f5f5f5;
+
 
 }
 
@@ -15,4 +19,16 @@
         background-color: var(--color-bg-body);
         color: var(--color-text-primary);
     }
+
+    .bg-accent {
+        background-color: var(--color-accent);
+    }
+}
+
+@theme {
+    --color-bg-body: #141414;
+    --color-text-primary: #f5f5f5;
+    --color-text-secondary: #bdbdbd;
+    --color-accent: #019cd9;
+    --color-bg-secondary: #f5f5f5;
 }

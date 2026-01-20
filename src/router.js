@@ -3,7 +3,11 @@ import { createRouter, createWebHistory } from 'vue-router'
 // Importa le tue view principali
 import Home from '../src/views/Home.vue'
 import About from '../src/views/About.vue'
-import ProjectDetail from '../src/views/ProjectDetail.vue'
+import ProjectDetail from './views/ProjectDetail.vue'
+import Projects from '../src/views/Projects.vue'
+import Contacts from '../src/views/Contacts.vue'
+import NotFound from '../src/views/NotFound.vue'
+import ServicesDetail from '../src/views/ServicesDetail.vue'
 
 const routes = [
     {
@@ -22,10 +26,25 @@ const routes = [
         component: ProjectDetail
     },
     {
-        //  facoltativo: pagina 404 personalizzata (utile se vuoi gestire errori)
+        path: '/projects',
+        name: 'Projects',
+        component: Projects
+    },
+    {
+        path: '/services/:slug',
+        name: 'ServicesDetail',
+        component: ServicesDetail
+    },
+    {   
+        path: '/contacts',
+        name: 'Contacts',
+        component: Contacts
+    },
+    {
+        //  pagina 404 personalizzata
         path: '/:pathMatch(.*)*',
         name: 'NotFound',
-        component: () => import('../src/views/notFound.vue')
+        component: NotFound
     }
 ]
 
