@@ -18,6 +18,7 @@ export const infoAgency = {
     Vision: 'We envision a digital landscape where creativity meets technology, resulting in immersive experiences that captivate and inspire users. At KLYK.studio, we strive to be at the forefront of innovation, continuously pushing the boundaries of what is possible in web design and development. Our goal is to build lasting relationships with our clients by delivering exceptional value and fostering a collaborative approach to every project.',
     WhyUs: 'You have the ideas, we have the skills to bring them to life.',
     Products: 'You can see some of our work.',
+    ProjectHeader: 'Our latest projects',
 };
 
 export const infoDesigner = [

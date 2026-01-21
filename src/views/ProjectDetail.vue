@@ -265,7 +265,7 @@ onMounted(async () => {
             scrollTrigger: {
                 trigger: sliderGallery.value,
                 start: 'top 62%',
-                end: 'bottom 35%',
+                end: 'bottom 0%',
                 toggleActions: 'play reverse play reverse',
                 // markers: true
             }

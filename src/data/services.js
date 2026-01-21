@@ -1,3 +1,8 @@
+import services1 from '../data/servicesAssets/services1.png';
+import services2 from '../data/servicesAssets/services2.png';
+import services3 from '../data/servicesAssets/services3.png';
+
+
 export const services = [
     {
         id: 1,
@@ -12,6 +17,7 @@ export const services = [
         ],
         client: 'For startups and established businesses looking to improve user experience and engagement through research-driven design.',
         Cta: 'Need to understand your users?',
+        image: services1,
     },
     {
         id: 2,
@@ -26,6 +32,7 @@ export const services = [
         ], 
         client: 'For businesses seeking to create impactful online presences with advanced visual and interactive elements.',
         Cta: 'Want to amaze your audience?',
+        image: services2,
     },
     {
         id: 3,
@@ -40,6 +47,7 @@ export const services = [
         ],
         client: 'For businesses and individuals looking to establish or enhance their online presence with professional web development services.',
         Cta: 'Need a new website?',
+        image: services3,
     },
 ];
 

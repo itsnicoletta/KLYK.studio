@@ -30,6 +30,7 @@ export const projects = [
         slug: 'lost-in-light-immersive-experience',
         title: 'Lost in Light',
         H2: 'An interactive and immersive web-based experience exploring light and perception.',
+        year: '2025',
         shortDescription:
             'A narrative-driven digital experience that blends motion, sound, and interactivity to explore the relationship between humans and light.',
         description: `Lost in Light is an experimental web project that invites users to explore the boundaries between light and darkness through motion, sound, and interaction. 
@@ -65,7 +66,8 @@ export const projects = [
             img2_3
         ],
         video: vid2,
-        link: 'https://progetto-esame---pelosi-nicoletta.webflow.io/'
+        link: 'https://progetto-esame---pelosi-nicoletta.webflow.io/',
+        year: '2025'
     },
     {
         id: 3,
@@ -79,9 +81,10 @@ export const projects = [
         coverImage: cover3,
         galleryImages: [img3_1, img3_2, img3_3],
         video: vid3,
-        link: 'https://focusflow-pro.netlify.app/'
+        link: 'https://focusflowpro.netlify.app',
+        year: '2024'
     },
-/*     {
+     {
         id: 4,
         slug: 'fintech-aml-kyc-unified-operations-case-study',
         title: 'Unified KYC/AML Workspace',
@@ -98,6 +101,29 @@ export const projects = [
             'Compliance UX (KYC/AML)',
             'Prototyping'
         ],
-    } */
+        year: '2026',
+    },
+    {
+        id: 5,
+        slug: 'template-project-5',
+        title: 'Project Title 5',
+        H2: 'Subtitle for project 5.',
+        shortDescription:
+            'A brief description of project 5.',
+        description: `Detailed description of project 5.`,
+        secondDescription: `Additional information about project 5.`,
+        skills: ['Skill 1', 'Skill 2', 'Skill 3'],
+        coverImage: 'path/to/cover5.png',
+        galleryImages: [
+            'path/to/image5_1.png',
+            'path/to/image5_2.png',
+
+            'path/to/image5_3.png'
+        ],
+        video: 'path/to/video5.mp4',
+        link: 'https://link-to-project-5.com',
+        year: '2023'    
+    } 
+
 ];
 

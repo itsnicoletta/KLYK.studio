@@ -1,12 +1,15 @@
 <template>
   <Navbar />
+  <Shader />
 
   <!-- HERO -->
-  <section id="Hero-wrapper" class="w-full min-h-screen mt-30">
-    <div id="hero-text" class="w-full h-full flex justify-center items-center gap-10 lg:gap-20
-             px-6 py-16 flex-col
-             pt-28 sm:pt-24
-             lg:pt-0 lg:px-40 lg:py-24 lg:flex-row" :class="isMobileOrTablet ? 'mt-[60px]' : 'mt-0'">
+  <section id="Hero-wrapper" class="w-full min-h-screen mt-16 lg:mt-30">
+    <div id="hero-text" class="w-full h-full flex justify-center items-center
+             gap-8 lg:gap-20
+             px-[40px] md:px-[80px] lg:px-[112px]
+             py-10 md:py-14 lg:py-24
+             pt-20 sm:pt-20 lg:pt-0
+             flex-col lg:flex-row" :class="isMobileOrTablet ? 'mt-[60px]' : 'mt-0'">
       <div id="hero-heading" class="flex flex-col gap-2 max-w-2xl
                w-full items-center text-center
                lg:w-1/2 lg:items-start lg:text-left">
@@ -42,8 +45,11 @@
   </section>
 
   <!-- SERVICES -->
-  <section id="services" class="flex flex-col gap-10 py-24 mb-40">
-    <div class="flex flex-col items-center pb-20">
+  <section id="services" class="px-[40px] md:px-[80px] lg:px-[112px]
+           flex flex-col gap-8 lg:gap-10
+           py-14 md:py-16 lg:py-24
+           mb-20 md:mb-28 lg:mb-40">
+    <div class="flex flex-col items-center pb-10 md:pb-14 lg:pb-20">
       <h3 ref="whyUsTitleEl" class="text-6xl font-display font-medium text-center w-1/2
                max-lg:w-3/4 max-md:w-11/12
                max-md:text-5xl max-sm:text-4xl">
@@ -52,15 +58,15 @@
     </div>
 
     <!-- Cards: desktop/tablet wrap, mobile stacked -->
-    <div class="flex flex-wrap justify-center gap-8 mb-40
-             max-md:flex-col max-md:flex-nowrap max-md:items-stretch max-md:w-full max-md:px-4">
-      <div class="flex flex-wrap gap-8 justify-center
-               max-md:flex-col max-md:flex-nowrap max-md:items-stretch max-md:w-full" ref="servicesCardsWrapEl">
+    <div class="flex flex-wrap justify-center gap-6 md:gap-8 mb-16 md:mb-24 lg:mb-40
+             max-md:flex-col max-md:flex-nowrap max-md:items-stretch max-md:w-full">
+      <div ref="servicesCardsWrapEl" class="flex flex-wrap gap-6 md:gap-8 justify-center
+               max-md:flex-col max-md:flex-nowrap max-md:items-stretch max-md:w-full">
         <ServicesCard v-for="service in services" :key="service.id" :service="service" class="max-md:w-full" />
       </div>
     </div>
 
-    <div class="flex flex-col items-center pt-30 pb-10">
+    <div class="flex flex-col items-center pt-40 md:pt-20 lg:pt-30">
       <h4 ref="otherServicesTitleEl" class="text-4xl text-center
                max-md:text-3xl max-sm:text-2xl">
         Have anything else in mind?
@@ -68,7 +74,7 @@
     </div>
 
     <div class="w-full">
-      <div ref="otherServicesWrapEl" class="w-2/5 mx-auto flex flex-row justify-center gap-8
+      <div ref="otherServicesWrapEl" class="w-3/5 mx-auto flex flex-row justify-center gap-6 md:gap-8
                max-lg:w-3/4 max-md:w-11/12
                max-md:flex-col max-md:items-center">
         <OtherServices v-for="service in otherServices" :key="`other-${service.id}`" :service="service" />
@@ -77,8 +83,10 @@
   </section>
 
   <!-- PROJECTS -->
-  <section id="projects" class="flex flex-col gap-10 py-24">
-    <div class="flex flex-col items-center pb-20">
+  <section id="projects" class="px-[40px] md:px-[80px] lg:px-[112px]
+           flex flex-col gap-8 lg:gap-10
+           py-14 md:py-16 lg:py-24">
+    <div class="flex flex-col items-center pb-10 md:pb-14 lg:pb-20">
       <h4 ref="projectsTitleEl" class="text-6xl font-display font-medium text-center w-1/2
                max-lg:w-3/4 max-md:w-11/12
                max-md:text-5xl max-sm:text-4xl">
@@ -86,21 +94,24 @@
       </h4>
     </div>
 
-    <ProjectCard v-for="project in projects" :key="project.slug" :title="project.title" :slug="project.slug"
+    <ProjectCard v-for="project in homeProjects" :key="project.slug" :title="project.title" :slug="project.slug"
       :image="project.coverImage" :skills="project.skills" />
   </section>
 
   <Footer />
+  <ShaderBottom />
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import { ref, onMounted, onBeforeUnmount, nextTick, computed } from 'vue'
 import { gsap } from 'gsap'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 
 import Navbar from '../components/Navbar.vue'
 import Footer from '../components/Footer.vue'
 import Button from '../components/Button.vue'
+import Shader from '../components/ShaderTop.vue'
+import ShaderBottom from '../components/ShaderBottom.vue'
 
 import ServicesCard from '../components/ServicesCard.vue'
 import OtherServices from '../components/OtherServices.vue'
@@ -111,6 +122,12 @@ import { services, otherServices } from '../data/services.js'
 import { projects } from '../data/projects.js'
 
 gsap.registerPlugin(ScrollTrigger)
+
+const homeProjects = computed(() =>
+  [...projects]
+    .sort((a, b) => b.year - a.year)
+    .slice(0, 4)
+)
 
 /* -------------------------------------------------------------------------- */
 /* Responsive flag                                                            */
@@ -123,7 +140,7 @@ function syncViewportFlag() {
 }
 
 /* -------------------------------------------------------------------------- */
-/* DOM refs                                                                    */
+/* DOM refs                                                                   */
 /* -------------------------------------------------------------------------- */
 const heroTitleEl = ref(null)
 const heroDescriptionEl = ref(null)
@@ -138,7 +155,7 @@ const servicesCardsWrapEl = ref(null)
 const otherServicesWrapEl = ref(null)
 
 /* -------------------------------------------------------------------------- */
-/* GSAP lifecycle                                                              */
+/* GSAP lifecycle                                                             */
 /* -------------------------------------------------------------------------- */
 let ctx = null
 
@@ -163,7 +180,6 @@ onMounted(async () => {
     heroTl
       .from(heroTitleEl.value, { opacity: 0, y: 40, duration: 1.1 })
       .from(heroDescriptionEl.value, { opacity: 0, y: 28, duration: 1 }, '-=0.6')
-      // Preferenza tua: $el, ma con fallback sicuro
       .from(heroCtaEl.value?.$el ?? heroCtaEl.value, { opacity: 0, y: 22, duration: 1 }, '-=0.55')
       .from(hero3dWrapperEl.value, { opacity: 0, y: 30, duration: 1.0 }, '-=0.6')
 
@@ -197,7 +213,7 @@ onMounted(async () => {
           y: 26,
           duration: 1,
           ease: 'power2.out',
-          stagger: 0.20,
+          stagger: 0.2,
           delay: 1,
           scrollTrigger: {
             trigger: servicesCardsWrapEl.value,
@@ -211,14 +227,14 @@ onMounted(async () => {
 
     /* --------------------- Other services stagger (scroll) --------------------- */
     if (otherServicesWrapEl.value) {
-      const otherServices = otherServicesWrapEl.value.children
-      if (otherServices?.length) {
-        gsap.from(otherServices, {
+      const els = otherServicesWrapEl.value.children
+      if (els?.length) {
+        gsap.from(els, {
           opacity: 0,
           y: 26,
           duration: 1,
           ease: 'power2.out',
-          stagger: 0.20,
+          stagger: 0.2,
           scrollTrigger: {
             trigger: otherServicesWrapEl.value,
             start: 'top 75%',
@@ -240,6 +256,6 @@ onBeforeUnmount(() => {
 
   // cleanup gsap
   ctx?.revert()
-  ScrollTrigger.getAll().forEach(t => t.kill())
+  ScrollTrigger.getAll().forEach((t) => t.kill())
 })
 </script>

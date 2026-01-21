@@ -1,8 +1,8 @@
 <template>
     <nav ref="navbar" class="fixed z-10 left-0 right-0 mx-auto p-4 pt-3 shadow-lg overflow-hidden border-2
            border-[var(--color-text-primary)] bg-[var(--color-bg-body)]
-           transition-[max-height,border-radius] duration-1500 ease-in-out" :class="[
-            isMobileOrTablet ? 'w-11/12 top-4' : 'w-3/5 top-10',
+           transition-[max-height,border-radius,padding] duration-1500 ease-in-out" :class="[
+            isMobileOrTablet ? 'w-11/12 top-4 p-2' : 'w-3/5 top-10 p-4',
             isMenuAperto ? 'max-h-[580px] rounded-[50px]' : 'max-h-[84px] rounded-[75px]'
         ]">
         <!-- HEADER: flex, logo centrato “reale” con absolute -->
