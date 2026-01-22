@@ -21,6 +21,7 @@
                     <!-- Required by Netlify -->
                     <input type="hidden" name="form-name" value="contact" />
 
+                    <input type="text" name="bot-field" class="hidden" />
                     <!-- Honeypot -->
                     <input v-model="form.botField" type="text" name="bot-field" class="hidden" tabindex="-1"
                         autocomplete="off" />
