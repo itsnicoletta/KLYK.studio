@@ -9,13 +9,11 @@
         <div class="absolute inset-0 -z-20 bg-center bg-cover" :style="{ backgroundImage: `url(${service.image})` }"
             aria-hidden="true"></div>
 
-        <!-- SFONDO: overlay per leggibilità (sempre presente, animato su hover) -->
         <div class="absolute inset-0 -z-10
              bg-black/55
              transition-opacity duration-700 ease-in-out
              group-hover:opacity-70" aria-hidden="true"></div>
 
-        <!-- opzionale: gradiente “di carattere” sopra l’overlay -->
         <div class="absolute inset-0 -z-10
              opacity-60 group-hover:opacity-80
              transition-opacity duration-700 ease-in-out

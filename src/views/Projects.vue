@@ -4,9 +4,9 @@
 
     <!-- TIMELINE VERTICALE — fixed overlay, non interferisce col layout -->
     <aside class="fixed top-0 left-0 h-screen
-           w-[84px] sm:w-[120px] lg:w-[160px]
-           z-10
-           border-r-2 border-[var(--color-body-primary)]
+           w-[84px] sm:w-[120px] lg:w-[160px] max-sm:w-[30px]
+           z-9
+           border-r-2 border-[var(--color-body-primary)] max-sm:border-none
            flex items-center justify-center
            pointer-events-none" aria-label="Projects years navigation">
         <div class="relative h-full w-full flex items-center justify-center">
@@ -14,10 +14,10 @@
             <nav class="relative h-full w-full
                flex flex-col items-center justify-center
                py-5 sm:py-7 lg:py-10
-               gap-2.5 sm:gap-4 lg:gap-6
-               pointer-events-auto">
+               gap-2.5 max-sm:gap-8 lg:gap-6
+               pointer-events-auto ">
                 <button v-for="year in years" :key="year" type="button" class="group relative flex items-center
-                 gap-2 sm:gap-3
+                 gap-2 max-sm:gap-6
                  w-full justify-center cursor-pointer
                  px-1 sm:px-2" @click="scrollToYear(year)">
                     <span class="h-2.5 w-2.5 sm:h-3 sm:w-3 rounded-full border-2
@@ -27,7 +27,7 @@
                     : 'bg-[var(--color-bg-body)] border-[var(--color-text-primary)]'" aria-hidden="true"></span>
 
                     <span class="text-[11px] sm:text-sm font-medium tracking-wide
-                   transition-opacity duration-200"
+                   transition-opacity duration-200 max-sm:-rotate-90 max-sm:origin-left max-sm:whitespace-nowrap"
                         :class="activeYear === year ? 'opacity-100' : 'opacity-60 group-hover:opacity-90'">
                         {{ year }}
                     </span>
@@ -51,9 +51,8 @@
         <div class="flex flex-col gap-10 sm:gap-14 lg:gap-16">
             <section v-for="group in projectsByYear" :key="group.year" :id="`year-${group.year}`"
                 :ref="setYearSectionRef(group.year)" class="scroll-mt-24 sm:scroll-mt-32 lg:scroll-mt-40">
-                <!-- Padding responsivo per evitare che la sidebar overlay copra il titolo -->
                 <div class="flex items-end justify-between mb-4 sm:mb-6 lg:mb-8
-                 pl-[100px] sm:pl-[140px] lg:pl-[190px]">
+                 pl-[100px] sm:pl-[140px] lg:pl-[190px] max-sm:pl-0 max-sm:flex-col">
                     <h5 class="text-3xl md:text-4xl font-display font-medium">
                         {{ group.year }}
                     </h5>
@@ -63,7 +62,7 @@
                 </div>
 
                 <div class="flex flex-col gap-6 sm:gap-7 lg:gap-8">
-                    <ProjectCard v-for="project in group.items" :key="project.slug" :title="project.title"
+                    <ProjectCard  v-for="project in group.items" :key="project.slug" :title="project.title"
                         :slug="project.slug" :image="project.coverImage" :skills="project.skills" />
                 </div>
             </section>

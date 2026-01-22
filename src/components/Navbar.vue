@@ -3,7 +3,7 @@
            border-[var(--color-text-primary)] bg-[var(--color-bg-body)]
            transition-[max-height,border-radius,padding] duration-1500 ease-in-out" :class="[
             isMobileOrTablet ? 'w-11/12 top-4 p-2' : 'w-3/5 top-10 p-4',
-            isMenuAperto ? 'max-h-[580px] rounded-[50px]' : 'max-h-[84px] rounded-[75px]'
+            isMenuAperto ? 'max-h-[580px] rounded-[50px]' : 'max-h-[84px] rounded-[75px] max-sm:h-[64px] max-sm:px-2 max-sm:pt-0.5 '
         ]">
         <!-- HEADER: flex, logo centrato “reale” con absolute -->
         <section id="navbar-chiusa" class="relative w-full flex flex-row justify-between items-center">
@@ -15,15 +15,15 @@
             <!-- center (indipendente da left/right) -->
             <div class="absolute left-1/2 -translate-x-1/2 flex items-center justify-center pointer-events-none">
                 <router-link to="/" class="inline-flex items-center justify-center pointer-events-auto">
-                    <img src="../assets/icon_navbar.svg" alt="Klyk Studio Logo" class="h-8 w-auto" />
+                    <img src="../assets/icon_navbar.svg" alt="Klyk Studio Logo" class="h-8 w-auto max-sm:h-6" />
                 </router-link>
             </div>
 
             <!-- right -->
             <div class="flex items-center">
-                <router-link to="/about" id="hero-cta" class="inline-flex">
+                <router-link to="/contacts" id="hero-cta" class="inline-flex">
                     <Button variant="primary" :size="isMobileOrTablet ? 'small' : 'medium'">
-                        {{ isMobileOrTablet ? 'Touch' : 'Get in touch' }}
+                        {{ isMobileOrTablet ? 'Contact' : 'Get in touch' }}
                     </Button>
                 </router-link>
             </div>
@@ -33,14 +33,14 @@
         <section id="menu-dropdown" class="pt-6 transition-all duration-[700ms] ease-out" :class="isMenuAperto
             ? 'opacity-100 translate-y-0 pointer-events-auto'
             : 'opacity-0 -translate-y-2 pointer-events-none'">
-            <ul class="flex flex-col justify-center items-center gap-8 h-full font-medium">
-                <li class="text-2xl transition-transform duration-300 ease-in-out hover:scale-110 origin-center">
+            <ul class="flex flex-col justify-center items-center gap-8 max-sm:gap-4 h-full font-medium">
+                <li class="text-2xl max-sm:text-lg transition-transform duration-300 ease-in-out hover:scale-110 origin-center">
                     <router-link to="/">Home</router-link>
                 </li>
-                <li class="text-2xl transition-transform duration-300 ease-in-out hover:scale-110 origin-center">
+                <li class="text-2xl max-sm:text-lg transition-transform duration-300 ease-in-out hover:scale-110 origin-center">
                     <router-link to="/projects">Projects</router-link>
                 </li>
-                <li class="text-2xl transition-transform duration-300 ease-in-out hover:scale-110 origin-center">
+                <li class="text-2xl max-sm:text-lg transition-transform duration-300 ease-in-out hover:scale-110 origin-center">
                     <router-link to="/about">About</router-link>
                 </li>
             </ul>

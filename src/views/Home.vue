@@ -28,9 +28,9 @@
           {{ infoAgency.Hero }}
         </p>
 
-        <router-link to="/about" id="hero-cta" ref="heroCtaEl" class="w-full sm:w-auto">
+        <router-link to="/quick-audit" id="hero-cta" ref="heroCtaEl" class="w-full sm:w-auto">
           <Button variant="outline" :size="isMobileOrTablet ? 'medium' : 'large'" class="w-full sm:w-auto">
-            Discover more of us
+            Book a 15-min call
           </Button>
         </router-link>
       </div>
@@ -47,18 +47,18 @@
   <!-- SERVICES -->
   <section id="services" class="px-[40px] md:px-[80px] lg:px-[112px]
            flex flex-col gap-8 lg:gap-10
-           py-14 md:py-16 lg:py-24
-           mb-20 md:mb-28 lg:mb-40">
+           py-14 md:py-16 lg:py-24 
+           mb-20 md:mb-28 lg:mb-40 max-sm:mb-0">
     <div class="flex flex-col items-center pb-10 md:pb-14 lg:pb-20">
       <h3 ref="whyUsTitleEl" class="text-6xl font-display font-medium text-center w-1/2
-               max-lg:w-3/4 max-md:w-11/12
-               max-md:text-5xl max-sm:text-4xl">
+               max-sm:text-2xl max-lg:w-3/4 max-md:w-11/12
+               max-md:text-5xl">
         {{ infoAgency.WhyUs }}
       </h3>
     </div>
 
     <!-- Cards: desktop/tablet wrap, mobile stacked -->
-    <div class="flex flex-wrap justify-center gap-6 md:gap-8 mb-16 md:mb-24 lg:mb-40
+    <div class="flex flex-wrap justify-center gap-6 md:gap-8 mb-16 md:mb-24 lg:mb-40 
              max-md:flex-col max-md:flex-nowrap max-md:items-stretch max-md:w-full">
       <div ref="servicesCardsWrapEl" class="flex flex-wrap gap-6 md:gap-8 justify-center
                max-md:flex-col max-md:flex-nowrap max-md:items-stretch max-md:w-full">
@@ -66,7 +66,7 @@
       </div>
     </div>
 
-    <div class="flex flex-col items-center pt-40 md:pt-20 lg:pt-30">
+    <div class="flex flex-col items-center pt-40 max-sm:pt-10 md:pt-20 lg:pt-30">
       <h4 ref="otherServicesTitleEl" class="text-4xl text-center
                max-md:text-3xl max-sm:text-2xl">
         Have anything else in mind?
@@ -75,7 +75,7 @@
 
     <div class="w-full">
       <div ref="otherServicesWrapEl" class="w-3/5 mx-auto flex flex-row justify-center gap-6 md:gap-8
-               max-lg:w-3/4 max-md:w-11/12
+               max-lg:w-3/4 max-md:w-11/12 max-sm:w-full 
                max-md:flex-col max-md:items-center">
         <OtherServices v-for="service in otherServices" :key="`other-${service.id}`" :service="service" />
       </div>
@@ -94,7 +94,7 @@
       </h4>
     </div>
 
-    <ProjectCard v-for="project in homeProjects" :key="project.slug" :title="project.title" :slug="project.slug"
+    <ProjectCard class="max-sm:w-full" v-for="project in homeProjects" :key="project.slug" :title="project.title" :slug="project.slug"
       :image="project.coverImage" :skills="project.skills" />
   </section>
 

@@ -46,6 +46,19 @@
 <body>
   <div id="app"></div>
   <script type="module" src="/src/main.js"></script>
+
+  <!-- Netlify Forms detection (hidden form) -->
+<form name="quick-audit-intake" netlify netlify-honeypot="bot-field" hidden>
+  <input type="text" name="bot-field" />
+  <input type="text" name="name" />
+  <input type="email" name="email" />
+  <input type="text" name="objective" />
+  <input type="text" name="budget" />
+  <input type="text" name="timeline" />
+  <textarea name="notes"></textarea>
+  <input type="text" name="calendly_event_uri" />
+  <input type="text" name="calendly_invitee_uri" />
+</form>
 </body>
 
 </html>

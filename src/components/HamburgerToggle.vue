@@ -1,6 +1,6 @@
 <template>
-    <button type="button" class="hamburger-btn" :class="stateClass" :style="btnStyle" @mouseenter="isHovered = true"
-        @mouseleave="isHovered = false" @click="$emit('click', $event)" aria-label="Toggle menu">
+    <button type="button" class="hamburger-btn" :class="stateClass" :style="btnStyle" @click="$emit('click', $event)"
+        aria-label="Toggle menu">
         <span class="line line--top" aria-hidden="true"></span>
         <span class="line line--mid" aria-hidden="true"></span>
         <span class="line line--bot" aria-hidden="true"></span>
@@ -8,7 +8,7 @@
 </template>
 
 <script setup>
-import { computed, ref } from "vue";
+import { computed } from "vue";
 
 const props = defineProps({
     open: { type: Boolean, default: false },
@@ -17,14 +17,7 @@ const props = defineProps({
 
 defineEmits(["click"]);
 
-const isHovered = ref(false);
-
-const stateClass = computed(() => {
-    if (!props.open && !isHovered.value) return "state--burger";
-    if (!props.open && isHovered.value) return "state--chev-down";
-    if (props.open && !isHovered.value) return "state--x";
-    return "state--chev-up";
-});
+const stateClass = computed(() => (props.open ? "state--x" : "state--burger"));
 
 // scala relativa: 44px è il baseline
 const btnStyle = computed(() => {
@@ -34,7 +27,6 @@ const btnStyle = computed(() => {
     return {
         "--btn": `${s}px`,
         "--lineW": `${22 * scale}px`,
-        "--chevW": `${16 * scale}px`,
         "--offset": `${7 * scale}px`,
         "--thick": `${2 * Math.max(1, scale)}px`,
     };
@@ -91,23 +83,6 @@ const btnStyle = computed(() => {
     transform: translate(-50%, var(--offset)) rotate(0deg);
 }
 
-/* CHEVRON DOWN */
-.state--chev-down .line--top {
-    width: var(--chevW);
-    transform: translate(-50%, 0px) rotate(45deg);
-}
-
-.state--chev-down .line--mid {
-    width: var(--lineW);
-    opacity: 0;
-    transform: translate(-50%, 0px) rotate(0deg);
-}
-
-.state--chev-down .line--bot {
-    width: var(--chevW);
-    transform: translate(-50%, 0px) rotate(-45deg);
-}
-
 /* X */
 .state--x .line--top {
     width: var(--lineW);
@@ -123,23 +98,6 @@ const btnStyle = computed(() => {
 .state--x .line--bot {
     width: var(--lineW);
     transform: translate(-50%, 0px) rotate(-45deg);
-}
-
-/* CHEVRON UP */
-.state--chev-up .line--top {
-    width: var(--chevW);
-    transform: translate(-50%, 0px) rotate(-45deg);
-}
-
-.state--chev-up .line--mid {
-    width: var(--lineW);
-    opacity: 0;
-    transform: translate(-50%, 0px) rotate(0deg);
-}
-
-.state--chev-up .line--bot {
-    width: var(--chevW);
-    transform: translate(-50%, 0px) rotate(45deg);
 }
 
 @media (prefers-reduced-motion: reduce) {

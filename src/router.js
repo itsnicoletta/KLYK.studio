@@ -7,6 +7,7 @@ import ProjectDetail from './views/ProjectDetail.vue'
 import Projects from './views/Projects.vue'
 import Contacts from './views/Contacts.vue'
 import ServicesDetail from './views/ServicesDetail.vue'
+import QuickAudit from './views/QuickAudit.vue'
 
 const routes = [
     {
@@ -38,7 +39,13 @@ const routes = [
         path: '/contacts',
         name: 'Contacts',
         component: Contacts
+    },
+    {
+        path: '/quick-audit',
+        name: 'QuickAudit',
+        component: QuickAudit
     }
+
 ]
 
 const router = createRouter({

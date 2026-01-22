@@ -2,7 +2,7 @@
   <Navbar />
 
   <main class="w-full lg:h-svh flex items-center justify-center px-6 pt-28 pb-24 lg:px-40">
-    <section class="w-full h-[50vh] max-w-4xl flex flex-col items-center justify-center text-center gap-8">
+    <section class="w-full max-w-4xl flex flex-col items-center justify-center text-center gap-8">
       <header class="flex flex-col items-center gap-4">
         <h1 class="font-display font-semibold leading-tight text-[clamp(2.6rem,6vw,4rem)]">
           About <br> KLYK.studio
@@ -15,11 +15,11 @@
       </header>
 
       <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-        <RouterLink to="/projects" class="w-full sm:w-auto">
-          <Button variant="outline" size="large" class="w-full sm:w-auto">
-            See projects
+       <router-link to="/quick-audit" id="hero-cta" ref="heroCtaEl" class="w-full sm:w-auto">
+          <Button variant="outline" :size="isMobileOrTablet ? 'medium' : 'large'" class="w-full sm:w-auto">
+            Book a 15 min call
           </Button>
-        </RouterLink>
+        </router-link>
 
         <a href="mailto:klyk.studio@gmail.com" class="w-full sm:w-auto">
           <Button variant="primary" size="large" class="w-full sm:w-auto">
@@ -60,4 +60,10 @@
 import Navbar from '../components/Navbar.vue'
 import Footer from '../components/Footer.vue'
 import Button from '../components/Button.vue'
+import { ref } from 'vue'
+const isMobileOrTablet = ref(window.innerWidth <= 768)
+window.addEventListener('resize', () => {
+  isMobileOrTablet.value = window.innerWidth <= 768
+})
+
 </script>
