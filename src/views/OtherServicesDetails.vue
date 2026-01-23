@@ -114,7 +114,7 @@
 
         <div class="flex flex-col items-center pt-20 max-md:pt-14 max-sm:pt-10">
             <h4 class="text-3xl text-center max-md:text-2xl max-sm:text-xl">
-                Or take a look at these
+                Or take a look at this
             </h4>
         </div>
 
