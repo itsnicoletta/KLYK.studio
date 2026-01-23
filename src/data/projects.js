@@ -1,25 +1,25 @@
 
 //progetto 1 assets
-import cover1 from './projectsAssets/project1_cover.png'
-import img1_1 from './projectsAssets/project1_1.png'
-import img1_2 from './projectsAssets/project1_2.png'
-import img1_3 from './projectsAssets/project1_3.png'
-import vid1 from './projectsAssets/project1_video.mp4'
+import cover1 from './projectsAssets/project1_cover.webp'
+import img1_1 from './projectsAssets/project1_1.webp'
+import img1_2 from './projectsAssets/project1_2.webp'
+import img1_3 from './projectsAssets/project1_3.webp'
+import vid1 from './projectsAssets/project1_video.webm'
 
 //progetto 2 assets
-import cover2 from './projectsAssets/project2_cover.png'
-import img2_1 from './projectsAssets/project2_1.png'
-import img2_2 from './projectsAssets/project2_2.png'
-import img2_3 from './projectsAssets/project2_3.png'
-import vid2 from './projectsAssets/project2_video.mp4'
+import cover2 from './projectsAssets/project2_cover.webp'
+import img2_1 from './projectsAssets/project2_1.webp'
+import img2_2 from './projectsAssets/project2_2.webp'
+import img2_3 from './projectsAssets/project2_3.webp'
+import vid2 from './projectsAssets/project2_video.webm'
 
 
 //progetto 3 assets
-import cover3 from './projectsAssets/project3_cover.png'
-import img3_1 from './projectsAssets/project3_1.png'
-import img3_2 from './projectsAssets/project3_2.png'
-import img3_3 from './projectsAssets/project3_3.png'
-import vid3 from './projectsAssets/project3_video.mp4'
+import cover3 from './projectsAssets/project3_cover.webp'
+import img3_1 from './projectsAssets/project3_1.webp'
+import img3_2 from './projectsAssets/project3_2.webp'
+import img3_3 from './projectsAssets/project3_3.webp'
+import vid3 from './projectsAssets/project3_video.webm'
 
 
 

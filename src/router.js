@@ -8,6 +8,7 @@ import Projects from './views/Projects.vue'
 import Contacts from './views/Contacts.vue'
 import ServicesDetail from './views/ServicesDetail.vue'
 import QuickAudit from './views/QuickAudit.vue'
+import OtherServicesDetails from './views/OtherServicesDetails.vue'
 
 const routes = [
     {
@@ -34,6 +35,11 @@ const routes = [
         path: '/services/:slug',
         name: 'ServicesDetail',
         component: ServicesDetail
+    },
+    {
+        path: '/other-services/:slug',
+        name: 'OtherServicesDetails',
+        component: OtherServicesDetails
     },
     {   
         path: '/contacts',

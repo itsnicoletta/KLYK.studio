@@ -1,16 +1,19 @@
 <template>
     <Navbar />
     <ShaderTop />
-    <main class="mt-30 max-sm:mt-16 lg:mt-24
-           px-[24px] sm:px-[40px] md:px-[80px] lg:px-[112px]
-           py-12 sm:py-16 lg:py-20 ">
-        <section class="flex flex-col items-center justify-center my-8 sm:my-8 lg:my-32 max-sm:mb-16">
-            <div class="max-w-3xl w-full flex flex-col items-center gap-4 sm:gap-6">
-                <h1 class="text-center text-3xl sm:text-4xl lg:text-5xl font-display font-medium leading-tight">
+
+    <!-- Desktop-first, solo max-* per override -->
+    <main class="mt-30 px-[112px] py-20
+           max-lg:mt-24 max-lg:px-[80px] max-lg:py-16
+           max-sm:mt-16 max-sm:px-[24px] max-sm:py-12">
+        <!-- HERO -->
+        <section class="flex flex-col items-center justify-center my-32 max-sm:my-8 max-sm:mb-16">
+            <div ref="heroEl" class="max-w-3xl w-full flex flex-col items-center gap-6 max-sm:gap-4">
+                <h1 class="text-center text-5xl font-display font-medium leading-tight max-sm:text-3xl">
                     Get a quick audit in 10-15 minutes
                 </h1>
 
-                <h2 class="text-center text-base sm:text-lg opacity-85">
+                <h2 class="text-center text-lg opacity-85 max-sm:text-base">
                     This helps us understand your needs quickly.
                 </h2>
 
@@ -21,12 +24,13 @@
         </section>
 
         <!-- TRUST CARDS -->
-        <section class="flex flex-col w-full mx-auto items-center justify-center gap-10 mb-16 sm:mb-24 lg:mb-32">
+        <section
+            class="flex flex-col w-full mx-auto items-center justify-center gap-10 mb-32 max-lg:mb-24 max-sm:mb-16">
             <div class="w-full max-w-5xl">
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
-                    <div class="rounded-3xl border border-[var(--color-body-primary)] bg-black/20 p-5 sm:p-6">
-                        <h3 class="font-medium text-base sm:text-lg">What you’ll get</h3>
-                        <ul class="mt-3 space-y-2 text-sm sm:text-base opacity-85">
+                <div ref="trustCardsEl" class="grid grid-cols-3 gap-6 max-sm:grid-cols-1 max-sm:gap-4">
+                    <div class="rounded-3xl border border-[var(--color-body-primary)] bg-black/20 p-6 max-sm:p-5">
+                        <h3 class="font-medium text-lg max-sm:text-base">What you’ll get</h3>
+                        <ul class="mt-3 space-y-2 text-base opacity-85 max-sm:text-sm">
                             <li>Short video audit (10-15 min).</li>
                             <li>5 prioritized suggestions.</li>
                             <li>Guidance for your project.</li>
@@ -34,17 +38,17 @@
                         </ul>
                     </div>
 
-                    <div class="rounded-3xl border border-[var(--color-body-primary)] bg-black/20 p-5 sm:p-6">
-                        <h3 class="font-medium text-base sm:text-lg">This is for you if</h3>
-                        <ul class="mt-3 space-y-2 text-sm sm:text-base opacity-85">
+                    <div class="rounded-3xl border border-[var(--color-body-primary)] bg-black/20 p-6 max-sm:p-5">
+                        <h3 class="font-medium text-lg max-sm:text-base">This is for you if</h3>
+                        <ul class="mt-3 space-y-2 text-base opacity-85 max-sm:text-sm">
                             <li>You want quick clarity on what to do first.</li>
                             <li>You care about conversions and results.</li>
                         </ul>
                     </div>
 
-                    <div class="rounded-3xl border border-[var(--color-body-primary)] bg-black/20 p-5 sm:p-6">
-                        <h3 class="font-medium text-base sm:text-lg">Not for you if</h3>
-                        <ul class="mt-3 space-y-2 text-sm sm:text-base opacity-85">
+                    <div class="rounded-3xl border border-[var(--color-body-primary)] bg-black/20 p-6 max-sm:p-5">
+                        <h3 class="font-medium text-lg max-sm:text-base">Not for you if</h3>
+                        <ul class="mt-3 space-y-2 text-base opacity-85 max-sm:text-sm">
                             <li>You want a full redesign immediately.</li>
                             <li>You’re not planning to implement changes.</li>
                         </ul>
@@ -54,103 +58,123 @@
         </section>
 
         <!-- BOOKING -->
-        <section ref="bookingSectionEl"
-            class="flex flex-col gap-4 sm:gap-6 w-full mx-auto my-16 max-sm:my-24 lg:my-32 items-center justify-center">
-            <div class="max-w-3xl text-center">
-                <h2 class="font-display font-medium text-2xl sm:text-3xl">
+        <section ref="bookingSectionEl" class="flex flex-col gap-6 w-full mx-auto my-32 items-center justify-center
+             max-sm:gap-4 max-sm:my-24">
+            <div ref="bookingHeaderEl" class="max-w-3xl text-center">
+                <h2 class="font-display font-medium text-3xl max-sm:text-2xl">
                     Book your quick audit
                 </h2>
-                <p class="mt-2 text-sm sm:text-base opacity-80">
+                <p class="mt-2 text-base opacity-80 max-sm:text-sm">
                     Choose a slot. After booking, the intake form appears below.
                 </p>
             </div>
 
             <!-- Calendly card -->
-            <div
-                class="flex align-center justify-center w-3/5 max-sm:w-full">
-                <div ref="calendlyHostEl" class="w-full h-auto" :style="{ minWidth: '320px', height: calendlyHeight }" />
+            <div ref="calendlyWrapEl" class="flex items-center justify-center w-3/5 max-sm:w-full">
+                <div ref="calendlyHostEl" class="w-full h-auto"
+                    :style="{ minWidth: '320px', height: calendlyHeight }" />
             </div>
 
-            <p class="text-sm sm:text-base opacity-70 text-center max-w-3xl">
+            <p class="text-base opacity-70 text-center max-w-3xl max-sm:text-sm">
                 Tip: after confirming the booking, scroll down to complete the intake form.
             </p>
         </section>
 
         <!-- FORM (after booking) -->
-        <section v-if="showIntakeForm" id="intake-form" class="w-full">
-            <!--  (commentato mentre stili) -->
-            <div
-                class="mx-auto w-full max-w-3xl rounded-4xl border border-[var(--color-body-primary)] bg-black/20 p-5 sm:p-7 lg:p-10">
-                <h3 class="font-display font-medium text-xl sm:text-2xl">
+        <section v-if="showIntakeForm" id="intake-form" ref="intakeSectionEl" class="w-full">
+            <div class="mx-auto w-full max-w-3xl rounded-4xl border border-[var(--color-body-primary)] bg-black/20 p-10
+               max-sm:p-5">
+                <h3 class="font-display font-medium text-2xl max-sm:text-xl">
                     Quick intake form
                 </h3>
-                <p class="mt-2 text-sm sm:text-base opacity-80">
+                <p class="mt-2 text-base opacity-80 max-sm:text-sm">
                     This helps me tailor the audit.
                 </p>
 
-                <form class="mt-6 sm:mt-7 flex flex-col gap-4 sm:gap-5" name="quick-audit-intake" method="POST" data-netlify="true" data-netlify-honeypot="bot-field"
-                    @submit.prevent="submitIntake">
+                <form class="mt-7 flex flex-col gap-5 max-sm:mt-6 max-sm:gap-4" name="quick-audit-intake" method="POST"
+                    data-netlify="true" data-netlify-honeypot="bot-field" @submit.prevent="submitIntake">
                     <!-- Netlify honeypot -->
-                    <input v-model="form.botField" type="text" name="bot-field" class="hidden" tabindex="-1" 
+                    <input v-model="form.botField" type="text" name="bot-field" class="hidden" tabindex="-1"
                         autocomplete="off" />
                     <input type="hidden" name="form-name" value="quick-audit-intake" />
-                    ...
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
+                    <!-- ... i tuoi altri campi ... -->
+
+                    <div class="grid grid-cols-2 gap-5 max-md:grid-cols-1 max-sm:gap-4">
                         <div class="flex flex-col gap-2">
                             <label class="text-sm font-medium">Name</label>
                             <input v-model.trim="form.name" name="name" type="text" required placeholder="Your name"
                                 class="w-full rounded-2xl border border-[var(--color-body-primary)]
-                       bg-black/10 px-4 py-3 text-sm sm:text-base
-                       focus:outline-none focus:ring-2 focus:ring-[var(--color-text-primary)]" />
+                       bg-black/10 px-4 py-3 text-base
+                       focus:outline-none focus:ring-2 focus:ring-[var(--color-text-primary)]
+                       max-sm:text-sm" />
                         </div>
 
                         <div class="flex flex-col gap-2">
                             <label class="text-sm font-medium">Email</label>
                             <input v-model.trim="form.email" name="email" type="email" required
                                 placeholder="you@email.com" class="w-full rounded-2xl border border-[var(--color-body-primary)]
-                       bg-black/10 px-4 py-3 text-sm sm:text-base
-                       focus:outline-none focus:ring-2 focus:ring-[var(--color-text-primary)]" />
+                       bg-black/10 px-4 py-3 text-base
+                       focus:outline-none focus:ring-2 focus:ring-[var(--color-text-primary)]
+                       max-sm:text-sm" />
                         </div>
 
                         <div class="flex flex-col gap-2">
                             <label class="text-sm font-medium">What do you need?</label>
                             <select v-model="form.objective" name="objective" required class="w-full rounded-2xl border border-[var(--color-body-primary)]
-                       bg-black/10 px-4 py-3 text-sm sm:text-base
-                       focus:outline-none focus:ring-2 focus:ring-[var(--color-text-primary)]">
-                                <option class="bg-stone-700 text-[var(--color-text-primary)]" value="" disabled>Select one</option>
-                                <option class="bg-stone-700 text-[var(--color-text-primary)]" value="landing_page">Landing page</option>
-                                <option class="bg-stone-700 text-[var(--color-text-primary)]" value="branding">Branding</option>
-                                <option class="bg-stone-700 text-[var(--color-text-primary)]" value="portfolio">Portfolio</option>
-                                <option class="bg-stone-700 text-[var(--color-text-primary)]" value="immersive_experience">Immersive experience</option>
-                                <option class="bg-stone-700 text-[var(--color-text-primary)]" value="others">Others</option>
+                       bg-black/10 px-4 py-3 text-base
+                       focus:outline-none focus:ring-2 focus:ring-[var(--color-text-primary)]
+                       max-sm:text-sm">
+                                <option class="bg-stone-700 text-[var(--color-text-primary)]" value="" disabled>Select
+                                    one</option>
+                                <option class="bg-stone-700 text-[var(--color-text-primary)]" value="landing_page">
+                                    Landing page</option>
+                                <option class="bg-stone-700 text-[var(--color-text-primary)]" value="branding">Branding
+                                </option>
+                                <option class="bg-stone-700 text-[var(--color-text-primary)]" value="portfolio">
+                                    Portfolio</option>
+                                <option class="bg-stone-700 text-[var(--color-text-primary)]"
+                                    value="immersive_experience">Immersive experience</option>
+                                <option class="bg-stone-700 text-[var(--color-text-primary)]" value="others">Others
+                                </option>
                             </select>
                         </div>
 
                         <div class="flex flex-col gap-2">
                             <label class="text-sm font-medium">Budget</label>
                             <select v-model="form.budget" name="budget" required class="w-full rounded-2xl border border-[var(--color-body-primary)]
-                       bg-black/10 px-4 py-3 text-sm sm:text-base
-                       focus:outline-none focus:ring-2 focus:ring-[var(--color-text-primary)]">
+                       bg-black/10 px-4 py-3 text-base
+                       focus:outline-none focus:ring-2 focus:ring-[var(--color-text-primary)]
+                       max-sm:text-sm">
                                 <option value="" disabled>Select one</option>
-                                <option class="bg-stone-700 text-[var(--color-text-primary)]" value="under_500">Under €500</option>
-                                <option class="bg-stone-700 text-[var(--color-text-primary)]" value="500_1500">€500/€1,500</option>
-                                <option class="bg-stone-700 text-[var(--color-text-primary)]" value="1500_5000">€1,500/€5,000</option>
-                                <option class="bg-stone-700 text-[var(--color-text-primary)]" value="5000_plus">€5,000+</option>
+                                <option class="bg-stone-700 text-[var(--color-text-primary)]" value="under_500">Under
+                                    €500</option>
+                                <option class="bg-stone-700 text-[var(--color-text-primary)]" value="500_1500">
+                                    €500/€1,500</option>
+                                <option class="bg-stone-700 text-[var(--color-text-primary)]" value="1500_5000">
+                                    €1,500/€5,000</option>
+                                <option class="bg-stone-700 text-[var(--color-text-primary)]" value="5000_plus">€5,000+
+                                </option>
                             </select>
                         </div>
                     </div>
 
                     <div class="flex flex-col gap-2">
                         <label class="text-sm font-medium">Timeline</label>
-                        <select v-model="form.timeline" name="timeline" required class="w-full rounded-2xl! border! border-[var(--color-body-primary)]
-                     bg-black/10 px-4 py-3 text-sm sm:text-base
-                     focus:outline-none focus:ring-2 focus:ring-[var(--color-text-primary)]">
-                            <option class="bg-stone-700  text-[var(--color-text-primary)]" value="" disabled>Select one</option>
-                            <option class="bg-stone-700 text-[var(--color-text-primary)]" value="2_4_weeks">2-4 weeks</option>
-                            <option class="bg-stone-700 text-[var(--color-text-primary)]" value="1_2_months">1-2 months</option>
-                            <option class="bg-stone-700 text-[var(--color-text-primary)]" value="3_plus_months">3+ months</option>
-                            <option class="bg-stone-700 text-[var(--color-text-primary)]" value="not_sure">Not sure yet</option>
+                        <select v-model="form.timeline" name="timeline" required class="w-full rounded-2xl border border-[var(--color-body-primary)]
+                     bg-black/10 px-4 py-3 text-base
+                     focus:outline-none focus:ring-2 focus:ring-[var(--color-text-primary)]
+                     max-sm:text-sm">
+                            <option class="bg-stone-700 text-[var(--color-text-primary)]" value="" disabled>Select one
+                            </option>
+                            <option class="bg-stone-700 text-[var(--color-text-primary)]" value="2_4_weeks">2-4 weeks
+                            </option>
+                            <option class="bg-stone-700 text-[var(--color-text-primary)]" value="1_2_months">1-2 months
+                            </option>
+                            <option class="bg-stone-700 text-[var(--color-text-primary)]" value="3_plus_months">3+
+                                months</option>
+                            <option class="bg-stone-700 text-[var(--color-text-primary)]" value="not_sure">Not sure yet
+                            </option>
                         </select>
                     </div>
 
@@ -158,15 +182,17 @@
                         <label class="text-sm font-medium">Notes (optional)</label>
                         <textarea v-model.trim="form.notes" name="notes" rows="4"
                             placeholder="Any context, links, or constraints?" class="w-full rounded-2xl border border-[var(--color-body-primary)]
-                     bg-black/10 px-4 py-3 text-sm sm:text-base
-                     focus:outline-none focus:ring-2 focus:ring-[var(--color-text-primary)]" />
+                     bg-black/10 px-4 py-3 text-base
+                     focus:outline-none focus:ring-2 focus:ring-[var(--color-text-primary)]
+                     max-sm:text-sm" />
                     </div>
 
                     <input type="hidden" name="calendly_event_uri" :value="booking.eventUri" />
                     <input type="hidden" name="calendly_invitee_uri" :value="booking.inviteeUri" />
 
-                    <div class="pt-2 flex flex-col sm:flex-row gap-3 sm:gap-4 items-start sm:items-center">
-                        <Button variant="primary" size="large" type="submit" :disabled="submitting">
+                    <div class="pt-2 flex flex-row gap-4 items-center max-sm:flex-col max-sm:items-start max-sm:gap-3">
+                        <Button variant="primary" size="large" type="submit" :disabled="submitting"
+                            class="max-sm:w-full">
                             {{ submitting ? 'Sending…' : 'Send' }}
                         </Button>
 
@@ -175,12 +201,10 @@
                         </p>
                     </div>
 
-                    <p v-if="submitOk" class="text-sm sm:text-base opacity-90">
-                        <!--  -->
+                    <p v-if="submitOk" class="text-base opacity-90 max-sm:text-sm">
                         Received - thank you. See you on the call.
                     </p>
-                    <p v-if="submitError" class="text-sm sm:text-base opacity-90">
-                        <!--  -->
+                    <p v-if="submitError" class="text-base opacity-90 max-sm:text-sm">
                         Error sending. Please try again.
                     </p>
                 </form>
@@ -194,6 +218,10 @@
 
 <script setup>
 import { ref, computed, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+gsap.registerPlugin(ScrollTrigger)
+
 import Navbar from '../components/Navbar.vue'
 import Footer from '../components/Footer.vue'
 import ShaderTop from '../components/ShaderTop.vue'
@@ -204,6 +232,12 @@ const CALENDLY_URL = 'https://calendly.com/klyk-studio/quick-audit'
 
 const bookingSectionEl = ref(null)
 const calendlyHostEl = ref(null)
+
+const heroEl = ref(null)
+const trustCardsEl = ref(null)
+const bookingHeaderEl = ref(null)
+const calendlyWrapEl = ref(null)
+const intakeSectionEl = ref(null)
 
 const showIntakeForm = ref(false)
 const submitting = ref(false)
@@ -316,15 +350,85 @@ async function submitIntake() {
     }
 }
 
+/* ---------------- Simple animations ---------------- */
+let ctx = null
+
 onMounted(async () => {
     window.addEventListener('message', onCalendlyMessage)
 
+    // Calendly
     await loadCalendlyScript()
     await nextTick()
     initCalendly()
+
+    // Animations (respect reduced motion)
+    const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches
+    if (reduceMotion) return
+
+    ctx = gsap.context(() => {
+        // HERO in
+        if (heroEl.value) {
+            gsap.from(heroEl.value, {
+                opacity: 0,
+                y: 28,
+                duration: 0.9,
+                ease: 'power2.out'
+            })
+        }
+
+        // Trust cards stagger
+        if (trustCardsEl.value?.children?.length) {
+            gsap.from(trustCardsEl.value.children, {
+                opacity: 0,
+                y: 22,
+                duration: 0.8,
+                ease: 'power2.out',
+                stagger: 0.12,
+                scrollTrigger: {
+                    trigger: trustCardsEl.value,
+                    start: 'top 75%',
+                    end: 'bottom 40%',
+                    toggleActions: 'play none none reverse'
+                }
+            })
+        }
+
+        // Booking header + calendly
+        if (bookingHeaderEl.value) {
+            gsap.from(bookingHeaderEl.value, {
+                opacity: 0,
+                y: 22,
+                duration: 0.8,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: bookingHeaderEl.value,
+                    start: 'top 75%',
+                    end: 'bottom 40%',
+                    toggleActions: 'play none none reverse'
+                }
+            })
+        }
+
+        if (calendlyWrapEl.value) {
+            gsap.from(calendlyWrapEl.value, {
+                opacity: 0,
+                y: 22,
+                duration: 0.8,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: calendlyWrapEl.value,
+                    start: 'top 75%',
+                    end: 'bottom 40%',
+                    toggleActions: 'play none none reverse'
+                }
+            })
+        }
+    })
 })
 
 onBeforeUnmount(() => {
     window.removeEventListener('message', onCalendlyMessage)
+    ctx?.revert()
+    ScrollTrigger.getAll().forEach(t => t.kill())
 })
 </script>

@@ -1,6 +1,7 @@
-import services1 from '../data/servicesAssets/services1.png';
-import services2 from '../data/servicesAssets/services2.png';
-import services3 from '../data/servicesAssets/services3.png';
+import services1 from '../data/servicesAssets/services1.webp';
+import services2 from '../data/servicesAssets/services2.webp';
+import services3 from '../data/servicesAssets/services3.webp';
+
 
 
 export const services = [
@@ -51,33 +52,42 @@ export const services = [
     },
 ];
 
+import services4 from '../data/servicesAssets/services4.webp'
+import services5 from '../data/servicesAssets/services5.webp'
+
 export const otherServices = [
     {
         id: 1,
         slug: 'brand-identity-graphic-design',
-        title: 'Brand Identity & Graphic Design',  
+        title: 'Brand Identity & Graphic Design',
         subtitle: 'Creating visually cohesive brand identities that resonate with your audience.',
-        description: 'We create cohesive brand identities and graphic designs that effectively communicate your brand’s message and values through visual storytelling and archetypes. From logos to marketing materials, we ensure consistency across all visual elements.',
+        description:
+            'We create cohesive brand identities and graphic designs that effectively communicate your brand’s message and values through visual storytelling and archetypes. From logos to marketing materials, we ensure consistency across all visual elements.',
         bullets: [
             'Logo Design & Brand Guidelines',
             'Marketing Collateral & Print Design',
             'Social Media Graphics & Digital Assets',
         ],
-        client: 'For businesses and individuals seeking to establish or refresh their brand identity through professional graphic design services.',
+        client:
+            'For businesses and individuals seeking to establish or refresh their brand identity through professional graphic design services.',
         Cta: 'Looking to build your brand?',
+        image: services4,
     },
     {
         id: 2,
         slug: 'digital-project-consultation-and-support-in-development',
-        title: 'Have an Idea? Let\'s Talk!',
-        subtitle: 'We\'re here to help bring your digital projects to life.',
-        description: 'Whether you have a clear vision or just a spark of an idea, we\'d love to hear from you. Our team is ready to collaborate and provide expert guidance to turn your concepts into reality. Let\'s discuss how we can work together to create something amazing.',
+        title: "Have an Idea? Let's Talk!",
+        subtitle: "We're here to help bring your digital projects to life.",
+        description:
+            "Whether you have a clear vision or just a spark of an idea, we'd love to hear from you. Our team is ready to collaborate and provide expert guidance to turn your concepts into reality. Let's discuss how we can work together to create something amazing.",
         bullets: [
             'Project Consultation & Ideation',
             'Custom Solutions Tailored to Your Needs',
             'Ongoing Support & Collaboration',
         ],
-        client: 'For anyone with a digital project idea looking for professional support and collaboration to bring it to life.',
+        client:
+            'For anyone with a digital project idea looking for professional support and collaboration to bring it to life.',
         Cta: 'Get in touch today!',
+        image: services5,
     },
-];
+]
