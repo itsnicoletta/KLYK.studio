@@ -21,6 +21,14 @@ import img3_2 from './projectsAssets/project3_2.webp'
 import img3_3 from './projectsAssets/project3_3.webp'
 import vid3 from './projectsAssets/project3_video.webm'
 
+//progetto 4 assets
+
+//progetto 5 assets
+import cover5 from './projectsAssets/project5_cover.webp'
+import img5_1 from './projectsAssets/project5_1.webp'
+import img5_2 from './projectsAssets/project5_2.webp'
+import img5_3 from './projectsAssets/project5_3.webp'
+
 
 
 
@@ -84,46 +92,58 @@ export const projects = [
         link: 'https://focusflowpro.netlify.app',
         year: '2024'
     },
-     {
+/*      {
         id: 4,
-        slug: 'fintech-aml-kyc-unified-operations-case-study',
-        title: 'Unified KYC/AML Workspace',
-        H2: 'A concept case study for standardizing KYC/AML operations across fragmented fintech tooling.',
+        slug: 'photography-portfolio-website-ui-design',
+        title: 'Photography Portfolio Website',
+        H2: 'A sleek and modern portfolio website design for a professional photographer, showcasing their work and services.',
         shortDescription:
-            'A unified operations workspace designed to reduce onboarding time, streamline compliance workflows, and improve consistency across teams and vendors.',
-        description: `Unified KYC/AML Workspace is a fintech product concept born from a recurring industry pain point: compliance teams often operate across multiple disjointed systems, each with different logic, terminology, and workflows. This fragmentation increases operational risk, slows down investigations, and forces every analyst to relearn the process when switching companies—often costing months of ramp-up time.`,
-        secondDescription: `The project explores a standardized, role-based workflow for KYC onboarding and AML monitoring, focusing on clarity, auditability, and handoff efficiency. The experience is designed around a single investigation hub: consistent case views, reusable decision patterns, clear evidence trails, and structured outputs that support audit reviews. The goal is to reduce cognitive load, accelerate decision-making, and create a more uniform operational model that can adapt to different providers while keeping the user experience stable.`,
+            'A clean, visually-driven website concept that highlights photography through holographic elements, colors and lighting to reflect the artist\'s unique style.',
+        description: `This project involved designing a portfolio website for a professional photographer, focusing on creating a visually appealing and user-friendly interface. The design emphasizes large, high-quality images to showcase the photographer's work, with a layout that balances aesthetics and functionality. Key features include a gallery section, an about page, and a contact form, all designed to enhance user engagement and facilitate easy navigation.`,
+        secondDescription: `The design incorporates modern web design trends, such as minimalism and responsive layouts, ensuring that the website looks great on all devices. The use of holographic elements and strategic lighting effects adds a unique touch that reflects the photographer's artistic vision. Overall, the portfolio website aims to provide an immersive experience that effectively represents the photographer's brand and attracts potential clients.`,
         skills: [
-            'Product Design',
-            'UX Research',
-            'Information Architecture',
-            'Workflow Design',
-            'Compliance UX (KYC/AML)',
-            'Prototyping'
+            'UI Design',
+            'Web Design',
+            'Responsive Design',
+            'Branding'
         ],
+        coverImage: 'path/to/cover4.png',
+        galleryImages: [
+             'path/to/image4_1.png',
+            'path/to/image4_2.png',
+            'path/to/image4_3.png' 
+       
         year: '2026',
-    },
+     */
     {
         id: 5,
-        slug: 'template-project-5',
-        title: 'Project Title 5',
-        H2: 'Subtitle for project 5.',
+        slug: 'brand-identity-design-for-fire-starter-company',
+        title: 'Focum - Brand Identity Design',
+        H2: 'Art direction and brand identity design for Focum, a company specializing in fire-starting products.',
         shortDescription:
-            'A brief description of project 5.',
-        description: `Detailed description of project 5.`,
-        secondDescription: `Additional information about project 5.`,
-        skills: ['Skill 1', 'Skill 2', 'Skill 3'],
-        coverImage: 'path/to/cover5.png',
-        galleryImages: [
-            'path/to/image5_1.png',
-            'path/to/image5_2.png',
-
-            'path/to/image5_3.png'
+            'A bold, elegant and dynamic brand identity that captures the essence of fire and ignition, combining strong visuals with strategic messaging to position Focum as a leader in its market.',
+        description: `Focum was a comprehensive brand identity project that involved creating a cohesive visual and verbal language for a fire-starting products company. The design process included logo creation, color palette selection, typography, photography, and the development of marketing materials that reflect the brand's core values of strength, reliability, and innovation.`,
+        secondDescription: `the brand identity was crafted to resonate with a more posh target audience, using sophisticated design elements and a refined aesthetic. The visual identity incorporates fiery colors and dynamic shapes to evoke the energy and power of fire, while the messaging emphasizes the brand's commitment to quality and performance. The result is a compelling brand presence that effectively communicates Focum's unique value proposition in the competitive market of fire-starting products as a product for parties and glamping.`,
+        skills: [
+            'Brand Identity',
+            'Art Direction',
+            'Graphic Design',
         ],
-        video: 'path/to/video5.mp4',
-        link: 'https://link-to-project-5.com',
-        year: '2023'    
-    } 
+        coverImage: cover5,
+        galleryImages: [
+            img5_1,
+            img5_2,
+            img5_3
+        ],
+        link: 'https://drive.google.com/file/d/1O0llKcTZq1OYRsD8eUrEFnUhW5pr-VG2/view?ths=true',
+        year: '2024'    
+    },
+    {
+        id: 6,
+        slug: 'museum-website-redesign-ui-ux',
+        title: 'Museum Website Redesign',
+        H2: 'A complete redesign of a museum website to enhance user experience and engagement.',
+    }
 
 ];
 

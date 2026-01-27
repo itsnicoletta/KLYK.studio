@@ -39,7 +39,7 @@
         <div class="w-full lg:w-3/5 mx-auto">
             <video v-if="project.video" :src="project.video" autoplay loop muted playsinline
                 class="w-full h-full object-cover rounded-4xl" />
-            <img v-else :src="project.coverImage" class="w-full h-full object-cover rounded-4xl" :alt="project.title" />
+            <img v-else :src="project.coverImage" class="w-full h-full object-cover rounded-4xl aspect-[16/9]" :alt="project.title" />
         </div>
     </section>
 

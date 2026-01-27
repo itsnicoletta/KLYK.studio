@@ -9,34 +9,36 @@
              max-lg:flex-col max-lg:gap-8 max-lg:mt-[60px]
              max-md:px-[80px] max-md:py-14
              max-sm:px-[40px] max-sm:py-10 max-sm:pt-20">
-      <div id="hero-heading" class="w-1/2 max-w-2xl flex flex-col gap-2 items-start text-left
+      <div class="w-full flex justify-center items-center
+               max-lg:flex-col max-lg:items-center">
+        <div id="hero-heading" class="w-1/2 max-w-2xl flex flex-col gap-2 items-start text-left 
                max-lg:w-full max-lg:items-center max-lg:text-center">
-        <h1 id="hero-title" ref="heroTitleEl" class="font-display font-semibold leading-tight
-                 text-[clamp(4rem,25vw,6rem)]
+          <h1 id="hero-title" ref="heroTitleEl" class="font-display font-semibold leading-tight 
+                 text-[clamp(4rem,24vw,6rem)]
                  max-md:text-[clamp(3.2rem,12vw,4.4rem)]
                  max-sm:text-[clamp(2.6rem,10vw,3.8rem)]">
-          {{ infoAgency.Usp }}
-        </h1>
+            {{ infoAgency.Usp }}
+          </h1>
 
-        <p id="hero-description" ref="heroDescriptionEl" class="mt-6 mb-6 font-sans text-body text-base-300 max-w-xl
+          <p id="hero-description" ref="heroDescriptionEl" class="mt-6 mb-6 font-sans text-body text-base-300 max-w-xl
                  mx-0 text-lg
                  max-lg:mx-auto max-lg:text-base">
-          {{ infoAgency.Hero }}
-        </p>
+            {{ infoAgency.Hero }}
+          </p>
 
-        <router-link to="/quick-audit" id="hero-cta" ref="heroCtaEl" class="w-auto max-sm:w-full">
-          <Button variant="outline" :size="isMobileOrTablet ? 'medium' : 'large'" class="w-auto max-sm:w-full">
-            Book a 15-min call
-          </Button>
-        </router-link>
-      </div>
+          <router-link to="/quick-audit" id="hero-cta" ref="heroCtaEl" class="w-auto max-sm:w-full">
+            <Button variant="outline" :size="isMobileOrTablet ? 'medium' : 'large'" class="w-auto max-sm:w-full">
+              Book a 15-min call
+            </Button>
+          </router-link>
+        </div>
 
-      <div id="hero-3D-wrapper" ref="hero3dWrapperEl" class="w-2/3 h-[80vh] flex justify-center items-start
-               max-lg:w-full max-lg:h-[420px]
-               max-md:h-[340px]
-               max-sm:h-[280px]">
-        <div class="w-full h-full rounded-3xl shadow-xl bg-gradient-to-br from-base-800 to-base-700
-                 max-w-[60vw] max-lg:max-w-none"></div>
+      <div id="hero-3D-wrapper" class="relative w-1/2 h-[80vh]
+         max-lg:w-full max-lg:h-[420px]
+         max-md:h-[340px]
+         max-sm:h-[280px] overflow-visible">
+          <Hero3D class="absolute inset-0" />
+        </div>
       </div>
     </div>
   </section>
@@ -107,6 +109,7 @@ import { ref, onMounted, onBeforeUnmount, nextTick, computed } from "vue";
 import { gsap } from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 
+import Hero3D from "../components/Hero3D.vue";
 import Navbar from "../components/Navbar.vue";
 import Footer from "../components/Footer.vue";
 import Button from "../components/Button.vue";
