@@ -137,12 +137,6 @@ export const projects = [
         ],
         link: 'https://drive.google.com/file/d/1O0llKcTZq1OYRsD8eUrEFnUhW5pr-VG2/view?ths=true',
         year: '2024'    
-    },
-    {
-        id: 6,
-        slug: 'museum-website-redesign-ui-ux',
-        title: 'Museum Website Redesign',
-        H2: 'A complete redesign of a museum website to enhance user experience and engagement.',
     }
 
 ];
