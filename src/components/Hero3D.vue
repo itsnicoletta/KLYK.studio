@@ -1,5 +1,5 @@
 <template>
-    <div ref="wrapRef" class="w-full h-full relative overflow-visible">
+    <div ref="wrapRef" class="w-full h-full absolute top-0 left-0 right-0 bottom-0 overflow-visible">
         <canvas ref="canvasRef" class="w-full h-full block"></canvas>
     </div>
 </template>
@@ -95,12 +95,16 @@ const BP_PHONE_MAX = 650;
 const BP_MID_MAX = 1280;
 const CAMERA_PADDING = 1.25;
 
-// ✅ TUNING: più grande su desktop => DOLLY più basso (camera più vicina)
-const DOLLY_DESKTOP = 1.30; // > 1280
-const DOLLY_MID = 1.2;      // 650–1280
-const DOLLY_PHONE = 0.95;   // < 650 (rimane come avevi)
+const DOLLY_DESKTOP = 1.3; // > 1280
+const DOLLY_MID = 1.2; // 650–1280
+const DOLLY_PHONE = 1.25; // < 650
 
-const GLOBAL_FRAMING = 0.60;
+const GLOBAL_FRAMING = 0.6;
+
+// ✅ MODEL LAYOUT SHIFT (tuning)
+const MODEL_SHIFT_X_DESKTOP = 0.55; // modello più a destra
+const MODEL_SHIFT_X_MID = 0.35;
+const MODEL_SHIFT_Y_PHONE = -0.75; // modello più in basso (valore negativo)
 
 // Reduce motion
 const reduceMotion =
@@ -137,6 +141,11 @@ let modelRadius = 1;
 // responsive camera
 let dolly = DOLLY_DESKTOP;
 let lastDollyKey = "";
+
+// ✅ responsive model offset (layout)
+let baseOffset = new Vector3(0, 0, 0);
+let lastOffsetKey = "";
+let enterOffsetX = 0;
 
 // press
 let hitboxBasePos = null;
@@ -222,6 +231,32 @@ function applyResponsiveDolly(w, h) {
     updateCameraFraming();
 }
 
+// ✅ compute model offset (responsive) — sposti il modello, non il canvas
+function computeModelOffset(w, h) {
+    const isCoarse = window.matchMedia?.("(pointer: coarse)")?.matches ?? false;
+    const isPhone = w < BP_PHONE_MAX || (isCoarse && h <= 520 && w <= 950);
+
+    const sx = isFinite(modelSize.x) ? modelSize.x : 1;
+    const sy = isFinite(modelSize.y) ? modelSize.y : 1;
+
+    if (isPhone) return new Vector3(0, sy * MODEL_SHIFT_Y_PHONE, 0);
+    if (w <= BP_MID_MAX) return new Vector3(sx * MODEL_SHIFT_X_MID, 0, 0);
+    return new Vector3(sx * MODEL_SHIFT_X_DESKTOP, 0, 0);
+}
+
+function applyResponsiveModelOffset(w, h) {
+    const off = computeModelOffset(w, h);
+    const key = `${off.x.toFixed(4)}|${off.y.toFixed(4)}`;
+    if (key === lastOffsetKey) return;
+    lastOffsetKey = key;
+    baseOffset.copy(off);
+
+    // se l'enter è finito, aggiorna subito la posizione
+    if (pivot && entered) {
+        pivot.position.set(baseOffset.x, baseOffset.y, baseOffset.z);
+    }
+}
+
 function resizeToContainer() {
     if (!wrapRef.value || !renderer || !camera) return;
 
@@ -235,7 +270,8 @@ function resizeToContainer() {
     camera.updateProjectionMatrix();
 
     applyResponsiveDolly(w, h);
-    // updateCameraFraming() già chiamata dentro applyResponsiveDolly quando serve
+    applyResponsiveModelOffset(w, h);
+    // updateCameraFraming è già gestita da applyResponsiveDolly quando serve
 }
 
 function centerModel(model) {
@@ -431,7 +467,8 @@ function updateTyping() {
     }
 
     const base = HELLO_MESSAGE.slice(0, typedCount);
-    const out = cursorOn && typedCount < HELLO_MESSAGE.length ? base + "▌" : base;
+    const out =
+        cursorOn && typedCount < HELLO_MESSAGE.length ? base + "▌" : base;
     drawHelloText(out);
 
     if (typedCount >= HELLO_MESSAGE.length) {
@@ -479,7 +516,6 @@ function createHelloPlane() {
 }
 
 function setupHelloWorldText() {
-    // Blender text off
     if (textObj) textObj.visible = false;
 }
 
@@ -543,7 +579,9 @@ function applyPress() {
     if (elapsed <= PRESS_DOWN_MS) k = easeOutCubic(elapsed / PRESS_DOWN_MS);
     else k = 1 - easeOutCubic((elapsed - PRESS_DOWN_MS) / PRESS_UP_MS);
 
-    const dir = PRESS_AXIS_LOCAL.clone().applyQuaternion(hitboxObj.quaternion).normalize();
+    const dir = PRESS_AXIS_LOCAL.clone()
+        .applyQuaternion(hitboxObj.quaternion)
+        .normalize();
     hitboxObj.position.copy(hitboxBasePos).addScaledVector(dir, PRESS_DEPTH * k);
 
     if (elapsed >= total) {
@@ -591,7 +629,7 @@ function onPointerLeave() {
 function animate() {
     rafId = requestAnimationFrame(animate);
 
-    // enter
+    // enter (✅ non sovrascrive l'offset responsive)
     if (pivot && !entered && !reduceMotion) {
         if (enterStart === null) enterStart = performance.now();
 
@@ -599,13 +637,21 @@ function animate() {
         const t = Math.min(1, elapsed / ENTER_DURATION);
         const k = easeOutCubic(t);
 
-        pivot.position.x = ENTER_FROM_X * (1 - k);
+        enterOffsetX = ENTER_FROM_X * (1 - k);
         pivot.rotation.z = ENTER_ROT_Z * (1 - k);
+
+        // posizione = baseOffset + enterOffset
+        pivot.position.set(
+            baseOffset.x + enterOffsetX,
+            baseOffset.y,
+            baseOffset.z
+        );
 
         if (t >= 1) {
             entered = true;
-            pivot.position.x = 0;
+            enterOffsetX = 0;
             pivot.rotation.z = 0;
+            pivot.position.set(baseOffset.x, baseOffset.y, baseOffset.z);
         }
     }
 
@@ -664,7 +710,10 @@ function initThree() {
     rim.position.set(-2, 4, -4);
     scene.add(rim);
 
-    shadowPlane = new Mesh(new PlaneGeometry(10, 10), new ShadowMaterial({ opacity: 0.16 }));
+    shadowPlane = new Mesh(
+        new PlaneGeometry(10, 10),
+        new ShadowMaterial({ opacity: 0.16 })
+    );
     shadowPlane.rotation.x = -Math.PI / 2;
     shadowPlane.position.y = -0.001;
     shadowPlane.receiveShadow = true;
@@ -711,15 +760,28 @@ function initThree() {
 
             if (hitboxObj) hitboxBasePos = hitboxObj.position.clone();
 
+            // ✅ calcola subito offset responsive con le dimensioni correnti
+            if (wrapRef.value) {
+                const rect = wrapRef.value.getBoundingClientRect();
+                applyResponsiveModelOffset(rect.width, rect.height);
+            }
+
             if (!reduceMotion) {
-                pivot.position.x = ENTER_FROM_X;
-                pivot.rotation.z = ENTER_ROT_Z;
+                // enter parte da baseOffset + ENTER_FROM_X
                 entered = false;
                 enterStart = null;
+                enterOffsetX = ENTER_FROM_X;
+                pivot.position.set(
+                    baseOffset.x + enterOffsetX,
+                    baseOffset.y,
+                    baseOffset.z
+                );
+                pivot.rotation.z = ENTER_ROT_Z;
             } else {
-                pivot.position.set(0, 0, 0);
                 pivot.rotation.z = 0;
                 entered = true;
+                enterOffsetX = 0;
+                pivot.position.set(baseOffset.x, baseOffset.y, baseOffset.z);
             }
 
             resizeToContainer();

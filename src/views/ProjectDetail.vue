@@ -1,126 +1,231 @@
 <template>
-    <Navbar />
+  <Navbar />
 
-    <!-- HERO -->
-    <section :class="sectionPad" class="w-full">
-        <section class="w-full flex flex-col items-center
+  <!-- HERO -->
+  <section :class="sectionPad" class="w-full">
+    <section
+      class="w-full flex flex-col items-center
              mt-50 my-20
              max-lg:mt-48 max-lg:my-16
              max-md:mt-40 max-md:my-12
-             max-sm:mt-32 max-sm:my-10">
-            <header ref="projectTitle" class="w-full lg:w-3/5 mx-auto flex gap-10
-               max-lg:flex-col max-lg:gap-8">
-                <div class="w-1/2 flex flex-col max-lg:w-full">
-                    <h1 class="text-8xl font-bold font-display max-lg:text-7xl max-md:text-5xl max-sm:text-4xl">
-                        {{ project.title }}
-                    </h1>
-                    <h2 class="text-3xl font-light max-lg:text-2xl max-md:text-xl max-sm:text-lg">
-                        {{ project.H2 }}
-                    </h2>
-                </div>
+             max-sm:mt-32 max-sm:my-10"
+    >
+      <header
+        ref="projectTitle"
+        class="w-full lg:w-6/8 mx-auto flex items-end
+               gap-10
+               [@media(min-width:1000px)_and_(max-width:1600px)]:gap-6
+               max-lg:flex-col max-lg:gap-8"
+      >
+        <div class="w-1/2 flex flex-col max-lg:w-full min-w-0">
+          <h1
+            class="font-bold font-display
+                   text-8xl
+                   [@media(min-width:1000px)_and_(max-width:1600px)]:text-6xl
+                   max-lg:text-7xl max-md:text-5xl max-sm:text-4xl"
+          >
+            {{ project.title }}
+          </h1>
 
-                <div ref="skillsContainer" class="w-1/2 flex flex-wrap gap-3 pt-6 items-end justify-end
-                 max-lg:w-full max-lg:pt-2 max-lg:items-start max-lg:justify-start">
-                    <span v-for="skill in project.skills" :key="skill" class="skill-badge bg-stone-800 whitespace-nowrap rounded-full
-                   text-lg px-5 py-2
+          <h2
+            class="font-light
+                   text-3xl
+                   [@media(min-width:1000px)_and_(max-width:1600px)]:text-xl
+                   max-lg:text-2xl max-md:text-xl max-sm:text-lg"
+          >
+            {{ project.H2 }}
+          </h2>
+        </div>
+
+        <div
+          ref="skillsContainer"
+          class="w-1/2 flex flex-wrap items-end justify-end
+                 pt-6 gap-3
+                 [@media(min-width:1000px)_and_(max-width:1600px)]:pt-3
+                 [@media(min-width:1000px)_and_(max-width:1600px)]:gap-2
+                 max-lg:w-full max-lg:pt-2 max-lg:items-start max-lg:justify-start
+                 min-w-0"
+        >
+          <span
+            v-for="skill in project.skills"
+            :key="skill"
+            class="skill-badge bg-stone-800 whitespace-nowrap rounded-full
+                   text-md px-5 py-2
+                   [@media(min-width:1000px)_and_(max-width:1600px)]:text-sm
+                   [@media(min-width:1000px)_and_(max-width:1600px)]:px-4
+                   [@media(min-width:1000px)_and_(max-width:1600px)]:py-1.5
                    max-md:text-base max-md:px-4 max-md:py-1.5
-                   max-sm:text-sm max-sm:px-3 max-sm:py-1">
-                        {{ skill }}
-                    </span>
-                </div>
-            </header>
-        </section>
+                   max-sm:text-sm max-sm:px-3 max-sm:py-1"
+          >
+            {{ skill }}
+          </span>
+        </div>
+      </header>
     </section>
+  </section>
 
-    <!-- MEDIA -->
-    <section :class="sectionPad" ref="projectVideo" class="w-full flex justify-center items-center
+  <!-- MEDIA -->
+  <section
+    :class="sectionPad"
+    ref="projectVideo"
+    class="w-full flex justify-center items-center
            my-20 rounded-4xl
-           max-lg:my-14 max-md:my-10 max-sm:my-8">
-        <div class="w-full lg:w-3/5 mx-auto">
-            <video v-if="project.video" :src="project.video" autoplay loop muted playsinline
-                class="w-full h-full object-cover rounded-4xl" />
-            <img v-else :src="project.coverImage" class="w-full h-full object-cover rounded-4xl aspect-[16/9]" :alt="project.title" />
-        </div>
-    </section>
-
-    <!-- DESCRIPTION -->
-    <section :class="sectionPad" class="w-full flex flex-col items-center
-           mt-20 mb-10
-           max-lg:mt-14">
-        <div class="w-full lg:w-3/5 mx-auto flex items-start">
-            <div ref="projectDescription" class="w-2/5 flex flex-col gap-6 text-xl leading-relaxed text-base-300
-               max-lg:w-full max-md:text-lg max-sm:text-base">
-                <p>{{ project.description }}</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- DIVIDER -->
-    <div :class="sectionPad" ref="lineEl" class="w-full flex flex-col items-center">
-        <div id="line" class="w-full lg:w-3/5 mx-auto h-1 rounded-2xl bg-[var(--color-text-primary)]
-             my-10
-             max-md:my-8
-             max-sm:my-6" />
+           max-lg:my-14 max-md:my-10 max-sm:my-8"
+  >
+    <div class="w-full lg:w-6/8 mx-auto">
+      <video
+        v-if="project.video"
+        :src="project.video"
+        autoplay
+        loop
+        muted
+        playsinline
+        class="w-full h-full object-cover rounded-4xl"
+      />
+      <img
+        v-else
+        :src="project.coverImage"
+        class="w-full h-full object-cover rounded-4xl aspect-[16/9]"
+        :alt="project.title"
+      />
     </div>
+  </section>
 
-    <!-- GALLERY + CTA -->
-    <section :class="sectionPad" class="w-full flex items-center justify-center mt-10 max-lg:mt-8">
-        <div class="w-full lg:w-3/5 mx-auto flex items-end gap-20 mb-20
+  <!-- DESCRIPTION -->
+  <section
+    :class="sectionPad"
+    class="w-full flex flex-col items-center
+           mt-20 mb-10
+           max-lg:mt-14"
+  >
+    <div class="w-full lg:w-6/8 mx-auto flex items-start">
+      <div
+        ref="projectDescription"
+        class="flex flex-col gap-6 text-xl leading-relaxed text-base-300
+               [@media(min-width:1000px)_and_(max-width:1600px)]:text-lg
+               max-lg:w-full max-md:text-lg max-sm:text-base"
+      >
+        <p>{{ project.description }}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIVIDER -->
+  <div :class="sectionPad" ref="lineEl" class="w-full flex flex-col items-center">
+    <div
+      id="line"
+      class="w-full lg:w-6/8 mx-auto h-1 rounded-2xl bg-[var(--color-text-primary)]
+             my-10
+             [@media(min-width:1000px)_and_(max-width:1600px)]:my-8
+             max-md:my-8
+             max-sm:my-6"
+    />
+  </div>
+
+  <!-- GALLERY + CTA -->
+  <section :class="sectionPad" class="w-full flex items-center justify-center mt-10 max-lg:mt-8">
+    <div
+      class="w-full lg:w-6/8 mx-auto flex items-end gap-20 mb-20
+             [@media(min-width:1000px)_and_(max-width:1600px)]:gap-12
+             [@media(min-width:1000px)_and_(max-width:1600px)]:mb-16
              max-lg:flex-col max-lg:items-stretch max-lg:gap-10
-             max-md:mb-14">
-            <!-- Slider -->
-            <div id="sliderGallery" ref="sliderGallery" class="w-1/2 relative rounded-4xl overflow-hidden h-[500px]
+             max-md:mb-14"
+    >
+      <!-- Slider -->
+      <div
+        id="sliderGallery"
+        ref="sliderGallery"
+        class="w-1/2 relative rounded-4xl overflow-hidden h-[500px]
+               [@media(min-width:1000px)_and_(max-width:1600px)]:h-[440px]
                max-lg:w-full max-lg:h-[460px]
                max-md:h-[380px]
-               max-sm:h-[320px]">
-                <div v-for="(image, index) in project.galleryImages" :key="index" class="absolute inset-0">
-                    <img :src="image"
-                        class="w-full h-full object-cover rounded-4xl transition-all duration-700 ease-in-out will-change-transform"
-                        :class="index === slideIndex ? 'opacity-100 scale-100' : 'opacity-0 scale-[1.02] pointer-events-none'"
-                        alt="" />
-                </div>
-
-                <div class="absolute bottom-4 right-4 z-10 flex items-center gap-4
-                 max-sm:bottom-3 max-sm:right-3 max-sm:gap-3">
-                    <button @click="prevBtn" class="bg-[var(--color-bg-body)] text-[var(--color-text-primary)]
-                   px-3 py-1.5 pb-2 rounded-[100px] text-2xl
-                   max-sm:px-2.5 max-sm:py-1 max-sm:text-xl">
-                        ←
-                    </button>
-                    <button @click="nextBtn" class="bg-[var(--color-bg-body)] text-[var(--color-text-primary)]
-                   px-3 py-1.5 pb-2 rounded-[100px] text-2xl
-                   max-sm:px-2.5 max-sm:py-1 max-sm:text-xl">
-                        →
-                    </button>
-                </div>
-            </div>
-
-            <!-- Text + CTA -->
-            <div ref="textAndCta" class="w-1/2 flex flex-col gap-6 pl-10 items-end justify-end
-               max-lg:w-full max-lg:pl-0 max-lg:items-start max-lg:justify-start">
-                <p class="w-4/5 text-xl leading-relaxed text-base-300 text-justify
-                 max-lg:w-full max-md:text-lg max-sm:text-base">
-                    {{ project.secondDescription }}
-                </p>
-
-                <div class="flex gap-6 mt-10 max-md:flex-col max-md:w-full max-md:gap-4">
-                    <Button variant="outline" :href="project.link" target="_blank"
-                        :size="isMobileOrTablet ? 'small' : 'medium'" class="max-md:w-full">
-                        <span>View Project Source</span>
-                    </Button>
-
-                    <Button variant="primary" href="mailto:klyk.studio@gmail.com" target="_blank"
-                        :size="isMobileOrTablet ? 'small' : 'medium'"
-                        class="text-[var(--color-bg-body)]! max-md:w-full">
-                        <span class="text-[var(--color-bg-body)]">Let's Connect</span>
-                    </Button>
-                </div>
-            </div>
+               max-sm:h-[320px]"
+      >
+        <div v-for="(image, index) in project.galleryImages" :key="index" class="absolute inset-0">
+          <img
+            :src="image"
+            class="w-full h-full object-cover rounded-4xl transition-all duration-700 ease-in-out will-change-transform"
+            :class="index === slideIndex ? 'opacity-100 scale-100' : 'opacity-0 scale-[1.02] pointer-events-none'"
+            alt=""
+          />
         </div>
-    </section>
 
-    <Footer />
+        <div class="absolute bottom-4 right-4 z-10 flex items-center gap-4
+                    max-sm:bottom-3 max-sm:right-3 max-sm:gap-3">
+          <button
+            @click="prevBtn"
+            class="bg-[var(--color-bg-body)] text-[var(--color-text-primary)]
+                   px-3 py-1.5 pb-2 rounded-[100px] text-2xl
+                   [@media(min-width:1000px)_and_(max-width:1600px)]:text-xl
+                   [@media(min-width:1000px)_and_(max-width:1600px)]:px-2.5
+                   [@media(min-width:1000px)_and_(max-width:1600px)]:py-1
+                   max-sm:px-2.5 max-sm:py-1 max-sm:text-xl cursor-pointer border-2 border-[var(--color-text-primary)]"
+          >
+            ←
+          </button>
+          <button
+            @click="nextBtn"
+            class="bg-[var(--color-bg-body)] text-[var(--color-text-primary)]
+                   px-3 py-1.5 pb-2 rounded-[100px] text-2xl
+                   [@media(min-width:1000px)_and_(max-width:1600px)]:text-xl
+                   [@media(min-width:1000px)_and_(max-width:1600px)]:px-2.5
+                   [@media(min-width:1000px)_and_(max-width:1600px)]:py-1
+                   max-sm:px-2.5 max-sm:py-1 max-sm:text-xl cursor-pointer border-2 border-[var(--color-text-primary)]"
+          >
+            →
+          </button>
+        </div>
+      </div>
+
+      <!-- Text + CTA -->
+      <div
+        ref="textAndCta"
+        class="w-1/2 flex flex-col gap-6 pl-10 items-end justify-end
+               [@media(min-width:1000px)_and_(max-width:1600px)]:pl-6
+               max-lg:w-full max-lg:pl-0 max-lg:items-start max-lg:justify-start
+               min-w-0"
+      >
+        <p
+          class="w-4/5 text-xl leading-relaxed text-base-300 text-justify
+                 [@media(min-width:1000px)_and_(max-width:1600px)]:text-lg
+                 max-lg:w-full max-md:text-lg max-sm:text-base"
+        >
+          {{ project.secondDescription }}
+        </p>
+
+        <div
+          class="flex gap-6 mt-10
+                 [@media(min-width:1000px)_and_(max-width:1600px)]:mt-8
+                 [@media(min-width:1000px)_and_(max-width:1600px)]:gap-4
+                 max-md:flex-col max-md:w-full max-md:gap-4"
+        >
+          <Button
+            variant="outline"
+            :href="project.link"
+            target="_blank"
+            :size="isMobileOrTablet ? 'small' : 'medium'"
+            class="max-md:w-full"
+          >
+            <span>View Project Source</span>
+          </Button>
+
+          <Button
+            variant="primary"
+            href="mailto:klyk.studio@gmail.com"
+            target="_blank"
+            :size="isMobileOrTablet ? 'small' : 'medium'"
+            class="text-[var(--color-bg-body)]! max-md:w-full"
+          >
+            <span class="text-[var(--color-bg-body)]">Let's Connect</span>
+          </Button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
 </template>
+
 
 <script setup>
 import { onMounted, onBeforeUnmount, ref, nextTick } from "vue";

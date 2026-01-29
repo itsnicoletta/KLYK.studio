@@ -1,44 +1,47 @@
 <template>
   <Navbar :animate="true" />
   <Shader />
-
   <!-- HERO -->
-  <section id="Hero-wrapper" class="w-full min-h-screen mt-30 max-lg:mt-16">
-    <div id="hero-text" class="w-full h-full flex justify-center items-center flex-row gap-20
+  <section id="Hero-wrapper" class="relative w-full min-h-screen mt-16 max-sm:mt-16">
+    <!-- 3D layer: sotto, cliccabile -->
+    <Hero3D class="absolute inset-0 z-0 pointer-events-auto" />
+
+    <!-- content layer: sopra, ma lascia passare i click tranne la CTA -->
+    <div id="hero-text" class="relative z-10 w-full h-full flex justify-center items-center flex-row gap-20
              px-[112px] py-24 pt-0
              max-lg:flex-col max-lg:gap-8 max-lg:mt-[60px]
              max-md:px-[80px] max-md:py-14
-             max-sm:px-[40px] max-sm:py-10 max-sm:pt-20">
-      <div class="w-full flex justify-center items-center
-               max-lg:flex-col max-lg:items-center">
-        <div id="hero-heading" class="w-1/2 max-w-2xl flex flex-col gap-2 items-start text-left 
-               max-lg:w-full max-lg:items-center max-lg:text-center">
-          <h1 id="hero-title" ref="heroTitleEl" class="font-display font-semibold leading-tight 
-                 text-[clamp(4rem,24vw,6rem)]
-                 max-md:text-[clamp(3.2rem,12vw,4.4rem)]
-                 max-sm:text-[clamp(2.6rem,10vw,3.8rem)]">
+             max-sm:px-[40px] max-sm:py-10 max-sm:pt-20
+             pointer-events-none">
+      <div class="w-full flex justify-center items-center max-lg:flex-col max-lg:items-center">
+        <div id="hero-heading" class="w-1/2 max-w-2xl flex flex-col gap-2 items-start text-left
+                 max-lg:w-full max-lg:items-center max-lg:text-center">
+          <h1 id="hero-title" ref="heroTitleEl" class="font-display font-semibold leading-tight
+                   text-[clamp(4rem,24vw,6rem)]
+                   max-md:text-[clamp(3.2rem,12vw,4.4rem)]
+                   max-sm:text-[clamp(2.6rem,10vw,3.8rem)]">
             {{ infoAgency.Usp }}
           </h1>
 
           <p id="hero-description" ref="heroDescriptionEl" class="mt-6 mb-6 font-sans text-body text-base-300 max-w-xl
-                 mx-0 text-lg
-                 max-lg:mx-auto max-lg:text-base">
+                   mx-0 text-lg
+                   max-lg:mx-auto max-lg:text-base">
             {{ infoAgency.Hero }}
           </p>
 
-          <router-link to="/quick-audit" id="hero-cta" ref="heroCtaEl" class="w-auto max-sm:w-full">
+          <!-- CTA torna cliccabile -->
+          <router-link to="/quick-audit" id="hero-cta" ref="heroCtaEl" class="w-auto max-sm:w-full pointer-events-auto">
             <Button variant="outline" :size="isMobileOrTablet ? 'medium' : 'large'" class="w-auto max-sm:w-full">
               Book a 15-min call
             </Button>
           </router-link>
         </div>
 
-      <div id="hero-3D-wrapper" class="relative w-1/2 h-[80vh]
-         max-lg:w-full max-lg:h-[420px]
-         max-md:h-[340px]
-         max-sm:h-[280px] overflow-visible">
-          <Hero3D class="absolute inset-0" />
-        </div>
+        <!-- questo wrapper lo puoi anche rimuovere se non ti serve -->
+        <div id="hero-3D-wrapper" ref="hero3dWrapperEl" class="relative w-1/2 h-[80vh]
+                 max-lg:w-full max-lg:h-[420px]
+                 max-md:h-[340px]
+                 max-sm:h-[280px] overflow-visible" />
       </div>
     </div>
   </section>
