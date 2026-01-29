@@ -3,10 +3,8 @@
   <Shader />
   <!-- HERO -->
   <section id="Hero-wrapper" class="relative w-full min-h-screen mt-16 max-sm:mt-16">
-    <!-- 3D layer: sotto, cliccabile -->
     <Hero3D class="absolute inset-0 z-0 pointer-events-auto" />
 
-    <!-- content layer: sopra, ma lascia passare i click tranne la CTA -->
     <div id="hero-text" class="relative z-10 w-full h-full flex justify-center items-center flex-row gap-20
              px-[112px] py-24 pt-0
              max-lg:flex-col max-lg:gap-8 max-lg:mt-[60px]
@@ -29,7 +27,6 @@
             {{ infoAgency.Hero }}
           </p>
 
-          <!-- CTA torna cliccabile -->
           <router-link to="/quick-audit" id="hero-cta" ref="heroCtaEl" class="w-auto max-sm:w-full pointer-events-auto">
             <Button variant="outline" :size="isMobileOrTablet ? 'medium' : 'large'" class="w-auto max-sm:w-full">
               Book a 15-min call
@@ -37,7 +34,6 @@
           </router-link>
         </div>
 
-        <!-- questo wrapper lo puoi anche rimuovere se non ti serve -->
         <div id="hero-3D-wrapper" ref="hero3dWrapperEl" class="relative w-1/2 h-[80vh]
                  max-lg:w-full max-lg:h-[420px]
                  max-md:h-[340px]
