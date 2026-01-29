@@ -97,7 +97,7 @@ const CAMERA_PADDING = 1.25;
 
 const DOLLY_DESKTOP = 1.3; // > 1280
 const DOLLY_MID = 1.2; // 650–1280
-const DOLLY_PHONE = 1.25; // < 650
+const DOLLY_PHONE = 1.45; // < 650
 
 const GLOBAL_FRAMING = 0.6;
 
