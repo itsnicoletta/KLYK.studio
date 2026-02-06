@@ -9,7 +9,7 @@
         </h1>
 
         <p class="text-base sm:text-lg text-base-300 leading-relaxed max-w-2xl">
-          We’re a small team focused on design and development for the web. We build clear, modern interfaces and ship
+          It's a small team focused on design and development for the web made by Nicoletta Pelosi and few other indipendent collaborators. We build clear, modern interfaces and ship
           reliable front-end experiences.
         </p>
       </header>

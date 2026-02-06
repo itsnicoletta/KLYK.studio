@@ -13,12 +13,12 @@ export const infoAgency = {
         github: ''
     },
     Usp: 'Designing immersive digital stories.',
-    Hero: 'At KLYK.studio, we combine UX/UI design, front-end development and storytelling to craft interactive websites and motion driven interfaces.',
-    Mission: 'Our mission is to create engaging digital experiences that seamlessly blend aesthetics and functionality. We believe in the power of design to tell stories, evoke emotions, and drive user engagement. By leveraging the latest technologies and design principles, we aim to deliver solutions that not only meet but exceed our clients\' expectations.',
-    Vision: 'We envision a digital landscape where creativity meets technology, resulting in immersive experiences that captivate and inspire users. At KLYK.studio, we strive to be at the forefront of innovation, continuously pushing the boundaries of what is possible in web design and development. Our goal is to build lasting relationships with our clients by delivering exceptional value and fostering a collaborative approach to every project.',
-    WhyUs: 'You have the ideas, we have the skills to bring them to life.',
-    Products: 'You can see some of our work.',
-    ProjectHeader: 'Our latest projects',
+    Hero: 'At KLYK.studio, I combine UX/UI design, front-end development and storytelling to craft interactive websites and motion driven interfaces.',
+    Mission: 'The mission is to create engaging digital experiences that seamlessly blend aesthetics and functionality. We believe in the power of design to tell stories, evoke emotions, and drive user engagement. By leveraging the latest technologies and design principles, we aim to deliver solutions that not only meet but exceed our clients\' expectations.',
+    Vision: 'I envision a digital landscape where creativity meets technology, resulting in immersive experiences that captivate and inspire users. At KLYK.studio, we strive to be at the forefront of innovation, continuously pushing the boundaries of what is possible in web design and development. Our goal is to build lasting relationships with our clients by delivering exceptional value and fostering a collaborative approach to every project.',
+    WhyUs: 'You have the ideas, I have the skills to bring them to life.',
+    Products: 'You can see some of my work.',
+    ProjectHeader: 'My latest projects',
 };
 
 export const infoDesigner = [
