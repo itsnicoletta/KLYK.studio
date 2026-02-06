@@ -223,4 +223,60 @@ watch(submitError, (v) => {
         gsap.fromTo(errEl.value, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" });
     });
 });
+
+import { useHead } from "@unhead/vue";
+
+useHead({
+    title: "Contact — KLYK.studio | Work with me",
+    meta: [
+        {
+            name: "description",
+            content:
+                "Get in touch with KLYK.studio (Nicoletta Pelosi). Reach out for UI/UX design, interactive web experiences, motion-driven interfaces and Vue frontend development.",
+        },
+        { name: "robots", content: "index,follow" },
+
+        // Open Graph
+        { property: "og:title", content: "Contact — KLYK.studio" },
+        {
+            property: "og:description",
+            content:
+                "Let’s build something engaging — UI/UX design, interactive websites, motion and Vue frontend development.",
+        },
+        { property: "og:url", content: "https://klyk.studio/contacts" },
+        { property: "og:type", content: "website" },
+
+        // Twitter
+        { name: "twitter:card", content: "summary_large_image" },
+    ],
+    link: [{ rel: "canonical", href: "https://klyk.studio/contacts" }],
+    script: [
+        {
+            type: "application/ld+json",
+            children: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "ContactPage",
+                name: "Contact — KLYK.studio",
+                url: "https://klyk.studio/contacts",
+                mainEntity: {
+                    "@type": "Person",
+                    name: "Nicoletta Pelosi",
+                    jobTitle: "Digital Designer & Frontend Developer",
+                    email: "mailto:pelosinicoletta@gmail.com",
+                    worksFor: {
+                        "@type": "Organization",
+                        name: "KLYK.studio",
+                        url: "https://klyk.studio/",
+                    },
+                    sameAs: [
+                        "https://www.linkedin.com/in/nicoletta-pelosi/",
+                        "https://www.instagram.com/klyk.studio/",
+                        "https://www.behance.net/klykstudio",
+                    ],
+                },
+            }),
+        },
+    ],
+});
+
 </script>

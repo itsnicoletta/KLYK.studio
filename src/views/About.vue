@@ -66,4 +66,60 @@ window.addEventListener('resize', () => {
   isMobileOrTablet.value = window.innerWidth <= 768
 })
 
+import { useHead } from "@unhead/vue";
+
+useHead({
+  title: "About — KLYK.studio | Nicoletta Pelosi",
+  meta: [
+    {
+      name: "description",
+      content:
+        "KLYK.studio is the portfolio of Nicoletta Pelosi, a UX/UI designer & frontend developer crafting interactive websites, motion-driven interfaces and immersive digital storytelling.",
+    },
+    { name: "robots", content: "index,follow" },
+
+    // Open Graph
+    { property: "og:title", content: "About — KLYK.studio | Nicoletta Pelosi" },
+    {
+      property: "og:description",
+      content:
+        "Meet Nicoletta Pelosi — UX/UI designer & frontend developer focused on interactive websites, motion design and immersive storytelling.",
+    },
+    { property: "og:url", content: "https://klyk.studio/about" },
+    { property: "og:type", content: "website" },
+
+    // Twitter
+    { name: "twitter:card", content: "summary_large_image" },
+  ],
+  link: [{ rel: "canonical", href: "https://klyk.studio/about" }],
+  script: [
+    {
+      type: "application/ld+json",
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Person",
+        name: "Nicoletta Pelosi",
+        jobTitle: "Digital Designer & Frontend Developer",
+        url: "https://klyk.studio/about",
+        email: "mailto:pelosinicoletta@gmail.com",
+        worksFor: {
+          "@type": "Organization",
+          name: "KLYK.studio",
+          url: "https://klyk.studio/",
+        },
+        sameAs: [
+          "https://www.linkedin.com/in/nicoletta-pelosi/",
+          "https://www.instagram.com/klyk.studio/",
+          "https://www.behance.net/klykstudio",
+        ],
+        address: {
+          "@type": "PostalAddress",
+          addressCountry: "IT",
+        },
+      }),
+    },
+  ],
+});
+
+
 </script>

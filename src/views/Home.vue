@@ -245,4 +245,62 @@ onBeforeUnmount(() => {
   ctx?.revert();
   ScrollTrigger.getAll().forEach((t) => t.kill());
 });
+
+//unhead plugin 
+import { useHead } from "@unhead/vue";
+
+useHead({
+  title: "KLYK.studio — UX/UI Design & Frontend Development",
+  meta: [
+    {
+      name: "description",
+      content:
+        "KLYK.studio is the portfolio of Nicoletta Pelosi — UX/UI designer & frontend developer. I craft interactive websites, motion-driven interfaces and immersive storytelling experiences.",
+    },
+    { name: "robots", content: "index,follow" },
+
+    // Open Graph
+    { property: "og:title", content: "KLYK.studio — UX/UI Design & Frontend Development" },
+    {
+      property: "og:description",
+      content:
+        "Interactive websites, motion-driven interfaces and immersive digital storytelling by Nicoletta Pelosi.",
+    },
+    { property: "og:url", content: "https://klyk.studio/" },
+    { property: "og:type", content: "website" },
+
+    // Twitter
+    { name: "twitter:card", content: "summary_large_image" },
+  ],
+  link: [{ rel: "canonical", href: "https://klyk.studio/" }],
+  script: [
+    {
+      type: "application/ld+json",
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Person",
+        name: "Nicoletta Pelosi",
+        jobTitle: "Digital Designer & Frontend Developer",
+        email: "mailto:pelosinicoletta@gmail.com",
+        url: "https://klyk.studio/",
+        sameAs: [
+          "https://www.linkedin.com/in/nicoletta-pelosi/",
+          "https://www.instagram.com/klyk.studio/",
+          "https://www.behance.net/klykstudio",
+        ],
+        worksFor: {
+          "@type": "Organization",
+          name: "KLYK.studio",
+          url: "https://klyk.studio/",
+        },
+        address: {
+          "@type": "PostalAddress",
+          addressCountry: "IT",
+        },
+      }),
+    },
+  ],
+});
+
+
 </script>

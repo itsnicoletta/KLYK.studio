@@ -250,4 +250,58 @@ watch(activeYear, (y) => {
 
     gsap.fromTo(activeDot, { scale: 1 }, { scale: 1.18, duration: 0.18, yoyo: true, repeat: 1, ease: 'power2.out' })
 })
+
+import { useHead } from "@unhead/vue";
+
+useHead({
+    title: "Projects — KLYK.studio | UI/UX, Motion & Frontend",
+    meta: [
+        {
+            name: "description",
+            content:
+                "Explore selected projects by KLYK.studio — UI/UX design, interactive websites, motion-driven interfaces and frontend development in Vue.",
+        },
+        { name: "robots", content: "index,follow" },
+
+        // Open Graph
+        { property: "og:title", content: "Projects — KLYK.studio" },
+        {
+            property: "og:description",
+            content:
+                "Selected work: UI/UX design, interactive websites, motion-driven interfaces and Vue frontend development.",
+        },
+        { property: "og:url", content: "https://klyk.studio/projects" },
+        { property: "og:type", content: "website" },
+
+        // Twitter
+        { name: "twitter:card", content: "summary_large_image" },
+    ],
+    link: [{ rel: "canonical", href: "https://klyk.studio/projects" }],
+    script: [
+        {
+            type: "application/ld+json",
+            children: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "CollectionPage",
+                name: "Projects — KLYK.studio",
+                url: "https://klyk.studio/projects",
+                isPartOf: {
+                    "@type": "WebSite",
+                    name: "KLYK.studio",
+                    url: "https://klyk.studio/",
+                },
+                about: [
+                    "UI/UX Design",
+                    "Web Design",
+                    "Motion Design",
+                    "Frontend Development",
+                    "Vue.js",
+                    "Interactive Storytelling",
+                ],
+            }),
+        },
+    ],
+});
+
+
 </script>

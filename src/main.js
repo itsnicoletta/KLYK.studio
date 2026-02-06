@@ -1,11 +1,13 @@
-// src/main.js
 import { createApp } from 'vue'
 import App from './App.vue'
-import router from './router' 
-import './styles/style.css'
-import 'lightgallery/css/lg-zoom.css'
-import 'lightgallery/css/lg-thumbnail.css'
+import router from './router'
+
+import { createHead } from '@unhead/vue'
 
 const app = createApp(App)
-app.use(router)                          // <— qui!
+
+const head = createHead()
+app.use(head)
+
+app.use(router)
 app.mount('#app')

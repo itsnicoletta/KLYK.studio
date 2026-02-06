@@ -431,4 +431,52 @@ onBeforeUnmount(() => {
     ctx?.revert()
     ScrollTrigger.getAll().forEach(t => t.kill())
 })
+
+
+import { useHead } from "@unhead/vue";
+
+useHead({
+    title: "Quick Audit — KLYK.studio | UX/UI & Website Review",
+    meta: [
+        {
+            name: "description",
+            content:
+                "Book a 15-minute Quick Audit with KLYK.studio. Get actionable feedback on your website’s UX/UI, clarity, conversion and visual consistency — fast and practical.",
+        },
+        { name: "robots", content: "index,follow" },
+
+        // Open Graph
+        { property: "og:title", content: "Quick Audit — KLYK.studio" },
+        {
+            property: "og:description",
+            content:
+                "A 15-minute website review with actionable UX/UI feedback on clarity, conversion and visual consistency.",
+        },
+        { property: "og:url", content: "https://klyk.studio/quick-audit" },
+        { property: "og:type", content: "website" },
+
+        // Twitter
+        { name: "twitter:card", content: "summary_large_image" },
+    ],
+    link: [{ rel: "canonical", href: "https://klyk.studio/quick-audit" }],
+    script: [
+        {
+            type: "application/ld+json",
+            children: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Service",
+                name: "Quick Audit (15 min)",
+                provider: {
+                    "@type": "Organization",
+                    name: "KLYK.studio",
+                    url: "https://klyk.studio/",
+                },
+                areaServed: "Remote",
+                serviceType: "Website UX/UI audit",
+                url: "https://klyk.studio/quick-audit",
+            }),
+        },
+    ],
+});
+
 </script>
