@@ -254,7 +254,7 @@ watch(activeYear, (y) => {
 import { useHead } from "@unhead/vue";
 
 useHead({
-    title: "Projects — KLYK.studio | UI/UX, Motion & Frontend",
+    title: "Projects - KLYK.studio | UI/UX, Motion & Frontend",
     meta: [
         {
             name: "description",

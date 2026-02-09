@@ -69,7 +69,7 @@ window.addEventListener('resize', () => {
 import { useHead } from "@unhead/vue";
 
 useHead({
-  title: "About — KLYK.studio | Nicoletta Pelosi",
+  title: "About - KLYK.studio | Nicoletta Pelosi",
   meta: [
     {
       name: "description",

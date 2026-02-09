@@ -227,7 +227,7 @@ watch(submitError, (v) => {
 import { useHead } from "@unhead/vue";
 
 useHead({
-    title: "Contact — KLYK.studio | Work with me",
+    title: "Contact - KLYK.studio | Work with me",
     meta: [
         {
             name: "description",

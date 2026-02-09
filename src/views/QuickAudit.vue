@@ -436,7 +436,7 @@ onBeforeUnmount(() => {
 import { useHead } from "@unhead/vue";
 
 useHead({
-    title: "Quick Audit — KLYK.studio | UX/UI & Website Review",
+    title: "Quick Audit - KLYK.studio | UX/UI & Website Review",
     meta: [
         {
             name: "description",
