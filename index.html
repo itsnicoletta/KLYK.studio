@@ -41,6 +41,20 @@
 
     gtag('config', 'G-GJ6409R33M', { 'anonymize_ip': true });
   </script>
+  <link rel="canonical" href="https://klyk.studio/" data-dynamic-canonical>
+  <script>
+    (function () {
+      var el = document.querySelector('link[rel="canonical"][data-dynamic-canonical]');
+      if (!el) return;
+      var url = new URL(window.location.href);
+      // normalizza: niente hash, niente query
+      url.hash = "";
+      url.search = "";
+      // opzionale: rimuovi slash finale (decidi standard)
+      // url.pathname = url.pathname.replace(/\/$/, "");
+      el.href = url.toString();
+    })();
+  </script>
 </head>
 
 <body>
