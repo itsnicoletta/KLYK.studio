@@ -68,10 +68,34 @@ import img10_2 from './projectsAssets/project10_2.webp'
 import img10_3 from './projectsAssets/project10_3.webp'
 import vid10 from './projectsAssets/project10_video.webm'
 
+//progetto 11 assets
+import cover11 from './projectsAssets/project11_cover.webp'
+import img11_1 from './projectsAssets/project11_1.webp'
+import img11_2 from './projectsAssets/project11_2.webp'
+import img11_3 from './projectsAssets/project11_3.webp'
+
 
 
 
 export const projects = [
+    {
+        id: 11,
+        slug: 'the-froggy-studio-sri-lanka-creative-website',
+        title: 'The Froggy Studio',
+        H2: 'A bold creative studio website designed to introduce art direction, web design, motion graphics, and digital services to the Sri Lankan market.',
+        year: '2026',
+        shortDescription:
+            'A playful yet strategic digital presence for a new creative studio focused on bringing high-impact art direction, web design, motion graphics, and storytelling-led services to Sri Lanka.',
+        description: `The Froggy Studio is a newly launched creative project built to position the studio as a fresh visual voice in Sri Lanka. The goal was to create a website that feels imaginative, memorable, and confident while clearly communicating a service offer centered on art direction, web design, and digital creativity.
+    The project balances expressive branding with a clear user journey, so visitors can immediately understand the studio's tone, values, and creative capabilities. Rather than presenting the studio as a generic agency, the experience was shaped to feel distinctive and full of personality, giving the brand a strong first impression from the very first screen.`,
+        secondDescription: `From a design direction standpoint, the project focuses on visual storytelling, atmosphere, and a more editorial presentation of services. Even if the current case study does not showcase the motion pieces in video form, the project also includes motion graphics as part of the wider creative direction, helping define a more dynamic and expressive brand presence.
+    The site was conceived as a creative launchpad: something that can introduce The Froggy Studio to new audiences, support future collaborations, and open space for design-led services in a market where this kind of positioning still feels fresh and full of opportunity.`,
+        skills: ['Art Direction', 'Web Design', 'Motion Graphics', 'Creative Strategy', 'Brand Positioning', 'Storytelling'],
+        coverImage: cover11,
+        galleryImages: [img11_1, img11_2, img11_3],
+        link: 'https://thefroggystudio.com',
+        buttonLabel: 'Visit Live Website'
+    },
     {
         id: 1,
         slug: 'lost-in-light-immersive-experience',

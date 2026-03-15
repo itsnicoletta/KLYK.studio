@@ -206,7 +206,7 @@
             :size="isMobileOrTablet ? 'small' : 'medium'"
             class="max-md:w-full"
           >
-            <span>View Project Source</span>
+            <span>{{ project.buttonLabel || 'View Project Source' }}</span>
           </Button>
 
           <Button
