@@ -1,3 +1,5 @@
 KLYK.Studio
 
-a web agency with 2 working heads ana a lot of passion
+This project is my portfolio as an independent digital designer and front-end developer. 
+
+The main goal is to showcase the project and work I have done as a single and as a team player. 
