@@ -20,17 +20,19 @@
              bg-gradient-to-bl from-white/0 to-black/70" aria-hidden="true"></div>
 
         <router-link :to="serviceUrl" class="relative z-10 block w-full h-full">
-            <div class="flex flex-row items-end justify-between h-full p-6 gap-4">
-                <div class="flex flex-col gap-4 max-w-[75%]">
-                    <h4 class="font-display text-3xl font-regular text-[var(--color-text-primary)] max-md:text-3xl">
+            <div class="flex flex-row items-end justify-between h-full p-6 gap-4 [@media(max-height:820px)]:lg:p-5 [@media(max-height:700px)]:lg:p-4">
+                <div class="flex flex-col gap-4 max-w-[75%] [@media(max-height:820px)]:lg:gap-3 [@media(max-height:700px)]:lg:gap-2.5">
+                    <h4 class="font-display font-regular text-[var(--color-text-primary)] leading-[1.05]
+                               text-3xl max-md:text-3xl
+                               [@media(max-height:820px)]:lg:text-2xl [@media(max-height:700px)]:lg:text-[1.7rem]">
                         {{ service.title }}
                     </h4>
 
-                    <p class="break-words max-md:text-lg text-base-300">
+                    <p class="break-words text-base-300 max-md:text-lg [@media(max-height:820px)]:lg:text-sm [@media(max-height:700px)]:lg:text-[0.9rem]">
                         {{ service.subtitle }}
                     </p>
 
-                    <ul v-if="service.bullets?.length" class="hidden md:flex flex-col gap-2 text-base text-base-300">
+                    <ul v-if="service.bullets?.length" class="hidden md:flex flex-col gap-2 text-base text-base-300 [@media(max-height:820px)]:lg:gap-1.5 [@media(max-height:820px)]:lg:text-sm [@media(max-height:700px)]:lg:text-[0.9rem]">
                         <li v-for="(b, i) in service.bullets" :key="i" class="flex items-start gap-2">
                             <span class="mt-2 h-1.5 w-1.5 rounded-full bg-[var(--color-text-primary)] shrink-0"></span>
                             <span class="leading-relaxed">{{ b }}</span>

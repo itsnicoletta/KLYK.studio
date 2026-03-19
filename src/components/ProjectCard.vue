@@ -1,7 +1,7 @@
 <template>
   <article ref="CardEl" class="relative mx-auto overflow-hidden rounded-4xl group
            w-11/12 sm:w-4/5 md:w-3/5
-           aspect-[4/5] sm:aspect-[3/4] md:aspect-[16/9] lg:aspect-[16/7]">
+           aspect-[4/5] sm:aspect-[3/4] md:aspect-[16/10] lg:aspect-[16/8]">
     <router-link :to="`/projects/${slug}`" class="block w-full h-full">
       <img :src="image" :alt="`${title} cover image`" class="absolute inset-0 w-full h-full object-cover rounded-4xl transition-all duration-700
                brightness-40
@@ -20,8 +20,9 @@
                  [@media(hover:hover)]:bg-none
                  [@media(hover:hover)]:justify-center">
           <h3 class="font-display text-[var(--color-text-primary)]
-                   text-2xl sm:text-3xl md:text-4xl
-                   [@media(hover:hover)]:text-6xl [@media(hover:hover)]:md:text-7xl">
+                   leading-[0.95] max-w-[18ch]
+                   text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl 2xl:text-6xl
+                   [@media(hover:hover)]:text-4xl [@media(hover:hover)]:md:text-5xl [@media(hover:hover)]:lg:text-5xl [@media(hover:hover)]:xl:text-6xl [@media(hover:hover)]:2xl:text-7xl">
             {{ title }}
           </h3>
 
