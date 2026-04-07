@@ -74,10 +74,38 @@ import img11_1 from './projectsAssets/project11_1.webp'
 import img11_2 from './projectsAssets/project11_2.webp'
 import img11_3 from './projectsAssets/project11_3.webp'
 
+//progetto 12 assets
+import cover12 from './projectsAssets/project12_cover.webp'
+import img12_1 from './projectsAssets/project12_1.webp'
+import img12_2 from './projectsAssets/project12_2.webp'
+import img12_3 from './projectsAssets/project12_3.webp'
+import img12_4 from './projectsAssets/project12_4.webp'
+import img12_5 from './projectsAssets/project12_5.webp'
+import vid12 from './projectsAssets/project12_video.webm'
+
 
 
 
 export const projects = [
+    {
+        id: 12,
+        slug: 'the-ring-experience-vue-sanity-jewellery-workshop-website',
+        title: 'The Ring Experience',
+        H2: 'A flexible Vue 3 website for a Sri Lankan jewellery experience brand, built so the team can manage services, slots, gemstones, and storytelling without developer support.',
+        year: '2026',
+        shortDescription:
+            'Website design and development for a Sri Lankan brand led by two Italo-Sri Lankan founders, focused on handcrafted jewellery-making experiences available in different formats.',
+        description: `The Ring Experience is a Sri Lanka-based business created by two Italo-Sri Lankan founders who offer people the chance to live a hands-on jewellery-making experience. The website was built to present the different workshop formats clearly, communicate the atmosphere of the brand, and help visitors understand the value of creating a piece by hand rather than simply buying one.
+    My role was to support the business by designing and developing a website in Vue 3 with Vite, shaped around a visual and editorial approach that could make the experience feel welcoming, authentic, and easy to explore.`,
+        secondDescription: `A key part of the project was giving the team real autonomy over their content. The backend was structured in Sanity so the admin can update photos, edit texts, activate or hide sections, and manage practical details like services, available slots, gemstones, and similar offer-related content without needing to contact me for every change.
+    The result is a site that supports the brand today while staying easy to maintain over time: flexible enough for business updates, but still carefully designed to preserve a strong and polished presentation of the experience.`,
+        skills: ['Vue 3', 'Vite', 'Sanity CMS', 'Frontend Development', 'CMS Architecture', 'Content Flexibility'],
+        coverImage: cover12,
+        galleryImages: [img12_1, img12_2, img12_3, img12_4, img12_5],
+        video: vid12,
+        link: 'https://www.theringexperience.lk',
+        buttonLabel: 'Visit Live Website'
+    },
     {
         id: 11,
         slug: 'the-froggy-studio-sri-lanka-creative-website',

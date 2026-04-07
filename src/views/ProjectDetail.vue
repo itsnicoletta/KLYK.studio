@@ -135,20 +135,28 @@
       <div
         id="sliderGallery"
         ref="sliderGallery"
-        class="w-1/2 relative rounded-4xl overflow-hidden h-[500px]
+        class="w-[45%] relative rounded-4xl overflow-hidden h-[500px]
                [@media(min-width:1000px)_and_(max-width:1600px)]:h-[440px]
                max-lg:w-full max-lg:h-[460px]
                max-md:h-[380px]
                max-sm:h-[320px]"
       >
-        <div v-for="(image, index) in project.galleryImages" :key="index" class="absolute inset-0">
+        <button
+          v-for="(image, index) in project.galleryImages"
+          :key="index"
+          type="button"
+          class="absolute inset-0 block cursor-zoom-in"
+          :class="index === slideIndex ? 'pointer-events-auto' : 'pointer-events-none'"
+          :aria-label="`Open gallery image ${index + 1}`"
+          @click="openLightbox(index)"
+        >
           <img
             :src="image"
             class="w-full h-full object-cover rounded-4xl transition-all duration-700 ease-in-out will-change-transform"
             :class="index === slideIndex ? 'opacity-100 scale-100' : 'opacity-0 scale-[1.02] pointer-events-none'"
             alt=""
           />
-        </div>
+        </button>
 
         <div class="absolute bottom-4 right-4 z-10 flex items-center gap-4
                     max-sm:bottom-3 max-sm:right-3 max-sm:gap-3">
@@ -180,15 +188,15 @@
       <!-- Text + CTA -->
       <div
         ref="textAndCta"
-        class="w-1/2 flex flex-col gap-6 pl-10 items-end justify-end
-               [@media(min-width:1000px)_and_(max-width:1600px)]:pl-6
+        class="w-[55%] flex flex-col gap-6 pl-6 items-end justify-end
+               [@media(min-width:1000px)_and_(max-width:1600px)]:pl-4
                max-lg:w-full max-lg:pl-0 max-lg:items-start max-lg:justify-start
                min-w-0"
       >
         <p
-          class="w-4/5 text-xl leading-relaxed text-base-300 text-justify
+          class="w-full max-w-[42rem] text-xl leading-relaxed text-base-300 text-justify
                  [@media(min-width:1000px)_and_(max-width:1600px)]:text-lg
-                 max-lg:w-full max-md:text-lg max-sm:text-base"
+                  max-lg:w-full max-md:text-lg max-sm:text-base"
         >
           {{ project.secondDescription }}
         </p>
@@ -223,6 +231,61 @@
     </div>
   </section>
 
+  <teleport to="body">
+    <div
+      v-if="lightboxOpen"
+      class="fixed inset-0 z-50 bg-black/92 backdrop-blur-sm flex items-center justify-center px-6 py-8 max-sm:px-4"
+      @click="closeLightbox"
+    >
+      <button
+        type="button"
+        class="absolute top-6 right-6 h-12 w-12 rounded-full border border-white/20 bg-white/10 text-white text-3xl leading-none cursor-pointer transition-colors hover:bg-white/20 max-sm:top-4 max-sm:right-4"
+        aria-label="Close image preview"
+        @click.stop="closeLightbox"
+      >
+        ×
+      </button>
+
+      <button
+        v-if="project.galleryImages.length > 1"
+        type="button"
+        class="absolute left-6 top-1/2 -translate-y-1/2 h-14 w-14 rounded-full border border-white/20 bg-white/10 text-white text-3xl cursor-pointer transition-colors hover:bg-white/20 max-sm:left-3 max-sm:h-12 max-sm:w-12"
+        aria-label="Previous image"
+        @click.stop="prevLightbox"
+      >
+        ←
+      </button>
+
+      <div class="w-full max-w-6xl flex flex-col items-center gap-5" @click.stop>
+        <img
+          :src="project.galleryImages[lightboxIndex]"
+          :alt="`${project.title} gallery image ${lightboxIndex + 1}`"
+          class="max-h-[78vh] w-auto max-w-full rounded-[2rem] object-contain shadow-2xl"
+        />
+
+        <div class="flex items-center justify-between w-full max-w-3xl gap-4 text-white/80 max-sm:flex-col">
+          <p class="text-sm uppercase tracking-[0.2em]">
+            {{ project.title }} · {{ lightboxIndex + 1 }}/{{ project.galleryImages.length }}
+          </p>
+
+          <p class="text-sm text-white/60">
+            Click outside or press Esc to close
+          </p>
+        </div>
+      </div>
+
+      <button
+        v-if="project.galleryImages.length > 1"
+        type="button"
+        class="absolute right-6 top-1/2 -translate-y-1/2 h-14 w-14 rounded-full border border-white/20 bg-white/10 text-white text-3xl cursor-pointer transition-colors hover:bg-white/20 max-sm:right-3 max-sm:h-12 max-sm:w-12"
+        aria-label="Next image"
+        @click.stop="nextLightbox"
+      >
+        →
+      </button>
+    </div>
+  </teleport>
+
   <Footer />
 </template>
 
@@ -249,6 +312,8 @@ const sectionPad = "px-[112px] max-md:px-[80px] max-sm:px-[40px]";
 // slider (0-based)
 const slideIndex = ref(0);
 let intervalId = null;
+const lightboxOpen = ref(false);
+const lightboxIndex = ref(0);
 
 function nextBtn() {
     const total = project?.galleryImages?.length ?? 0;
@@ -276,6 +341,46 @@ function stopAutoplay() {
     }
 }
 
+function syncBodyScrollLock() {
+    if (typeof document === "undefined") return;
+    document.body.style.overflow = lightboxOpen.value ? "hidden" : "";
+}
+
+function openLightbox(index) {
+    lightboxIndex.value = index;
+    lightboxOpen.value = true;
+    syncBodyScrollLock();
+}
+
+function closeLightbox() {
+    lightboxOpen.value = false;
+    syncBodyScrollLock();
+}
+
+function nextLightbox() {
+    const total = project?.galleryImages?.length ?? 0;
+    if (!total) return;
+    lightboxIndex.value = (lightboxIndex.value + 1) % total;
+}
+
+function prevLightbox() {
+    const total = project?.galleryImages?.length ?? 0;
+    if (!total) return;
+    lightboxIndex.value = (lightboxIndex.value - 1 + total) % total;
+}
+
+function handleKeydown(event) {
+    if (!lightboxOpen.value) return;
+
+    if (event.key === "Escape") {
+        closeLightbox();
+    } else if (event.key === "ArrowRight") {
+        nextLightbox();
+    } else if (event.key === "ArrowLeft") {
+        prevLightbox();
+    }
+}
+
 /* responsive flag (<= 1024px) */
 const isMobileOrTablet = ref(false);
 let mql;
@@ -297,6 +402,7 @@ let ctx = null;
 
 onMounted(async () => {
     startAutoplay();
+    window.addEventListener("keydown", handleKeydown);
 
     // matchMedia
     mql = window.matchMedia("(max-width: 1024px)");
@@ -420,6 +526,8 @@ onMounted(async () => {
 
 onBeforeUnmount(() => {
     stopAutoplay();
+    closeLightbox();
+    window.removeEventListener("keydown", handleKeydown);
     ctx?.revert();
     ScrollTrigger.getAll().forEach((t) => t.kill());
 
