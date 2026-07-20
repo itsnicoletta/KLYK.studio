@@ -36,19 +36,19 @@
     </aside>
 
     <!-- ARCHIVE -->
-    <section id="projectsArchive" class="mt-40 px-[112px] py-24 flex flex-col gap-10
+    <section id="projectsArchive" class="mt-40 px-[88px] py-20 flex flex-col gap-8
            max-lg:mt-28 max-lg:px-[80px] max-lg:py-14 max-lg:gap-8
-           max-sm:mt-20 max-sm:px-[40px] max-sm:py-10 max-sm:gap-5">
+           max-sm:mt-20 max-sm:px-[28px] max-sm:py-10 max-sm:gap-5">
         <header class="flex flex-col items-center pb-20 max-lg:pb-10 max-sm:pb-6">
-            <h4 ref="projectsTitleEl" class="text-6xl font-display font-medium text-center w-1/2
+            <h1 ref="projectsTitleEl" class="text-4xl font-display font-medium text-center w-1/2
                max-lg:w-3/4
-               max-md:w-11/12 max-md:text-5xl
-               max-sm:text-4xl">
-                {{ infoAgency?.Products ?? 'Projects' }}
-            </h4>
+               max-md:w-11/12 max-md:text-4xl
+               max-sm:text-3xl">
+                {{ t("common.selectedProjects") }}
+            </h1>
         </header>
 
-        <div class="flex flex-col gap-16 max-lg:gap-14 max-sm:gap-10">
+        <div class="flex flex-col gap-16 max-lg:gap-14 max-sm:gap-8">
             <section v-for="group in projectsByYear" :key="group.year" :id="`year-${group.year}`"
                 :ref="setYearSectionRef(group.year)" class="scroll-mt-40 max-lg:scroll-mt-32 max-sm:scroll-mt-24">
                 <div class="flex items-end justify-between mb-8 pl-[190px]
@@ -58,7 +58,7 @@
                         {{ group.year }}
                     </h5>
                     <p class="text-sm opacity-70">
-                        {{ group.items.length }} projects
+                        {{ group.items.length }} {{ locale === "it" ? "progetti" : "projects" }}
                     </p>
                 </div>
 
@@ -83,18 +83,20 @@ gsap.registerPlugin(ScrollTrigger)
 import Navbar from '../components/Navbar.vue'
 import Footer from '../components/Footer.vue'
 import ShaderTop from '../components/ShaderTop.vue'
+import { breadcrumbSchema, useSeo } from '../utils/seo.js'
 import ShaderBottom from '../components/ShaderBottom.vue'
 import ProjectCard from '../components/ProjectCard.vue'
 
-import { projects } from '../data/projects.js'
-import { infoAgency } from '../data/Info.js'
+import { getProjects, localizedPath, useI18n } from '../i18n'
+
+const { locale, t } = useI18n()
 
 /* -------------------------------------------------------------------------- */
 /* Raggruppamento per anno (DESC)                                             */
 /* -------------------------------------------------------------------------- */
 const projectsByYear = computed(() => {
     const map = new Map()
-    for (const p of projects) {
+    for (const p of getProjects(locale.value)) {
         const y = Number(p.year)
         if (!map.has(y)) map.set(y, [])
         map.get(y).push(p)
@@ -251,57 +253,22 @@ watch(activeYear, (y) => {
     gsap.fromTo(activeDot, { scale: 1 }, { scale: 1.18, duration: 0.18, yoyo: true, repeat: 1, ease: 'power2.out' })
 })
 
-import { useHead } from "@unhead/vue";
 
-useHead({
-    title: "Projects - KLYK.studio | UI/UX, Motion & Frontend",
-    meta: [
-        {
-            name: "description",
-            content:
-                "Explore selected projects by KLYK.studio — UI/UX design, interactive websites, motion-driven interfaces and frontend development in Vue.",
-        },
-        { name: "robots", content: "index,follow" },
 
-        // Open Graph
-        { property: "og:title", content: "Projects — KLYK.studio" },
-        {
-            property: "og:description",
-            content:
-                "Selected work: UI/UX design, interactive websites, motion-driven interfaces and Vue frontend development.",
-        },
-        { property: "og:url", content: "https://klyk.studio/projects" },
-        { property: "og:type", content: "website" },
-
-        // Twitter
-        { name: "twitter:card", content: "summary_large_image" },
+useSeo(() => ({
+    title: t("seo.projectsTitle"),
+    description: t("seo.projectsDescription"),
+    path: localizedPath(locale.value, "projects"),
+    lang: locale.value,
+    alternates: [
+        { hreflang: "it", path: localizedPath("it", "projects") },
+        { hreflang: "en", path: localizedPath("en", "projects") },
+        { hreflang: "x-default", path: localizedPath("it", "projects") },
     ],
-    link: [{ rel: "canonical", href: "https://klyk.studio/projects" }],
-    script: [
-        {
-            type: "application/ld+json",
-            children: JSON.stringify({
-                "@context": "https://schema.org",
-                "@type": "CollectionPage",
-                name: "Projects — KLYK.studio",
-                url: "https://klyk.studio/projects",
-                isPartOf: {
-                    "@type": "WebSite",
-                    name: "KLYK.studio",
-                    url: "https://klyk.studio/",
-                },
-                about: [
-                    "UI/UX Design",
-                    "Web Design",
-                    "Motion Design",
-                    "Frontend Development",
-                    "Vue.js",
-                    "Interactive Storytelling",
-                ],
-            }),
-        },
-    ],
-});
-
-
+    schema: breadcrumbSchema([
+        { name: t("common.home"), path: localizedPath(locale.value, "home") },
+        { name: t("nav.projects"), path: localizedPath(locale.value, "projects") },
+    ]),
+}));
 </script>
+

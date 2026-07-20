@@ -17,7 +17,6 @@ export const services = [
             'Wireframing & Interactive Prototypes',
         ],
         client: 'For startups and established businesses looking to improve user experience and engagement through research-driven design.',
-        Cta: 'Need to understand your users?',
         image: services1,
     },
     {
@@ -32,7 +31,6 @@ export const services = [
             'Responsive & Performance-Optimized Design',
         ], 
         client: 'For businesses seeking to create impactful online presences with advanced visual and interactive elements.',
-        Cta: 'Want to amaze your audience?',
         image: services2,
     },
     {
@@ -47,7 +45,6 @@ export const services = [
             'Performance Optimization & SEO Best Practices',
         ],
         client: 'For businesses and individuals looking to establish or enhance their online presence with professional web development services.',
-        Cta: 'Need a new website?',
         image: services3,
     },
 ];
@@ -70,7 +67,6 @@ export const otherServices = [
         ],
         client:
             'For businesses and individuals seeking to establish or refresh their brand identity through professional graphic design services.',
-        Cta: 'Looking to build your brand?',
         image: services4,
     },
     {
@@ -87,7 +83,6 @@ export const otherServices = [
         ],
         client:
             'For anyone with a digital project idea looking for professional support and collaboration to bring it to life.',
-        Cta: 'Get in touch today!',
         image: services5,
     },
 ]

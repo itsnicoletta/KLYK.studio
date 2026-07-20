@@ -1,4 +1,58 @@
 [[redirects]]
+  from = "/"
+  to = "/it/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.klyk.studio/*"
+  to = "https://klyk.studio/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/contact"
+  to = "/it/contatti"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/contacts"
+  to = "/it/contatti"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/about"
+  to = "/it/chi-siamo"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/projects"
+  to = "/it/progetti"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/services/*"
+  to = "/it/servizi/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/other-services/*"
+  to = "/it/servizi-extra/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/quick-audit"
+  to = "/it/audit-sito-brand"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200

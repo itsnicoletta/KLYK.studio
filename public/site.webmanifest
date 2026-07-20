@@ -1,0 +1,22 @@
+{
+  "name": "KLYK Studio",
+  "short_name": "KLYK",
+  "description": "Digital design studio italiano per branding, web design, sviluppo siti, UX/UI e strategie digitali.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#141414",
+  "theme_color": "#141414",
+  "icons": [
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon_klyk.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

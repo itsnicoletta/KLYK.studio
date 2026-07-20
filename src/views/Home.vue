@@ -6,18 +6,18 @@
     <Hero3D class="absolute inset-0 z-0 pointer-events-auto" />
 
     <div id="hero-text" class="relative z-10 w-full h-full flex justify-center items-center flex-row gap-20
-             px-[112px] py-24 pt-0
+             px-[88px] py-20 pt-0
              max-lg:flex-col max-lg:gap-8 max-lg:mt-[60px]
-             max-md:px-[80px] max-md:py-14
-             max-sm:px-[40px] max-sm:py-10 max-sm:pt-20
+             max-md:px-[64px] max-md:py-14
+             max-sm:px-[28px] max-sm:py-10 max-sm:pt-20
              pointer-events-none">
       <div class="w-full flex justify-center items-center max-lg:flex-col max-lg:items-center">
         <div id="hero-heading" class="w-1/2 max-w-2xl flex flex-col gap-2 items-start text-left
                  max-lg:w-full max-lg:items-center max-lg:text-center">
           <h1 id="hero-title" ref="heroTitleEl" class="font-display font-semibold leading-tight
-                   text-[clamp(4rem,24vw,6rem)]
-                   max-md:text-[clamp(3.2rem,12vw,4.4rem)]
-                   max-sm:text-[clamp(2.6rem,10vw,3.8rem)]">
+                   text-[clamp(3.1rem,8vw,4.8rem)]
+                   max-md:text-[clamp(2.7rem,10vw,3.8rem)]
+                   max-sm:text-[clamp(2.25rem,9vw,3.1rem)]">
             {{ infoAgency.Usp }}
           </h1>
 
@@ -27,9 +27,9 @@
             {{ infoAgency.Hero }}
           </p>
 
-          <router-link to="/quick-audit" id="hero-cta" ref="heroCtaEl" class="w-auto max-sm:w-full pointer-events-auto">
+          <router-link :to="localizedPath(locale, 'quickAudit')" id="hero-cta" ref="heroCtaEl" class="w-auto max-sm:w-full pointer-events-auto">
             <Button variant="outline" :size="isMobileOrTablet ? 'medium' : 'large'" class="w-auto max-sm:w-full">
-              Book a 15-min call
+              {{ t("common.bookCall") }}
             </Button>
           </router-link>
         </div>
@@ -43,20 +43,20 @@
   </section>
 
   <!-- SERVICES -->
-  <section id="services" class="px-[112px] py-24 mb-40 flex flex-col gap-10
-           max-md:px-[80px] max-md:py-16 max-md:mb-28 max-md:gap-8
-           max-sm:px-[40px] max-sm:py-14 max-sm:mb-0">
+  <section id="services" class="px-[88px] py-20 mb-32 flex flex-col gap-8
+           max-md:px-[64px] max-md:py-16 max-md:mb-28 max-md:gap-8
+           max-sm:px-[28px] max-sm:py-14 max-sm:mb-0">
     <div class="flex flex-col items-center pb-20 max-md:pb-14 max-sm:pb-10">
-      <h3 ref="whyUsTitleEl" class="w-1/2 text-6xl font-display font-medium text-center
+      <h3 ref="whyUsTitleEl" class="w-1/2 text-4xl font-display font-medium text-center
                max-lg:w-3/4
-               max-md:w-11/12 max-md:text-5xl
+               max-md:w-11/12 max-md:text-4xl
                max-sm:text-2xl">
         {{ infoAgency.WhyUs }}
       </h3>
     </div>
 
     <!-- Cards -->
-    <div class="flex flex-wrap justify-center gap-8 mb-40
+    <div class="flex flex-wrap justify-center gap-8 mb-32
              max-md:flex-col max-md:flex-nowrap max-md:items-stretch max-md:w-full max-md:mb-24
              max-sm:gap-6 max-sm:mb-16">
       <div ref="servicesCardsWrapEl" class="flex flex-wrap justify-center gap-8
@@ -68,7 +68,7 @@
 
     <div class="flex flex-col items-center pt-30 max-md:pt-20 max-sm:pt-10">
       <h4 ref="otherServicesTitleEl" class="text-4xl text-center max-md:text-3xl max-sm:text-2xl">
-        Have anything else in mind?
+        {{ t("common.otherIdeas") }}
       </h4>
     </div>
 
@@ -83,14 +83,14 @@
   </section>
 
   <!-- PROJECTS -->
-  <section id="projects" class="px-[112px] py-24 flex flex-col gap-10
-           max-md:px-[80px] max-md:py-16 max-md:gap-8
-           max-sm:px-[40px] max-sm:py-14">
+  <section id="projects" class="px-[88px] py-20 flex flex-col gap-8
+           max-md:px-[64px] max-md:py-16 max-md:gap-8
+           max-sm:px-[28px] max-sm:py-14">
     <div class="flex flex-col items-center pb-20 max-md:pb-14 max-sm:pb-10">
-      <h4 ref="projectsTitleEl" class="w-1/2 text-6xl font-display font-medium text-center
+      <h4 ref="projectsTitleEl" class="w-1/2 text-4xl font-display font-medium text-center
                max-lg:w-3/4
-               max-md:w-11/12 max-md:text-5xl
-               max-sm:text-4xl">
+               max-md:w-11/12 max-md:text-4xl
+               max-sm:text-3xl">
         {{ infoAgency.Products }}
       </h4>
     </div>
@@ -119,15 +119,22 @@ import ServicesCard from "../components/ServicesCard.vue";
 import OtherServices from "../components/OtherServices.vue";
 import ProjectCard from "../components/ProjectCard.vue";
 
-import { infoAgency } from "../data/Info.js";
-import { services, otherServices } from "../data/services.js";
-import { projects } from "../data/projects.js";
+import { localizedPath, useI18n, getServices, getOtherServices, getProjects } from "../i18n";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const homeProjects = computed(() =>
-  [...projects].sort((a, b) => b.year - a.year).slice(0, 4)
+  [...getProjects(locale.value)].sort((a, b) => b.year - a.year).slice(0, 4)
 );
+const { locale, t } = useI18n();
+const services = computed(() => getServices(locale.value));
+const otherServices = computed(() => getOtherServices(locale.value));
+const infoAgency = computed(() => ({
+  Usp: t("home.usp"),
+  Hero: t("home.hero"),
+  WhyUs: t("home.why"),
+  Products: t("home.projects"),
+}));
 
 /* Responsive flag (<= 1024px) */
 const isMobileOrTablet = ref(false);
@@ -246,61 +253,20 @@ onBeforeUnmount(() => {
   ScrollTrigger.getAll().forEach((t) => t.kill());
 });
 
-//unhead plugin 
-import { useHead } from "@unhead/vue";
+import { organizationSchema, useSeo } from "../utils/seo.js";
 
-useHead({
-title: "KLYK.studio | UX/UI Design & Frontend Development",
-  meta: [
-    {
-      name: "description",
-      content:
-        "KLYK.studio is the portfolio of Nicoletta Pelosi — UX/UI designer & frontend developer. I craft interactive websites, motion-driven interfaces and immersive storytelling experiences.",
-    },
-    { name: "robots", content: "index,follow" },
-
-    // Open Graph
-    { property: "og:title", content: "KLYK.studio — UX/UI Design & Frontend Development" },
-    {
-      property: "og:description",
-      content:
-        "Interactive websites, motion-driven interfaces and immersive digital storytelling by Nicoletta Pelosi.",
-    },
-    { property: "og:url", content: "https://klyk.studio/" },
-    { property: "og:type", content: "website" },
-
-    // Twitter
-    { name: "twitter:card", content: "summary_large_image" },
+useSeo(() => ({
+  title: t("seo.homeTitle"),
+  description: t("seo.homeDescription"),
+  path: localizedPath(locale.value, "home"),
+  lang: locale.value,
+  alternates: [
+    { hreflang: "it", path: localizedPath("it", "home") },
+    { hreflang: "en", path: localizedPath("en", "home") },
+    { hreflang: "x-default", path: localizedPath("it", "home") },
   ],
-  link: [{ rel: "canonical", href: "https://klyk.studio/" }],
-  script: [
-    {
-      type: "application/ld+json",
-      children: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "Person",
-        name: "Nicoletta Pelosi",
-        jobTitle: "Digital Designer & Frontend Developer",
-        email: "mailto:pelosinicoletta@gmail.com",
-        url: "https://klyk.studio/",
-        sameAs: [
-          "https://www.linkedin.com/in/nicoletta-pelosi/",
-          "https://www.instagram.com/klyk.studio/",
-          "https://www.behance.net/klykstudio",
-        ],
-        worksFor: {
-          "@type": "Organization",
-          name: "KLYK.studio",
-          url: "https://klyk.studio/",
-        },
-        address: {
-          "@type": "PostalAddress",
-          addressCountry: "IT",
-        },
-      }),
-    },
-  ],
-});
-
-
+  schema: organizationSchema,
+}));
 </script>
+
+

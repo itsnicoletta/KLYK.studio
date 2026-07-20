@@ -5,7 +5,7 @@
   <section :class="sectionPad" class="w-full">
     <section
       class="w-full flex flex-col items-center
-             mt-50 my-20
+             mt-44 my-20
              max-lg:mt-48 max-lg:my-16
              max-md:mt-40 max-md:my-12
              max-sm:mt-32 max-sm:my-10"
@@ -13,25 +13,25 @@
       <header
         ref="projectTitle"
         class="w-full lg:w-6/8 mx-auto flex items-end
-               gap-10
+               gap-8
                [@media(min-width:1000px)_and_(max-width:1600px)]:gap-6
                max-lg:flex-col max-lg:gap-8"
       >
-        <div class="w-1/2 flex flex-col max-lg:w-full min-w-0">
+        <div class="w-1/2 flex flex-col gap-3 max-lg:w-full min-w-0">
           <h1
             class="font-bold font-display
-                   text-8xl
-                   [@media(min-width:1000px)_and_(max-width:1600px)]:text-6xl
-                   max-lg:text-7xl max-md:text-5xl max-sm:text-4xl"
+                   text-4xl
+                   [@media(min-width:1000px)_and_(max-width:1600px)]:text-4xl
+                   max-lg:text-4xl max-md:text-4xl max-sm:text-3xl"
           >
             {{ project.title }}
           </h1>
 
           <h2
-            class="font-light
-                   text-3xl
-                   [@media(min-width:1000px)_and_(max-width:1600px)]:text-xl
-                   max-lg:text-2xl max-md:text-xl max-sm:text-lg"
+            class="font-light leading-snug text-base-300
+                   text-xl
+                   [@media(min-width:1000px)_and_(max-width:1600px)]:text-lg
+                   max-md:text-lg max-sm:text-base"
           >
             {{ project.H2 }}
           </h2>
@@ -86,7 +86,7 @@
         v-else
         :src="project.coverImage"
         class="w-full h-full object-cover rounded-4xl aspect-[16/9]"
-        :alt="project.title"
+        :alt="`Homepage del progetto ${project.title} progettata da KLYK Studio`"
       />
     </div>
   </section>
@@ -128,14 +128,14 @@
       class="w-full lg:w-6/8 mx-auto flex items-end gap-20 mb-20
              [@media(min-width:1000px)_and_(max-width:1600px)]:gap-12
              [@media(min-width:1000px)_and_(max-width:1600px)]:mb-16
-             max-lg:flex-col max-lg:items-stretch max-lg:gap-10
+             max-lg:flex-col max-lg:items-stretch max-lg:gap-8
              max-md:mb-14"
     >
       <!-- Slider -->
       <div
         id="sliderGallery"
         ref="sliderGallery"
-        class="w-[45%] relative rounded-4xl overflow-hidden h-[500px]
+        class="w-[45%] relative rounded-4xl overflow-hidden h-[440px]
                [@media(min-width:1000px)_and_(max-width:1600px)]:h-[440px]
                max-lg:w-full max-lg:h-[460px]
                max-md:h-[380px]
@@ -214,7 +214,7 @@
             :size="isMobileOrTablet ? 'small' : 'medium'"
             class="max-md:w-full"
           >
-            <span>{{ project.buttonLabel || 'View Project Source' }}</span>
+            <span>{{ project.buttonLabel || t("common.viewProject") }}</span>
           </Button>
 
           <Button
@@ -224,7 +224,7 @@
             :size="isMobileOrTablet ? 'small' : 'medium'"
             class="text-[var(--color-bg-body)]! max-md:w-full"
           >
-            <span class="text-[var(--color-bg-body)]">Let's Connect</span>
+            <span class="text-[var(--color-bg-body)]">{{ t("common.connect") }}</span>
           </Button>
         </div>
       </div>
@@ -240,7 +240,7 @@
       <button
         type="button"
         class="absolute top-6 right-6 h-12 w-12 rounded-full border border-white/20 bg-white/10 text-white text-3xl leading-none cursor-pointer transition-colors hover:bg-white/20 max-sm:top-4 max-sm:right-4"
-        aria-label="Close image preview"
+        :aria-label="t('common.close')"
         @click.stop="closeLightbox"
       >
         ×
@@ -250,7 +250,7 @@
         v-if="project.galleryImages.length > 1"
         type="button"
         class="absolute left-6 top-1/2 -translate-y-1/2 h-14 w-14 rounded-full border border-white/20 bg-white/10 text-white text-3xl cursor-pointer transition-colors hover:bg-white/20 max-sm:left-3 max-sm:h-12 max-sm:w-12"
-        aria-label="Previous image"
+        :aria-label="t('common.prev')"
         @click.stop="prevLightbox"
       >
         ←
@@ -269,7 +269,7 @@
           </p>
 
           <p class="text-sm text-white/60">
-            Click outside or press Esc to close
+            {{ t("common.lightboxHint") }}
           </p>
         </div>
       </div>
@@ -278,7 +278,7 @@
         v-if="project.galleryImages.length > 1"
         type="button"
         class="absolute right-6 top-1/2 -translate-y-1/2 h-14 w-14 rounded-full border border-white/20 bg-white/10 text-white text-3xl cursor-pointer transition-colors hover:bg-white/20 max-sm:right-3 max-sm:h-12 max-sm:w-12"
-        aria-label="Next image"
+        :aria-label="t('common.next')"
         @click.stop="nextLightbox"
       >
         →
@@ -293,7 +293,8 @@
 <script setup>
 import { onMounted, onBeforeUnmount, ref, nextTick } from "vue";
 import { useRoute } from "vue-router";
-import { projects } from "../data/projects.js";
+import { absoluteUrl, breadcrumbSchema, useSeo } from "../utils/seo.js";
+import { getProjects, localizedPath, useI18n } from "../i18n";
 
 import Navbar from "../components/Navbar.vue";
 import Footer from "../components/Footer.vue";
@@ -304,10 +305,48 @@ import { ScrollTrigger } from "gsap/ScrollTrigger.js";
 gsap.registerPlugin(ScrollTrigger);
 
 const route = useRoute();
-const project = projects.find((p) => p.slug === route.params.slug);
+const { locale, t } = useI18n();
+const project = getProjects(locale.value).find((p) => p.slug === route.params.slug);
+
+const seoDescription = project
+    ? `Scopri come KLYK Studio ha progettato ${project.skills.slice(0, 3).join(", ")} per ${project.title}, migliorando identita digitale, chiarezza e usabilita.`
+    : "Case study KLYK Studio dedicato a branding, web design, UX/UI e soluzioni digitali per aziende e professionisti.";
+
+useSeo(() => ({
+    title: project ? `${project.title} | Case Study KLYK Studio` : "Case Study | KLYK Studio",
+    description: seoDescription,
+    path: localizedPath(locale.value, "projectDetail", { slug: route.params.slug }),
+    lang: locale.value,
+    image: project?.coverImage,
+    alternates: [
+        { hreflang: "it", path: localizedPath("it", "projectDetail", { slug: route.params.slug }) },
+        { hreflang: "en", path: localizedPath("en", "projectDetail", { slug: route.params.slug }) },
+        { hreflang: "x-default", path: localizedPath("it", "projectDetail", { slug: route.params.slug }) },
+    ],
+    schemas: [
+        project && {
+            "@context": "https://schema.org",
+            "@type": "CreativeWork",
+            name: project.title,
+            url: absoluteUrl(localizedPath(locale.value, "projectDetail", { slug: project.slug })),
+            image: absoluteUrl(project.coverImage),
+            description: seoDescription,
+            creator: {
+                "@type": "Organization",
+                name: "KLYK Studio",
+                url: "https://klyk.studio/",
+            },
+        },
+        breadcrumbSchema([
+            { name: t("common.home"), path: localizedPath(locale.value, "home") },
+            { name: t("nav.projects"), path: localizedPath(locale.value, "projects") },
+            { name: project?.title || "Case study", path: localizedPath(locale.value, "projectDetail", { slug: route.params.slug }) },
+        ]),
+    ],
+}));
 
 /* ✅ padding laterale come negli altri dettagli */
-const sectionPad = "px-[112px] max-md:px-[80px] max-sm:px-[40px]";
+const sectionPad = "px-[88px] max-md:px-[64px] max-sm:px-[28px]";
 
 // slider (0-based)
 const slideIndex = ref(0);
@@ -537,3 +576,4 @@ onBeforeUnmount(() => {
     }
 });
 </script>
+

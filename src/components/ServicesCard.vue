@@ -1,7 +1,7 @@
 <template>
     <article class="group relative flex flex-col items-end justify-start
            w-full sm:w-[46%] lg:w-[20vw]
-           h-[320px] sm:h-[360px] lg:h-[50vh]
+           h-[320px] sm:h-[360px] lg:h-[44vh]
            rounded-4xl overflow-hidden
            focus-within:ring-2 focus-within:ring-[var(--color-text-primary)] focus-within:ring-offset-4 focus-within:ring-offset-[var(--color-bg-body)]
            transition-transform duration-300 ease-out hover:-translate-y-2">
@@ -57,10 +57,13 @@
 
 <script setup>
 import { computed } from "vue";
+import { localizedPath, useI18n } from "../i18n";
 
 const { service } = defineProps({
     service: { type: Object, required: true },
 });
+const { locale } = useI18n();
 
-const serviceUrl = computed(() => `/services/${service.slug}`);
+const serviceUrl = computed(() => localizedPath(locale.value, "services", { slug: service.slug }));
 </script>
+

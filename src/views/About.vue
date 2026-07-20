@@ -2,94 +2,69 @@
   <Navbar />
 
   <main class="w-full px-5 pt-32 pb-16 sm:px-6 sm:pt-36 sm:pb-20 lg:px-12 xl:px-20 2xl:px-28">
-    <section class="mx-auto flex w-full max-w-[1780px] flex-col gap-8 sm:gap-10">
+    <section class="mx-auto flex w-full max-w-[1780px] flex-col gap-8 sm:gap-8">
       <div
         class="grid grid-cols-1 items-stretch gap-6 xl:grid-cols-[1.04fr_0.96fr] 2xl:grid-cols-[1.08fr_0.92fr]"
       >
         <article
-          class="rounded-[2rem] border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.02))] p-6 sm:p-8 lg:p-9 xl:p-10"
+          class="rounded-[2rem] border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.02))] p-6 sm:p-8 lg:p-9 xl:p-8"
         >
           <div class="mb-7 flex flex-col gap-4">
             <p class="text-sm uppercase tracking-[0.28em] text-base-300">
-              About KLYK.studio
+              {{ t("about.eyebrow") }}
             </p>
 
             <h1 class="font-display text-[clamp(2.3rem,5.4vw,4.4rem)] leading-[0.94]">
-              Nicoletta Pelosi
+              {{ t("about.h1") }}
             </h1>
 
             <p class="max-w-3xl text-base leading-relaxed text-base-300 sm:text-lg xl:text-xl">
-              I am a <strong class="font-semibold text-[var(--color-text-primary)]">digital designer</strong>
-              and <strong class="font-semibold text-[var(--color-text-primary)]">frontend developer</strong>
-              building websites, interfaces, and brand experiences with a strong
-              focus on <strong class="font-semibold text-[var(--color-text-primary)]">clarity</strong>,
-              <strong class="font-semibold text-[var(--color-text-primary)]">motion</strong>, and
-              <strong class="font-semibold text-[var(--color-text-primary)]">emotional direction</strong>.
+              {{ t("about.intro") }}
             </p>
           </div>
 
           <div class="mt-4 grid gap-5 md:grid-cols-2 lg:mt-6">
             <div class="space-y-4 text-base-300 sm:text-lg">
               <h2 class="font-display text-xl text-[var(--color-text-primary)] sm:text-2xl">
-                Who I Am
+                {{ t("about.who") }}
               </h2>
               <p class="leading-relaxed">
-                <strong class="font-semibold text-[var(--color-text-primary)]">KLYK.studio</strong>
-                is my independent practice. I work across
-                <strong class="font-semibold text-[var(--color-text-primary)]"> UX/UI design</strong>,
-                <strong class="font-semibold text-[var(--color-text-primary)]"> visual direction</strong>,
-                and <strong class="font-semibold text-[var(--color-text-primary)]">frontend development</strong>,
-                helping brands shape digital experiences that feel
-                <strong class="font-semibold text-[var(--color-text-primary)]"> polished</strong>,
-                <strong class="font-semibold text-[var(--color-text-primary)]"> usable</strong>, and
-                full of character.
+                {{ locale === "it"
+                  ? "KLYK Studio e il digital design studio che ho fondato. Lavoro su UX/UI design, direzione visiva, branding e sviluppo web per aiutare brand e aziende a costruire esperienze digitali chiare, curate e riconoscibili."
+                  : "KLYK Studio is the digital design studio I founded. I work across UX/UI design, visual direction, branding and web development to help brands and companies build clear, polished and recognizable digital experiences." }}
               </p>
               <p class="leading-relaxed">
-                My approach sits between
-                <strong class="font-semibold text-[var(--color-text-primary)]">design sensitivity</strong>
-                and <strong class="font-semibold text-[var(--color-text-primary)]">build precision</strong>.
-                I like giving projects a
-                <strong class="font-semibold text-[var(--color-text-primary)]">clear visual identity</strong>,
-                then translating that direction into real interfaces that are
-                <strong class="font-semibold text-[var(--color-text-primary)]">responsive</strong>,
-                <strong class="font-semibold text-[var(--color-text-primary)]"> structured</strong>, and
-                ready to evolve.
+                {{ locale === "it"
+                  ? "L'approccio unisce sensibilita progettuale e precisione tecnica: prima definiamo una direzione visiva chiara, poi la traduciamo in interfacce responsive, strutturate e pronte a evolvere."
+                  : "The approach combines design sensitivity and technical precision: first we define a clear visual direction, then we translate it into responsive, structured interfaces that are ready to evolve." }}
               </p>
             </div>
 
             <div class="space-y-4 text-base-300 sm:text-lg">
               <h2 class="font-display text-xl text-[var(--color-text-primary)] sm:text-2xl">
-                How I Work
+                {{ t("about.how") }}
               </h2>
               <p class="leading-relaxed">
-                I usually support projects from
-                <strong class="font-semibold text-[var(--color-text-primary)]">concept to execution</strong>,
-                combining <strong class="font-semibold text-[var(--color-text-primary)]">design thinking</strong>
-                with hands-on implementation in
-                <strong class="font-semibold text-[var(--color-text-primary)]">modern frontend stacks</strong>.
-                The goal is never just to make something look nice, but to make
-                it feel <strong class="font-semibold text-[var(--color-text-primary)]">intentional</strong>,
-                <strong class="font-semibold text-[var(--color-text-primary)]"> useful</strong>, and easy
-                to manage over time.
+                {{ locale === "it"
+                  ? "KLYK Studio segue i progetti dal concept all'esecuzione, combinando strategia, design thinking e implementazione con stack frontend moderni."
+                  : "KLYK Studio supports projects from concept to execution, combining strategy, design thinking and hands-on implementation with modern frontend stacks." }}
               </p>
               <p class="leading-relaxed">
-                I care a lot about
-                <strong class="font-semibold text-[var(--color-text-primary)]">collaboration</strong>,
-                <strong class="font-semibold text-[var(--color-text-primary)]"> honest feedback</strong>,
-                and building systems that clients can use
-                <strong class="font-semibold text-[var(--color-text-primary)]">confidently after launch</strong>.
+                {{ locale === "it"
+                  ? "L'obiettivo non e solo creare qualcosa di bello, ma costruire sistemi intenzionali, utili e gestibili con sicurezza anche dopo il lancio."
+                  : "The goal is not only to make something look good, but to build intentional, useful systems that clients can manage confidently after launch." }}
               </p>
             </div>
           </div>
 
           <div class="mt-7 flex flex-col gap-4 sm:flex-row sm:flex-wrap">
-            <router-link to="/quick-audit" id="hero-cta" class="w-full sm:w-auto">
+            <router-link :to="localizedPath(locale, 'quickAudit')" id="hero-cta" class="w-full sm:w-auto">
               <Button
                 variant="outline"
                 :size="isMobileOrTablet ? 'medium' : 'large'"
                 class="w-full sm:w-auto"
               >
-                Book a 15 min call
+                {{ t("common.bookCall") }}
               </Button>
             </router-link>
 
@@ -99,7 +74,7 @@
                 :size="isMobileOrTablet ? 'medium' : 'large'"
                 class="w-full sm:w-auto"
               >
-                Contact
+                {{ t("about.contact") }}
               </Button>
             </a>
           </div>
@@ -117,46 +92,26 @@
       </div>
 
       <section
-        class="grid grid-cols-1 gap-6 rounded-[2rem] border border-white/8 bg-[var(--color-bg-card)] p-6 sm:p-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start xl:p-10"
+        class="grid grid-cols-1 gap-6 rounded-[2rem] border border-white/8 bg-[var(--color-bg-card)] p-6 sm:p-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start xl:p-8"
       >
         <div class="space-y-4">
           <p class="text-sm uppercase tracking-[0.28em] text-base-300">
             Collaboration
           </p>
           <h2 class="font-display text-3xl leading-tight sm:text-4xl">
-            The Froggy Studio partnership
+            {{ t("about.partnership") }}
           </h2>
         </div>
 
         <div class="space-y-4 text-base-300 sm:space-y-5 sm:text-lg">
           <p class="leading-relaxed">
-            I also collaborate with
-            <strong class="font-semibold text-[var(--color-text-primary)]">The Froggy Studio</strong>,
-            where I am a <strong class="font-semibold text-[var(--color-text-primary)]">partner</strong>.
-            It is a relationship built on
-            <strong class="font-semibold text-[var(--color-text-primary)]">mutual trust</strong>,
-            shared perspective, and the idea that great work becomes stronger
-            when different backgrounds and talents meet.
+            {{ t("about.partnershipText1") }}
           </p>
           <p class="leading-relaxed">
-            We exchange
-            <strong class="font-semibold text-[var(--color-text-primary)]">clients</strong>,
-            <strong class="font-semibold text-[var(--color-text-primary)]"> opinions</strong>, and
-            <strong class="font-semibold text-[var(--color-text-primary)]">creative skills</strong>,
-            working across design directions, digital experiences, and visual
-            storytelling. That collaboration creates a bridge between
-            <strong class="font-semibold text-[var(--color-text-primary)]">Italy</strong> and
-            <strong class="font-semibold text-[var(--color-text-primary)]">Sri Lanka</strong>,
-            turning two different contexts into one shared way of building
-            meaningful projects for clients around the world.
+            {{ t("about.partnershipText2") }}
           </p>
           <p class="leading-relaxed">
-            For me, this means staying
-            <strong class="font-semibold text-[var(--color-text-primary)]">open</strong>,
-            <strong class="font-semibold text-[var(--color-text-primary)]"> connected</strong>, and
-            <strong class="font-semibold text-[var(--color-text-primary)]">internationally minded</strong>
-            while still keeping a personal and hands-on approach in every project
-            I take on.
+            {{ t("about.partnershipText3") }}
           </p>
         </div>
       </section>
@@ -165,45 +120,41 @@
         <article
           class="rounded-[2rem] bg-[var(--color-bg-card)] p-6 text-left"
         >
-          <h2 class="font-display text-2xl">Design Direction</h2>
+          <h2 class="font-display text-2xl">{{ t("about.directionTitle") }}</h2>
           <p class="mt-3 leading-relaxed text-base-300">
-            UI systems, visual storytelling, layout rhythm, and interfaces that
-            feel distinctive without losing clarity.
+            {{ t("about.directionText") }}
           </p>
         </article>
 
         <article
           class="rounded-[2rem] bg-[var(--color-bg-card)] p-6 text-left"
         >
-          <h2 class="font-display text-2xl">Frontend Build</h2>
+          <h2 class="font-display text-2xl">{{ t("about.buildTitle") }}</h2>
           <p class="mt-3 leading-relaxed text-base-300">
-            Vue-based development, structured components, and websites designed
-            to be elegant in motion and solid in production.
+            {{ t("about.buildText") }}
           </p>
         </article>
 
         <article
           class="rounded-[2rem] bg-[var(--color-bg-card)] p-6 text-left"
         >
-          <h2 class="font-display text-2xl">Long-Term Support</h2>
+          <h2 class="font-display text-2xl">{{ t("about.supportCardTitle") }}</h2>
           <p class="mt-3 leading-relaxed text-base-300">
-            Flexible systems, clear communication, and practical solutions that
-            help clients update and grow their project with confidence.
+            {{ t("about.supportCardText") }}
           </p>
         </article>
       </section>
 
-      <section class="rounded-[2rem] border border-white/8 bg-[var(--color-bg-card)] p-6 sm:p-8 xl:p-10">
+      <section class="rounded-[2rem] border border-white/8 bg-[var(--color-bg-card)] p-6 sm:p-8 xl:p-8">
         <div class="flex flex-col items-center gap-4 pb-12 text-center max-md:pb-10">
           <p class="text-sm uppercase tracking-[0.28em] text-base-300">
-            Services
+            {{ t("common.services") }}
           </p>
-          <h2 class="max-w-3xl font-display text-3xl leading-tight sm:text-4xl xl:text-5xl">
-            Need support on the design or build side?
+          <h2 class="max-w-3xl font-display text-3xl leading-tight sm:text-4xl xl:text-4xl">
+            {{ t("about.supportTitle") }}
           </h2>
           <p class="max-w-2xl text-base text-base-300 sm:text-lg">
-            These are the core services I use most often to help brands launch,
-            refine, and grow digital projects with more clarity and confidence.
+            {{ t("about.supportText") }}
           </p>
         </div>
 
@@ -212,7 +163,7 @@
             v-for="service in services"
             :key="service.id"
             :service="service"
-            class="!w-full md:!w-[48%] xl:!w-[30%] 2xl:!w-[20vw] !h-[320px] md:!h-[360px] xl:!h-[42vh] 2xl:!h-[50vh]"
+            class="!w-full md:!w-[48%] xl:!w-[30%] 2xl:!w-[20vw] !h-[320px] md:!h-[360px] xl:!h-[38vh] 2xl:!h-[44vh]"
           />
         </div>
       </section>
@@ -223,17 +174,20 @@
 </template>
 
 <script setup>
-import { onBeforeUnmount, onMounted, ref } from "vue";
-import { useHead } from "@unhead/vue";
+import { computed, onBeforeUnmount, onMounted, ref } from "vue";
+
 
 import Navbar from "../components/Navbar.vue";
 import Footer from "../components/Footer.vue";
 import Button from "../components/Button.vue";
 import ServicesCard from "../components/ServicesCard.vue";
 import nicolettaPhoto from "../assets/Nicoletta.png";
-import { services } from "../data/services.js";
+import { breadcrumbSchema, useSeo } from "../utils/seo.js";
+import { getServices, localizedPath, useI18n } from "../i18n";
 
 const isMobileOrTablet = ref(false);
+const { locale, t } = useI18n();
+const services = computed(() => getServices(locale.value));
 
 function syncViewport() {
   isMobileOrTablet.value = window.innerWidth <= 768;
@@ -248,60 +202,40 @@ onBeforeUnmount(() => {
   window.removeEventListener("resize", syncViewport);
 });
 
-useHead({
-  title: "About - KLYK.studio | Nicoletta Pelosi",
-  meta: [
-    {
-      name: "description",
-      content:
-        "KLYK.studio is the independent practice of Nicoletta Pelosi, a digital designer and frontend developer working across UX/UI, visual storytelling, and modern web experiences.",
-    },
-    { name: "robots", content: "index,follow" },
-    {
-      property: "og:title",
-      content: "About - KLYK.studio | Nicoletta Pelosi",
-    },
-    {
-      property: "og:description",
-      content:
-        "Meet Nicoletta Pelosi and discover the design, frontend, and international collaboration behind KLYK.studio.",
-    },
-    { property: "og:url", content: "https://klyk.studio/about" },
-    { property: "og:type", content: "website" },
-    { name: "twitter:card", content: "summary_large_image" },
+useSeo(() => ({
+  title: t("seo.aboutTitle"),
+  description: t("seo.aboutDescription"),
+  path: localizedPath(locale.value, "about"),
+  lang: locale.value,
+  alternates: [
+    { hreflang: "it", path: localizedPath("it", "about") },
+    { hreflang: "en", path: localizedPath("en", "about") },
+    { hreflang: "x-default", path: localizedPath("it", "about") },
   ],
-  link: [{ rel: "canonical", href: "https://klyk.studio/about" }],
-  script: [
+  schemas: [
     {
-      type: "application/ld+json",
-      children: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "Person",
-        name: "Nicoletta Pelosi",
-        jobTitle: "Digital Designer & Frontend Developer",
-        url: "https://klyk.studio/about",
-        email: "mailto:pelosinicoletta@gmail.com",
-        worksFor: {
-          "@type": "Organization",
-          name: "KLYK.studio",
-          url: "https://klyk.studio/",
-        },
-        memberOf: {
-          "@type": "Organization",
-          name: "The Froggy Studio",
-          url: "https://thefroggystudio.com",
-        },
-        sameAs: [
-          "https://www.linkedin.com/in/nicoletta-pelosi/",
-          "https://www.instagram.com/klyk.studio/",
-          "https://www.behance.net/klykstudio",
-        ],
-        address: {
-          "@type": "PostalAddress",
-          addressCountry: "IT",
-        },
-      }),
+      "@context": "https://schema.org",
+      "@type": "Person",
+      name: "Nicoletta Pelosi",
+      jobTitle: locale.value === "it" ? "Founder di KLYK Studio" : "Founder of KLYK Studio",
+      url: localizedPath(locale.value, "about"),
+      email: "mailto:klyk.studio@gmail.com",
+      worksFor: {
+        "@type": "Organization",
+        name: "KLYK Studio",
+        url: "https://klyk.studio/",
+      },
+      sameAs: [
+        "https://www.linkedin.com/in/nicoletta-pelosi/",
+        "https://www.instagram.com/klyk.studio/",
+        "https://www.behance.net/klykstudio",
+      ],
     },
+    breadcrumbSchema([
+      { name: t("common.home"), path: localizedPath(locale.value, "home") },
+      { name: t("nav.about"), path: localizedPath(locale.value, "about") },
+    ]),
   ],
-});
+}));
 </script>
+

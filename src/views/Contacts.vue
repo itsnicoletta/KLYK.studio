@@ -9,13 +9,11 @@
         <section class="w-full max-w-4xl flex flex-col items-center justify-center text-center gap-8">
             <header ref="headerEl" class="flex flex-col items-center gap-4">
                 <h1 class="font-display font-semibold leading-tight text-4xl max-sm:text-2xl">
-                    Get in touch <br />with KLYK.studio
+                    {{ t("contacts.h1") }}
                 </h1>
 
                 <p class="text-lg text-base-300 leading-relaxed max-w-2xl max-md:text-base">
-                    We’re always excited to hear about new projects and collaborations. Whether you have a specific idea
-                    in mind
-                    or just want to explore possibilities, feel free to reach out!
+                    {{ t("contacts.intro") }}
                 </p>
             </header>
 
@@ -35,8 +33,8 @@
 
                     <div class="grid grid-cols-2 gap-5 max-md:grid-cols-1 max-md:gap-4">
                         <div class="flex flex-col gap-2">
-                            <label class="text-sm font-medium text-start">Name</label>
-                            <input v-model.trim="form.name" name="name" type="text" required placeholder="Your name"
+                            <label class="text-sm font-medium text-start">{{ t("contacts.name") }}</label>
+                            <input v-model.trim="form.name" name="name" type="text" required :placeholder="t('contacts.namePlaceholder')"
                                 class="w-full rounded-2xl border border-[var(--color-body-primary)]
                        bg-black/10 px-4 py-3 text-base
                        max-sm:text-sm
@@ -44,7 +42,7 @@
                         </div>
 
                         <div class="flex flex-col gap-2">
-                            <label class="text-sm font-medium text-start">Email</label>
+                            <label class="text-sm font-medium text-start">{{ t("contacts.email") }}</label>
                             <input v-model.trim="form.email" name="email" type="email" required
                                 placeholder="you@email.com" class="w-full rounded-2xl border border-[var(--color-body-primary)]
                        bg-black/10 px-4 py-3 text-base
@@ -54,9 +52,9 @@
                     </div>
 
                     <div class="flex flex-col gap-2">
-                        <label class="text-sm font-medium text-start">Message</label>
+                        <label class="text-sm font-medium text-start">{{ t("contacts.message") }}</label>
                         <textarea v-model.trim="form.message" name="message" rows="5" required
-                            placeholder="What are you trying to achieve? Any links or context?" class="w-full rounded-2xl border border-[var(--color-body-primary)]
+                            :placeholder="t('contacts.messagePlaceholder')" class="w-full rounded-2xl border border-[var(--color-body-primary)]
                      bg-black/10 px-4 py-3 text-base
                      max-sm:text-sm
                      focus:outline-none focus:ring-2 focus:ring-[var(--color-text-primary)]" />
@@ -65,39 +63,39 @@
                     <div class="pt-1 flex items-center gap-4 max-sm:flex-col max-sm:items-start max-sm:gap-3">
                         <Button variant="primary" :size="isMobileOrTablet ? 'medium' : 'large'" type="submit"
                             :disabled="submitting" class="max-sm:w-full">
-                            {{ submitting ? "Sending…" : "Send message" }}
+                            {{ submitting ? t("contacts.sending") : t("contacts.send") }}
                         </Button>
 
                         <p class="text-sm opacity-75">
-                            No spam. I’ll only use this to reply.
+                            {{ t("contacts.privacy") }}
                         </p>
                     </div>
 
                     <p v-if="submitOk" ref="okEl" class="text-base opacity-90 max-sm:text-sm">
-                        Received — thank you. I’ll reply soon.
+                        {{ t("contacts.ok") }}
                     </p>
 
                     <p v-if="submitError" ref="errEl" class="text-base opacity-90 max-sm:text-sm">
-                        Error sending. Please try again.
+                        {{ t("contacts.error") }}
                     </p>
                 </form>
             </div>
 
             <div ref="otherWaysEl" class="w-full flex flex-col gap-4 my-10 max-sm:my-8">
-                <h2 class="text-xl max-sm:text-lg">You can contact us in other ways</h2>
+                <h2 class="text-xl max-sm:text-lg">{{ t("contacts.otherWays") }}</h2>
 
                 <div class="flex gap-6 justify-center max-sm:flex-col">
-                    <router-link to="/quick-audit" class="w-auto max-sm:w-full">
+                    <router-link :to="localizedPath(locale, 'quickAudit')" class="w-auto max-sm:w-full">
                         <Button variant="outline" :size="isMobileOrTablet ? 'medium' : 'large'"
                             class="w-auto max-sm:w-full">
-                            Book a 15 min call
+                            {{ t("common.bookCall") }}
                         </Button>
                     </router-link>
 
                     <a href="mailto:klyk.studio@gmail.com" class="w-auto max-sm:w-full">
                         <Button variant="primary" :size="isMobileOrTablet ? 'medium' : 'large'"
                             class="w-auto max-sm:w-full">
-                            Contact via Email
+                            {{ t("contacts.emailCta") }}
                         </Button>
                     </a>
                 </div>
@@ -115,12 +113,15 @@ import gsap from "gsap";
 import Navbar from "../components/Navbar.vue";
 import Footer from "../components/Footer.vue";
 import Button from "../components/Button.vue";
+import { breadcrumbSchema, useSeo } from "../utils/seo.js";
+import { localizedPath, useI18n } from "../i18n";
 
 /* -------------------------------------------------------------------------- */
 /* Responsive flag (max-md ~ 768)                                              */
 /* -------------------------------------------------------------------------- */
 const isMobileOrTablet = ref(false);
 let mql;
+const { locale, t } = useI18n();
 
 function syncViewportFlag() {
     isMobileOrTablet.value = !!mql?.matches;
@@ -224,59 +225,23 @@ watch(submitError, (v) => {
     });
 });
 
-import { useHead } from "@unhead/vue";
 
-useHead({
-    title: "Contact - KLYK.studio | Work with me",
-    meta: [
-        {
-            name: "description",
-            content:
-                "Get in touch with KLYK.studio (Nicoletta Pelosi). Reach out for UI/UX design, interactive web experiences, motion-driven interfaces and Vue frontend development.",
-        },
-        { name: "robots", content: "index,follow" },
 
-        // Open Graph
-        { property: "og:title", content: "Contact — KLYK.studio" },
-        {
-            property: "og:description",
-            content:
-                "Let’s build something engaging — UI/UX design, interactive websites, motion and Vue frontend development.",
-        },
-        { property: "og:url", content: "https://klyk.studio/contacts" },
-        { property: "og:type", content: "website" },
-
-        // Twitter
-        { name: "twitter:card", content: "summary_large_image" },
+useSeo(() => ({
+    title: t("seo.contactsTitle"),
+    description: t("seo.contactsDescription"),
+    path: localizedPath(locale.value, "contacts"),
+    lang: locale.value,
+    alternates: [
+        { hreflang: "it", path: localizedPath("it", "contacts") },
+        { hreflang: "en", path: localizedPath("en", "contacts") },
+        { hreflang: "x-default", path: localizedPath("it", "contacts") },
     ],
-    link: [{ rel: "canonical", href: "https://klyk.studio/contacts" }],
-    script: [
-        {
-            type: "application/ld+json",
-            children: JSON.stringify({
-                "@context": "https://schema.org",
-                "@type": "ContactPage",
-                name: "Contact — KLYK.studio",
-                url: "https://klyk.studio/contacts",
-                mainEntity: {
-                    "@type": "Person",
-                    name: "Nicoletta Pelosi",
-                    jobTitle: "Digital Designer & Frontend Developer",
-                    email: "mailto:pelosinicoletta@gmail.com",
-                    worksFor: {
-                        "@type": "Organization",
-                        name: "KLYK.studio",
-                        url: "https://klyk.studio/",
-                    },
-                    sameAs: [
-                        "https://www.linkedin.com/in/nicoletta-pelosi/",
-                        "https://www.instagram.com/klyk.studio/",
-                        "https://www.behance.net/klykstudio",
-                    ],
-                },
-            }),
-        },
-    ],
-});
-
+    schema: breadcrumbSchema([
+        { name: t("common.home"), path: localizedPath(locale.value, "home") },
+        { name: t("nav.contact"), path: localizedPath(locale.value, "contacts") },
+    ]),
+}));
 </script>
+
+

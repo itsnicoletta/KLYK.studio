@@ -3,54 +3,49 @@
     <ShaderTop />
 
     <!-- Desktop-first, solo max-* per override -->
-    <main class="mt-30 px-[112px] py-20
+    <main class="mt-30 px-[88px] py-20
            max-lg:mt-24 max-lg:px-[80px] max-lg:py-16
            max-sm:mt-16 max-sm:px-[24px] max-sm:py-12">
         <!-- HERO -->
-        <section class="flex flex-col items-center justify-center my-32 max-sm:my-8 max-sm:mb-16">
+        <section class="flex flex-col items-center justify-center my-24 max-sm:my-8 max-sm:mb-16">
             <div ref="heroEl" class="max-w-3xl w-full flex flex-col items-center gap-6 max-sm:gap-4">
-                <h1 class="text-center text-5xl font-display font-medium leading-tight max-sm:text-3xl">
-                    Get a quick audit in 10-15 minutes
+                <h1 class="text-center text-4xl font-display font-medium leading-tight max-sm:text-3xl">
+                    {{ t("audit.h1") }}
                 </h1>
 
                 <h2 class="text-center text-lg opacity-85 max-sm:text-base">
-                    This helps us understand your needs quickly.
+                    {{ t("audit.subtitle") }}
                 </h2>
 
                 <Button variant="primary" size="large" @click="scrollToBooking" class="max-sm:w-full">
-                    Book your slot
+                    {{ t("audit.slot") }}
                 </Button>
             </div>
         </section>
 
         <!-- TRUST CARDS -->
         <section
-            class="flex flex-col w-full mx-auto items-center justify-center gap-10 mb-32 max-lg:mb-24 max-sm:mb-16">
+            class="flex flex-col w-full mx-auto items-center justify-center gap-8 mb-32 max-lg:mb-24 max-sm:mb-16">
             <div class="w-full max-w-5xl">
                 <div ref="trustCardsEl" class="grid grid-cols-3 gap-6 max-sm:grid-cols-1 max-sm:gap-4">
                     <div class="rounded-3xl border border-[var(--color-body-primary)] bg-black/20 p-6 max-sm:p-5">
-                        <h3 class="font-medium text-lg max-sm:text-base">What you’ll get</h3>
+                        <h3 class="font-medium text-lg max-sm:text-base">{{ t("audit.what") }}</h3>
                         <ul class="mt-3 space-y-2 text-base opacity-85 max-sm:text-sm">
-                            <li>Short video audit (10-15 min).</li>
-                            <li>5 prioritized suggestions.</li>
-                            <li>Guidance for your project.</li>
-                            <li>Actionable next steps.</li>
+                            <li v-for="item in t('audit.whatItems')" :key="item">{{ item }}</li>
                         </ul>
                     </div>
 
                     <div class="rounded-3xl border border-[var(--color-body-primary)] bg-black/20 p-6 max-sm:p-5">
-                        <h3 class="font-medium text-lg max-sm:text-base">This is for you if</h3>
+                        <h3 class="font-medium text-lg max-sm:text-base">{{ t("audit.forYou") }}</h3>
                         <ul class="mt-3 space-y-2 text-base opacity-85 max-sm:text-sm">
-                            <li>You want quick clarity on what to do first.</li>
-                            <li>You care about conversions and results.</li>
+                            <li v-for="item in t('audit.forYouItems')" :key="item">{{ item }}</li>
                         </ul>
                     </div>
 
                     <div class="rounded-3xl border border-[var(--color-body-primary)] bg-black/20 p-6 max-sm:p-5">
-                        <h3 class="font-medium text-lg max-sm:text-base">Not for you if</h3>
+                        <h3 class="font-medium text-lg max-sm:text-base">{{ t("audit.notForYou") }}</h3>
                         <ul class="mt-3 space-y-2 text-base opacity-85 max-sm:text-sm">
-                            <li>You want a full redesign immediately.</li>
-                            <li>You’re not planning to implement changes.</li>
+                            <li v-for="item in t('audit.notForYouItems')" :key="item">{{ item }}</li>
                         </ul>
                     </div>
                 </div>
@@ -58,14 +53,14 @@
         </section>
 
         <!-- BOOKING -->
-        <section ref="bookingSectionEl" class="flex flex-col gap-6 w-full mx-auto my-32 items-center justify-center
+        <section ref="bookingSectionEl" class="flex flex-col gap-6 w-full mx-auto my-24 items-center justify-center
              max-sm:gap-4 max-sm:my-24">
             <div ref="bookingHeaderEl" class="max-w-3xl text-center">
                 <h2 class="font-display font-medium text-3xl max-sm:text-2xl">
-                    Book your quick audit
+                    {{ t("audit.bookingTitle") }}
                 </h2>
                 <p class="mt-2 text-base opacity-80 max-sm:text-sm">
-                    Choose a slot. After booking, the intake form appears below.
+                    {{ t("audit.bookingText") }}
                 </p>
             </div>
 
@@ -76,19 +71,19 @@
             </div>
 
             <p class="text-base opacity-70 text-center max-w-3xl max-sm:text-sm">
-                Tip: after confirming the booking, scroll down to complete the intake form.
+                {{ t("audit.tip") }}
             </p>
         </section>
 
         <!-- FORM (after booking) -->
         <section v-if="showIntakeForm" id="intake-form" ref="intakeSectionEl" class="w-full">
-            <div class="mx-auto w-full max-w-3xl rounded-4xl border border-[var(--color-body-primary)] bg-black/20 p-10
+            <div class="mx-auto w-full max-w-3xl rounded-4xl border border-[var(--color-body-primary)] bg-black/20 p-8
                max-sm:p-5">
                 <h3 class="font-display font-medium text-2xl max-sm:text-xl">
-                    Quick intake form
+                    {{ t("audit.intake") }}
                 </h3>
                 <p class="mt-2 text-base opacity-80 max-sm:text-sm">
-                    This helps me tailor the audit.
+                    {{ t("audit.intakeText") }}
                 </p>
 
                 <form class="mt-7 flex flex-col gap-5 max-sm:mt-6 max-sm:gap-4" name="quick-audit-intake" method="POST"
@@ -102,8 +97,8 @@
 
                     <div class="grid grid-cols-2 gap-5 max-md:grid-cols-1 max-sm:gap-4">
                         <div class="flex flex-col gap-2">
-                            <label class="text-sm font-medium">Name</label>
-                            <input v-model.trim="form.name" name="name" type="text" required placeholder="Your name"
+                            <label class="text-sm font-medium">{{ t("contacts.name") }}</label>
+                            <input v-model.trim="form.name" name="name" type="text" required :placeholder="t('contacts.namePlaceholder')"
                                 class="w-full rounded-2xl border border-[var(--color-body-primary)]
                        bg-black/10 px-4 py-3 text-base
                        focus:outline-none focus:ring-2 focus:ring-[var(--color-text-primary)]
@@ -111,7 +106,7 @@
                         </div>
 
                         <div class="flex flex-col gap-2">
-                            <label class="text-sm font-medium">Email</label>
+                            <label class="text-sm font-medium">{{ t("contacts.email") }}</label>
                             <input v-model.trim="form.email" name="email" type="email" required
                                 placeholder="you@email.com" class="w-full rounded-2xl border border-[var(--color-body-primary)]
                        bg-black/10 px-4 py-3 text-base
@@ -120,13 +115,13 @@
                         </div>
 
                         <div class="flex flex-col gap-2">
-                            <label class="text-sm font-medium">What do you need?</label>
+                            <label class="text-sm font-medium">{{ t("audit.objective") }}</label>
                             <select v-model="form.objective" name="objective" required class="w-full rounded-2xl border border-[var(--color-body-primary)]
                        bg-black/10 px-4 py-3 text-base
                        focus:outline-none focus:ring-2 focus:ring-[var(--color-text-primary)]
                        max-sm:text-sm">
                                 <option class="bg-stone-700 text-[var(--color-text-primary)]" value="" disabled>Select
-                                    one</option>
+                                    {{ t("audit.select") }}</option>
                                 <option class="bg-stone-700 text-[var(--color-text-primary)]" value="landing_page">
                                     Landing page</option>
                                 <option class="bg-stone-700 text-[var(--color-text-primary)]" value="branding">Branding
@@ -160,7 +155,7 @@
                     </div>
 
                     <div class="flex flex-col gap-2">
-                        <label class="text-sm font-medium">Timeline</label>
+                        <label class="text-sm font-medium">{{ t("audit.timeline") }}</label>
                         <select v-model="form.timeline" name="timeline" required class="w-full rounded-2xl border border-[var(--color-body-primary)]
                      bg-black/10 px-4 py-3 text-base
                      focus:outline-none focus:ring-2 focus:ring-[var(--color-text-primary)]
@@ -179,9 +174,9 @@
                     </div>
 
                     <div class="flex flex-col gap-2">
-                        <label class="text-sm font-medium">Notes (optional)</label>
+                        <label class="text-sm font-medium">{{ t("audit.notes") }}</label>
                         <textarea v-model.trim="form.notes" name="notes" rows="4"
-                            placeholder="Any context, links, or constraints?" class="w-full rounded-2xl border border-[var(--color-body-primary)]
+                            :placeholder="t('contacts.messagePlaceholder')" class="w-full rounded-2xl border border-[var(--color-body-primary)]
                      bg-black/10 px-4 py-3 text-base
                      focus:outline-none focus:ring-2 focus:ring-[var(--color-text-primary)]
                      max-sm:text-sm" />
@@ -193,19 +188,19 @@
                     <div class="pt-2 flex flex-row gap-4 items-center max-sm:flex-col max-sm:items-start max-sm:gap-3">
                         <Button variant="primary" size="large" type="submit" :disabled="submitting"
                             class="max-sm:w-full">
-                            {{ submitting ? 'Sending…' : 'Send' }}
+                            {{ submitting ? t("contacts.sending") : t("audit.send") }}
                         </Button>
 
                         <p class="text-sm opacity-75">
-                            No spam. I’ll only use this to prepare your audit and give you valuable feedback.
+                            {{ t("contacts.privacy") }}
                         </p>
                     </div>
 
                     <p v-if="submitOk" class="text-base opacity-90 max-sm:text-sm">
-                        Received - thank you. See you on the call.
+                        {{ t("audit.ok") }}
                     </p>
                     <p v-if="submitError" class="text-base opacity-90 max-sm:text-sm">
-                        Error sending. Please try again.
+                        {{ t("contacts.error") }}
                     </p>
                 </form>
             </div>
@@ -227,8 +222,11 @@ import Footer from '../components/Footer.vue'
 import ShaderTop from '../components/ShaderTop.vue'
 import ShaderBottom from '../components/ShaderBottom.vue'
 import Button from '../components/Button.vue'
+import { breadcrumbSchema, useSeo } from '../utils/seo.js'
+import { localizedPath, useI18n } from '../i18n'
 
 const CALENDLY_URL = 'https://calendly.com/klyk-studio/quick-audit'
+const { locale, t } = useI18n()
 
 const bookingSectionEl = ref(null)
 const calendlyHostEl = ref(null)
@@ -433,50 +431,37 @@ onBeforeUnmount(() => {
 })
 
 
-import { useHead } from "@unhead/vue";
 
-useHead({
-    title: "Quick Audit - KLYK.studio | UX/UI & Website Review",
-    meta: [
-        {
-            name: "description",
-            content:
-                "Book a 15-minute Quick Audit with KLYK.studio. Get actionable feedback on your website’s UX/UI, clarity, conversion and visual consistency — fast and practical.",
-        },
-        { name: "robots", content: "index,follow" },
 
-        // Open Graph
-        { property: "og:title", content: "Quick Audit — KLYK.studio" },
-        {
-            property: "og:description",
-            content:
-                "A 15-minute website review with actionable UX/UI feedback on clarity, conversion and visual consistency.",
-        },
-        { property: "og:url", content: "https://klyk.studio/quick-audit" },
-        { property: "og:type", content: "website" },
-
-        // Twitter
-        { name: "twitter:card", content: "summary_large_image" },
+useSeo(() => ({
+    title: t("seo.auditTitle"),
+    description: t("seo.auditDescription"),
+    path: localizedPath(locale.value, "quickAudit"),
+    lang: locale.value,
+    alternates: [
+        { hreflang: "it", path: localizedPath("it", "quickAudit") },
+        { hreflang: "en", path: localizedPath("en", "quickAudit") },
+        { hreflang: "x-default", path: localizedPath("it", "quickAudit") },
     ],
-    link: [{ rel: "canonical", href: "https://klyk.studio/quick-audit" }],
-    script: [
+    schemas: [
         {
-            type: "application/ld+json",
-            children: JSON.stringify({
-                "@context": "https://schema.org",
-                "@type": "Service",
-                name: "Quick Audit (15 min)",
-                provider: {
-                    "@type": "Organization",
-                    name: "KLYK.studio",
-                    url: "https://klyk.studio/",
-                },
-                areaServed: "Remote",
-                serviceType: "Website UX/UI audit",
-                url: "https://klyk.studio/quick-audit",
-            }),
+            "@context": "https://schema.org",
+            "@type": "Service",
+            name: "Audit sito web e brand",
+            provider: {
+                "@type": "Organization",
+                name: "KLYK Studio",
+                url: "https://klyk.studio/",
+            },
+            areaServed: ["Italia", "Europa"],
+            serviceType: "Website, brand and UX audit",
+            url: "https://klyk.studio/quick-audit",
         },
+        breadcrumbSchema([
+            { name: t("common.home"), path: localizedPath(locale.value, "home") },
+            { name: "Quick Audit", path: localizedPath(locale.value, "quickAudit") },
+        ]),
     ],
-});
-
+}));
 </script>
+

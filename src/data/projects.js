@@ -83,10 +83,45 @@ import img12_4 from './projectsAssets/project12_4.webp'
 import img12_5 from './projectsAssets/project12_5.webp'
 import vid12 from './projectsAssets/project12_video.webm'
 
+//progetto 13 assets
+import cover13 from './projectsAssets/project13_cover.webp'
+import img13_1 from './projectsAssets/project13_1.webp'
+import img13_2 from './projectsAssets/project13_2.webp'
+import img13_3 from './projectsAssets/project13_3.webp'
+
 
 
 
 export const projects = [
+    {
+        id: 13,
+        slug: 'atlas-pro-social-media-management-content-strategy',
+        title: 'Atlas Pro - Social Media Management & Content Strategy',
+        H2: 'A continuous social media management and content strategy project for a sports association, designed to promote summer camps, build trust with families, and grow a local community.',
+        year: '2026',
+        shortDescription:
+            'Social media management, content strategy and Instagram campaign planning for Atlas Pro, a sports association focused on summer camps, sports activities and training paths.',
+        description: `Atlas Pro is a sports association that organizes summer camps, sports activities and training paths for children, teenagers and adults. The collaboration ran from March to July 2026 with the goal of building a credible and consistent digital presence, promoting summer camps, communicating activities, and strengthening trust with parents and the local community.
+    KLYK Studio worked across the full social media ecosystem: profile analysis, competitor research, tone of voice, content pillars, editorial strategy, Instagram management, copywriting, content planning, graphics, reels, carousel posts, stories and campaign communication.`,
+        secondDescription: `The communication evolved through three main phases: Reconnect, to reactivate the profile and community; Summer Campaign, focused on summer camp promotion; and Follow-up, dedicated to live coverage and post-activity communication.
+    From 17 March to 11 July 2026, 29 Instagram contents were published. The project generated 85,314 views, 47,541 reached accounts, 1,239 interactions and 83 new followers. Meta Insights also recorded 79,200 views, 32,700 reached accounts, around 1,000 interactions, 556 clicks and 468 profile visits between 16 April and 14 July 2026.`,
+        skills: [
+            'Social Media Strategy',
+            'Social Media Management',
+            'Content Strategy',
+            'Editorial Calendar',
+            'Copywriting',
+            'Graphic Design',
+            'Reel Production',
+            'Campaign Planning',
+            'Performance Analysis',
+            'Community Growth'
+        ],
+        coverImage: cover13,
+        galleryImages: [img13_1, img13_2, img13_3],
+        link: 'https://www.instagram.com/atlaspro_/',
+        buttonLabel: 'View Instagram Profile'
+    },
     {
         id: 12,
         slug: 'the-ring-experience-vue-sanity-jewellery-workshop-website',
