@@ -3,7 +3,18 @@
   <Shader />
   <!-- HERO -->
   <section id="Hero-wrapper" class="relative w-full min-h-screen mt-16 max-sm:mt-16">
-    <Hero3D class="absolute inset-0 z-0 pointer-events-auto" />
+    <component
+      :is="Hero3D"
+      v-if="shouldLoadHero3D"
+      class="absolute inset-0 z-0 pointer-events-auto"
+    />
+    <img
+      v-else
+      src="/cover.jpg"
+      alt=""
+      aria-hidden="true"
+      class="absolute inset-0 z-0 h-full w-full object-cover opacity-35"
+    />
 
     <div id="hero-text" class="relative z-10 w-full h-full flex justify-center items-center flex-row gap-20
              px-[88px] py-20 pt-0
@@ -104,11 +115,10 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount, nextTick, computed } from "vue";
+import { defineAsyncComponent, ref, onMounted, onBeforeUnmount, nextTick, computed } from "vue";
 import { gsap } from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 
-import Hero3D from "../components/Hero3D.vue";
 import Navbar from "../components/Navbar.vue";
 import Footer from "../components/Footer.vue";
 import Button from "../components/Button.vue";
@@ -122,6 +132,16 @@ import ProjectCard from "../components/ProjectCard.vue";
 import { localizedPath, useI18n, getServices, getOtherServices, getProjects } from "../i18n";
 
 gsap.registerPlugin(ScrollTrigger);
+
+const Hero3D = defineAsyncComponent({
+  loader: () => import("../components/Hero3D.vue"),
+  delay: 0,
+  timeout: 10000,
+  onError(error, retry, fail, attempts) {
+    if (attempts <= 1) retry();
+    else fail(error);
+  },
+});
 
 const homeProjects = computed(() =>
   [...getProjects(locale.value)].sort((a, b) => b.year - a.year).slice(0, 4)
@@ -138,7 +158,42 @@ const infoAgency = computed(() => ({
 
 /* Responsive flag (<= 1024px) */
 const isMobileOrTablet = ref(false);
+const isClient = typeof window !== "undefined";
+const prefersReducedMotion = isClient && window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+const shouldLoadHero3D = ref(isClient ? window.matchMedia("(min-width: 1025px)").matches && !prefersReducedMotion : false);
 let mql;
+let hero3DIdleId = null;
+let hero3DTimeoutId = null;
+
+function loadHero3DOnce() {
+  if (shouldLoadHero3D.value || prefersReducedMotion) return;
+  shouldLoadHero3D.value = true;
+  cleanupHero3DDeferral();
+}
+
+function cleanupHero3DDeferral() {
+  window.removeEventListener("pointerdown", loadHero3DOnce);
+  window.removeEventListener("keydown", loadHero3DOnce);
+  window.removeEventListener("touchstart", loadHero3DOnce);
+
+  if (hero3DIdleId && window.cancelIdleCallback) window.cancelIdleCallback(hero3DIdleId);
+  if (hero3DTimeoutId) clearTimeout(hero3DTimeoutId);
+  hero3DIdleId = null;
+  hero3DTimeoutId = null;
+}
+
+function deferMobileHero3D() {
+  if (!isMobileOrTablet.value || shouldLoadHero3D.value || prefersReducedMotion) return;
+
+  window.addEventListener("pointerdown", loadHero3DOnce, { once: true, passive: true });
+  window.addEventListener("keydown", loadHero3DOnce, { once: true });
+  window.addEventListener("touchstart", loadHero3DOnce, { once: true, passive: true });
+
+  if (window.requestIdleCallback) {
+    hero3DIdleId = window.requestIdleCallback(loadHero3DOnce, { timeout: 3500 });
+  }
+  hero3DTimeoutId = setTimeout(loadHero3DOnce, 5000);
+}
 
 function syncViewportFlag() {
   isMobileOrTablet.value = !!mql?.matches;
@@ -166,6 +221,9 @@ onMounted(async () => {
   syncViewportFlag();
   if (mql.addEventListener) mql.addEventListener("change", syncViewportFlag);
   else mql.addListener(syncViewportFlag);
+
+  if (!isMobileOrTablet.value && !prefersReducedMotion) shouldLoadHero3D.value = true;
+  deferMobileHero3D();
 
   await nextTick();
   ScrollTrigger.refresh();
@@ -248,6 +306,7 @@ onBeforeUnmount(() => {
     if (mql.removeEventListener) mql.removeEventListener("change", syncViewportFlag);
     else mql.removeListener(syncViewportFlag);
   }
+  cleanupHero3DDeferral();
 
   ctx?.revert();
   ScrollTrigger.getAll().forEach((t) => t.kill());

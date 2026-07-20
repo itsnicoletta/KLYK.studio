@@ -29,16 +29,33 @@
   <meta name="twitter:description" content="Branding, siti web, UX/UI, social media e strategie digitali per aziende e professionisti a Brescia e in tutta Italia." />
   <meta name="twitter:image" content="https://klyk.studio/cover.jpg" />
 
-  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@1&f[]=satoshi@1&display=swap" rel="stylesheet">
+  <link rel="preload" href="/src/assets/fonts/ClashDisplay-Semibold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+  <link rel="preload" href="https://api.fontshare.com/v2/css?f[]=satoshi@1&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link href="https://api.fontshare.com/v2/css?f[]=satoshi@1&display=swap" rel="stylesheet"></noscript>
 
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GJ6409R33M"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
+    window.gtag = window.gtag || function gtag(){ dataLayer.push(arguments); };
 
-    gtag('config', 'G-GJ6409R33M', { 'anonymize_ip': true });
+    (function () {
+      var initialized = false;
+      function initAnalytics() {
+        if (initialized) return;
+        initialized = true;
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-GJ6409R33M';
+        document.head.appendChild(script);
+        gtag('js', new Date());
+        gtag('config', 'G-GJ6409R33M', { 'anonymize_ip': true });
+      }
+      window.addEventListener('load', function () {
+        if ('requestIdleCallback' in window) requestIdleCallback(initAnalytics, { timeout: 3000 });
+        else setTimeout(initAnalytics, 2500);
+      }, { once: true });
+      setTimeout(initAnalytics, 7000);
+    })();
   </script>
   <link rel="canonical" href="https://klyk.studio/">
 </head>

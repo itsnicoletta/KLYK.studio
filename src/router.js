@@ -1,14 +1,15 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import Home from './views/Home.vue'
-import About from './views/About.vue'
-import ProjectDetail from './views/ProjectDetail.vue'
-import Projects from './views/Projects.vue'
-import Contacts from './views/Contacts.vue'
-import ServicesDetail from './views/ServicesDetail.vue'
-import QuickAudit from './views/QuickAudit.vue'
-import OtherServicesDetails from './views/OtherServicesDetails.vue'
 import { defaultLocale, localizedPath, pagePaths } from './i18n'
+
+const About = () => import('./views/About.vue')
+const ProjectDetail = () => import('./views/ProjectDetail.vue')
+const Projects = () => import('./views/Projects.vue')
+const Contacts = () => import('./views/Contacts.vue')
+const ServicesDetail = () => import('./views/ServicesDetail.vue')
+const QuickAudit = () => import('./views/QuickAudit.vue')
+const OtherServicesDetails = () => import('./views/OtherServicesDetails.vue')
 
 const localizedRoutes = [
     ...['it', 'en'].flatMap((locale) => [
