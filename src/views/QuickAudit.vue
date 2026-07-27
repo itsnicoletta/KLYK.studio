@@ -88,7 +88,7 @@
 
                 <form class="mt-7 flex flex-col gap-5 max-sm:mt-6 max-sm:gap-4" name="quick-audit-intake" method="POST"
                     data-netlify="true" data-netlify-honeypot="bot-field"
-                    action="/forms.html" @submit.prevent="submitIntake">
+                    action="/thank-you.html" @submit="prepareIntakeSubmit">
                     <!-- Netlify honeypot -->
                     <input v-model="form.botField" type="text" name="bot-field" class="hidden" tabindex="-1"
                         autocomplete="off" />
@@ -316,44 +316,25 @@ async function onCalendlyMessage(e) {
 }
 
 /* ---------------- Netlify Forms submit ---------------- */
-function encode(data) {
-    return new URLSearchParams(data).toString()
-}
-
-async function submitIntake(event) {
-    submitOk.value = false
-    submitError.value = false
-
+function prepareIntakeSubmit(event) {
     submitting.value = true
-    try {
-        const formEl = event.currentTarget
-        submittedAt.value = new Date().toISOString()
-        await nextTick()
+    submittedAt.value = new Date().toISOString()
 
-        const formData = new FormData(formEl)
-        formData.set('form-name', 'quick-audit-intake')
-        formData.set('calendly_event_uri', booking.value.eventUri)
-        formData.set('calendly_invitee_uri', booking.value.inviteeUri)
+    const formEl = event.currentTarget
+    const submittedAtInput = formEl.elements.submitted_at
+    const eventUriInput = formEl.elements.calendly_event_uri
+    const inviteeUriInput = formEl.elements.calendly_invitee_uri
 
-        const requiredFields = ['name', 'email', 'objective', 'budget', 'timeline']
-        const hasMissingFields = requiredFields.some((field) => !String(formData.get(field) || '').trim())
+    if (submittedAtInput) {
+        submittedAtInput.value = submittedAt.value
+    }
 
-        if (hasMissingFields) {
-            throw new Error('Missing required audit fields')
-        }
+    if (eventUriInput) {
+        eventUriInput.value = booking.value.eventUri
+    }
 
-        const res = await fetch(formEl.getAttribute('action') || window.location.pathname, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: encode(formData)
-        })
-
-        if (!res.ok) throw new Error('Submit failed')
-        submitOk.value = true
-    } catch (err) {
-        submitError.value = true
-    } finally {
-        submitting.value = false
+    if (inviteeUriInput) {
+        inviteeUriInput.value = booking.value.inviteeUri
     }
 }
 

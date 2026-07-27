@@ -22,7 +22,7 @@
                max-md:p-7
                max-sm:p-5">
                 <form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field"
-                    action="/forms.html" @submit.prevent="submitContact"
+                    action="/thank-you.html" @submit="prepareContactSubmit"
                     class="flex flex-col gap-5 max-sm:gap-4">
                     <!-- Required by Netlify -->
                     <input type="hidden" name="form-name" value="contact" />
@@ -73,13 +73,6 @@
                         </p>
                     </div>
 
-                    <p v-if="submitOk" ref="okEl" class="text-base opacity-90 max-sm:text-sm">
-                        {{ t("contacts.ok") }}
-                    </p>
-
-                    <p v-if="submitError" ref="errEl" class="text-base opacity-90 max-sm:text-sm">
-                        {{ t("contacts.error") }}
-                    </p>
                 </form>
             </div>
 
@@ -109,7 +102,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount, nextTick, watch } from "vue";
+import { ref, onMounted, onBeforeUnmount, nextTick } from "vue";
 import { useRoute } from "vue-router";
 import gsap from "gsap";
 
@@ -135,8 +128,6 @@ function syncViewportFlag() {
 /* Form state                                                                  */
 /* -------------------------------------------------------------------------- */
 const submitting = ref(false);
-const submitOk = ref(false);
-const submitError = ref(false);
 const submittedAt = ref("");
 
 const form = ref({
@@ -146,47 +137,13 @@ const form = ref({
     message: "",
 });
 
-function encode(data) {
-    return new URLSearchParams(data).toString();
-}
-
-async function submitContact(event) {
-    submitOk.value = false;
-    submitError.value = false;
+function prepareContactSubmit(event) {
     submitting.value = true;
+    submittedAt.value = new Date().toISOString();
 
-    try {
-        const formEl = event.currentTarget;
-        submittedAt.value = new Date().toISOString();
-        await nextTick();
-
-        const formData = new FormData(formEl);
-        formData.set("form-name", "contact");
-
-        const name = String(formData.get("name") || "").trim();
-        const email = String(formData.get("email") || "").trim();
-        const message = String(formData.get("message") || "").trim();
-
-        if (!name || !email || !message) {
-            throw new Error("Missing required contact fields");
-        }
-
-        const res = await fetch(formEl.getAttribute("action") || window.location.pathname, {
-            method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: encode(formData),
-        });
-
-        if (!res.ok) throw new Error("Submit failed");
-
-        submitOk.value = true;
-        form.value.name = "";
-        form.value.email = "";
-        form.value.message = "";
-    } catch (e) {
-        submitError.value = true;
-    } finally {
-        submitting.value = false;
+    const submittedAtInput = event.currentTarget.elements.submitted_at;
+    if (submittedAtInput) {
+        submittedAtInput.value = submittedAt.value;
     }
 }
 
@@ -196,8 +153,6 @@ async function submitContact(event) {
 const headerEl = ref(null);
 const formCardEl = ref(null);
 const otherWaysEl = ref(null);
-const okEl = ref(null);
-const errEl = ref(null);
 
 onMounted(async () => {
     // matchMedia
@@ -219,25 +174,6 @@ onBeforeUnmount(() => {
     if (mql.removeEventListener) mql.removeEventListener("change", syncViewportFlag);
     else mql.removeListener(syncViewportFlag);
 });
-
-// animate feedback messages
-watch(submitOk, (v) => {
-    if (!v) return;
-    requestAnimationFrame(() => {
-        if (!okEl.value) return;
-        gsap.fromTo(okEl.value, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" });
-    });
-});
-
-watch(submitError, (v) => {
-    if (!v) return;
-    requestAnimationFrame(() => {
-        if (!errEl.value) return;
-        gsap.fromTo(errEl.value, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" });
-    });
-});
-
-
 
 useSeo(() => ({
     title: t("seo.contactsTitle"),

@@ -65,8 +65,11 @@
   <script type="module" src="/src/main.js"></script>
 
   <!-- Netlify Forms detection (hidden form) -->
-<form name="quick-audit-intake" netlify netlify-honeypot="bot-field" hidden>
+<form name="quick-audit-intake" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
   <input type="text" name="bot-field" />
+  <input type="hidden" name="form-name" value="quick-audit-intake" />
+  <input type="text" name="source_path" />
+  <input type="text" name="submitted_at" />
   <input type="text" name="name" />
   <input type="email" name="email" />
   <input type="text" name="objective" />
@@ -79,6 +82,8 @@
 <form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
   <input type="text" name="bot-field" />
   <input type="hidden" name="form-name" value="contact" />
+  <input type="text" name="source_path" />
+  <input type="text" name="submitted_at" />
   <input type="text" name="name" />
   <input type="email" name="email" />
   <textarea name="message"></textarea>
