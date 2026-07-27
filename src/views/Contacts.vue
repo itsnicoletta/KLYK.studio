@@ -22,7 +22,7 @@
                max-md:p-7
                max-sm:p-5">
                 <form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field"
-                    action="/thank-you.html" @submit="prepareContactSubmit"
+                    action="/" @submit.prevent="submitContact"
                     class="flex flex-col gap-5 max-sm:gap-4">
                     <!-- Required by Netlify -->
                     <input type="hidden" name="form-name" value="contact" />
@@ -73,6 +73,13 @@
                         </p>
                     </div>
 
+                    <p v-if="submitOk" ref="okEl" class="text-base opacity-90 max-sm:text-sm">
+                        {{ t("contacts.ok") }}
+                    </p>
+
+                    <p v-if="submitError" ref="errEl" class="text-base opacity-90 max-sm:text-sm">
+                        {{ t("contacts.error") }}
+                    </p>
                 </form>
             </div>
 
@@ -102,7 +109,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount, nextTick } from "vue";
+import { ref, onMounted, onBeforeUnmount, nextTick, watch } from "vue";
 import { useRoute } from "vue-router";
 import gsap from "gsap";
 
@@ -128,6 +135,8 @@ function syncViewportFlag() {
 /* Form state                                                                  */
 /* -------------------------------------------------------------------------- */
 const submitting = ref(false);
+const submitOk = ref(false);
+const submitError = ref(false);
 const submittedAt = ref("");
 
 const form = ref({
@@ -137,13 +146,41 @@ const form = ref({
     message: "",
 });
 
-function prepareContactSubmit(event) {
-    submitting.value = true;
-    submittedAt.value = new Date().toISOString();
+function encode(data) {
+    return new URLSearchParams(data).toString();
+}
 
-    const submittedAtInput = event.currentTarget.elements.submitted_at;
-    if (submittedAtInput) {
-        submittedAtInput.value = submittedAt.value;
+async function submitContact(event) {
+    submitOk.value = false;
+    submitError.value = false;
+    submitting.value = true;
+
+    try {
+        const formEl = event.currentTarget;
+        submittedAt.value = new Date().toISOString();
+        await nextTick();
+
+        const formData = new FormData(formEl);
+        formData.set("form-name", "contact");
+        formData.set("submitted_at", submittedAt.value);
+        formData.set("source_path", route.fullPath);
+
+        const res = await fetch("/", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: encode(formData),
+        });
+
+        if (!res.ok) throw new Error("Submit failed");
+
+        submitOk.value = true;
+        form.value.name = "";
+        form.value.email = "";
+        form.value.message = "";
+    } catch (error) {
+        submitError.value = true;
+    } finally {
+        submitting.value = false;
     }
 }
 
@@ -153,6 +190,8 @@ function prepareContactSubmit(event) {
 const headerEl = ref(null);
 const formCardEl = ref(null);
 const otherWaysEl = ref(null);
+const okEl = ref(null);
+const errEl = ref(null);
 
 onMounted(async () => {
     // matchMedia
@@ -173,6 +212,22 @@ onBeforeUnmount(() => {
     if (!mql) return;
     if (mql.removeEventListener) mql.removeEventListener("change", syncViewportFlag);
     else mql.removeListener(syncViewportFlag);
+});
+
+watch(submitOk, (value) => {
+    if (!value) return;
+    requestAnimationFrame(() => {
+        if (!okEl.value) return;
+        gsap.fromTo(okEl.value, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" });
+    });
+});
+
+watch(submitError, (value) => {
+    if (!value) return;
+    requestAnimationFrame(() => {
+        if (!errEl.value) return;
+        gsap.fromTo(errEl.value, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.5, ease: "power2.out" });
+    });
 });
 
 useSeo(() => ({

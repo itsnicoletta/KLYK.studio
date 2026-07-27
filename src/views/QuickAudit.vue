@@ -88,7 +88,7 @@
 
                 <form class="mt-7 flex flex-col gap-5 max-sm:mt-6 max-sm:gap-4" name="quick-audit-intake" method="POST"
                     data-netlify="true" data-netlify-honeypot="bot-field"
-                    action="/thank-you.html" @submit="prepareIntakeSubmit">
+                    action="/" @submit.prevent="submitIntake">
                     <!-- Netlify honeypot -->
                     <input v-model="form.botField" type="text" name="bot-field" class="hidden" tabindex="-1"
                         autocomplete="off" />
@@ -315,26 +315,41 @@ async function onCalendlyMessage(e) {
     }
 }
 
+function encode(data) {
+    return new URLSearchParams(data).toString()
+}
+
 /* ---------------- Netlify Forms submit ---------------- */
-function prepareIntakeSubmit(event) {
+async function submitIntake(event) {
+    submitOk.value = false
+    submitError.value = false
     submitting.value = true
-    submittedAt.value = new Date().toISOString()
 
-    const formEl = event.currentTarget
-    const submittedAtInput = formEl.elements.submitted_at
-    const eventUriInput = formEl.elements.calendly_event_uri
-    const inviteeUriInput = formEl.elements.calendly_invitee_uri
+    try {
+        const formEl = event.currentTarget
+        submittedAt.value = new Date().toISOString()
+        await nextTick()
 
-    if (submittedAtInput) {
-        submittedAtInput.value = submittedAt.value
-    }
+        const formData = new FormData(formEl)
+        formData.set('form-name', 'quick-audit-intake')
+        formData.set('submitted_at', submittedAt.value)
+        formData.set('source_path', route.fullPath)
+        formData.set('calendly_event_uri', booking.value.eventUri)
+        formData.set('calendly_invitee_uri', booking.value.inviteeUri)
 
-    if (eventUriInput) {
-        eventUriInput.value = booking.value.eventUri
-    }
+        const res = await fetch('/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: encode(formData)
+        })
 
-    if (inviteeUriInput) {
-        inviteeUriInput.value = booking.value.inviteeUri
+        if (!res.ok) throw new Error('Submit failed')
+
+        submitOk.value = true
+    } catch (error) {
+        submitError.value = true
+    } finally {
+        submitting.value = false
     }
 }
 
