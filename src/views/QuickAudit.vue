@@ -87,7 +87,8 @@
                 </p>
 
                 <form class="mt-7 flex flex-col gap-5 max-sm:mt-6 max-sm:gap-4" name="quick-audit-intake" method="POST"
-                    data-netlify="true" data-netlify-honeypot="bot-field" @submit.prevent="submitIntake">
+                    data-netlify="true" data-netlify-honeypot="bot-field"
+                    :action="localizedPath(locale, 'quickAudit')" @submit.prevent="submitIntake">
                     <!-- Netlify honeypot -->
                     <input v-model="form.botField" type="text" name="bot-field" class="hidden" tabindex="-1"
                         autocomplete="off" />
@@ -314,29 +315,29 @@ function encode(data) {
     return new URLSearchParams(data).toString()
 }
 
-async function submitIntake() {
+async function submitIntake(event) {
     submitOk.value = false
     submitError.value = false
 
     submitting.value = true
     try {
-        const payload = {
-            'form-name': 'quick-audit-intake',
-            'bot-field': form.value.botField,
-            name: form.value.name,
-            email: form.value.email,
-            objective: form.value.objective,
-            budget: form.value.budget,
-            timeline: form.value.timeline,
-            notes: form.value.notes,
-            calendly_event_uri: booking.value.eventUri,
-            calendly_invitee_uri: booking.value.inviteeUri
+        const formEl = event.currentTarget
+        const formData = new FormData(formEl)
+        formData.set('form-name', 'quick-audit-intake')
+        formData.set('calendly_event_uri', booking.value.eventUri)
+        formData.set('calendly_invitee_uri', booking.value.inviteeUri)
+
+        const requiredFields = ['name', 'email', 'objective', 'budget', 'timeline']
+        const hasMissingFields = requiredFields.some((field) => !String(formData.get(field) || '').trim())
+
+        if (hasMissingFields) {
+            throw new Error('Missing required audit fields')
         }
 
-        const res = await fetch('/', {
+        const res = await fetch(formEl.getAttribute('action') || window.location.pathname, {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: encode(payload)
+            body: encode(formData)
         })
 
         if (!res.ok) throw new Error('Submit failed')

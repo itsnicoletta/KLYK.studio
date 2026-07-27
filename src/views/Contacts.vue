@@ -22,12 +22,12 @@
                max-md:p-7
                max-sm:p-5">
                 <form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field"
-                    @submit.prevent="submitContact" class="flex flex-col gap-5 max-sm:gap-4">
+                    :action="localizedPath(locale, 'contacts')" @submit.prevent="submitContact"
+                    class="flex flex-col gap-5 max-sm:gap-4">
                     <!-- Required by Netlify -->
                     <input type="hidden" name="form-name" value="contact" />
 
                     <!-- Honeypot -->
-                    <input type="text" name="bot-field" class="hidden" />
                     <input v-model="form.botField" type="text" name="bot-field" class="hidden" tabindex="-1"
                         autocomplete="off" />
 
@@ -145,24 +145,28 @@ function encode(data) {
     return new URLSearchParams(data).toString();
 }
 
-async function submitContact() {
+async function submitContact(event) {
     submitOk.value = false;
     submitError.value = false;
     submitting.value = true;
 
     try {
-        const payload = {
-            "form-name": "contact",
-            "bot-field": form.value.botField,
-            name: form.value.name,
-            email: form.value.email,
-            message: form.value.message,
-        };
+        const formEl = event.currentTarget;
+        const formData = new FormData(formEl);
+        formData.set("form-name", "contact");
 
-        const res = await fetch("/", {
+        const name = String(formData.get("name") || "").trim();
+        const email = String(formData.get("email") || "").trim();
+        const message = String(formData.get("message") || "").trim();
+
+        if (!name || !email || !message) {
+            throw new Error("Missing required contact fields");
+        }
+
+        const res = await fetch(formEl.getAttribute("action") || window.location.pathname, {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: encode(payload),
+            body: encode(formData),
         });
 
         if (!res.ok) throw new Error("Submit failed");
