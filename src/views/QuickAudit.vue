@@ -93,6 +93,8 @@
                     <input v-model="form.botField" type="text" name="bot-field" class="hidden" tabindex="-1"
                         autocomplete="off" />
                     <input type="hidden" name="form-name" value="quick-audit-intake" />
+                    <input type="hidden" name="source_path" :value="route.fullPath" />
+                    <input type="hidden" name="submitted_at" :value="submittedAt" />
 
                     <!-- ... i tuoi altri campi ... -->
 
@@ -214,6 +216,7 @@
 
 <script setup>
 import { ref, computed, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import { useRoute } from 'vue-router'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
@@ -228,6 +231,7 @@ import { localizedPath, useI18n } from '../i18n'
 
 const CALENDLY_URL = 'https://calendly.com/klyk-studio/quick-audit'
 const { locale, t } = useI18n()
+const route = useRoute()
 
 const bookingSectionEl = ref(null)
 const calendlyHostEl = ref(null)
@@ -242,6 +246,7 @@ const showIntakeForm = ref(false)
 const submitting = ref(false)
 const submitOk = ref(false)
 const submitError = ref(false)
+const submittedAt = ref('')
 
 const booking = ref({ eventUri: '', inviteeUri: '' })
 
@@ -322,6 +327,9 @@ async function submitIntake(event) {
     submitting.value = true
     try {
         const formEl = event.currentTarget
+        submittedAt.value = new Date().toISOString()
+        await nextTick()
+
         const formData = new FormData(formEl)
         formData.set('form-name', 'quick-audit-intake')
         formData.set('calendly_event_uri', booking.value.eventUri)

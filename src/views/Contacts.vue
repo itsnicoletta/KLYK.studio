@@ -26,6 +26,8 @@
                     class="flex flex-col gap-5 max-sm:gap-4">
                     <!-- Required by Netlify -->
                     <input type="hidden" name="form-name" value="contact" />
+                    <input type="hidden" name="source_path" :value="route.fullPath" />
+                    <input type="hidden" name="submitted_at" :value="submittedAt" />
 
                     <!-- Honeypot -->
                     <input v-model="form.botField" type="text" name="bot-field" class="hidden" tabindex="-1"
@@ -108,6 +110,7 @@
 
 <script setup>
 import { ref, onMounted, onBeforeUnmount, nextTick, watch } from "vue";
+import { useRoute } from "vue-router";
 import gsap from "gsap";
 
 import Navbar from "../components/Navbar.vue";
@@ -122,6 +125,7 @@ import { localizedPath, useI18n } from "../i18n";
 const isMobileOrTablet = ref(false);
 let mql;
 const { locale, t } = useI18n();
+const route = useRoute();
 
 function syncViewportFlag() {
     isMobileOrTablet.value = !!mql?.matches;
@@ -133,6 +137,7 @@ function syncViewportFlag() {
 const submitting = ref(false);
 const submitOk = ref(false);
 const submitError = ref(false);
+const submittedAt = ref("");
 
 const form = ref({
     botField: "",
@@ -152,6 +157,9 @@ async function submitContact(event) {
 
     try {
         const formEl = event.currentTarget;
+        submittedAt.value = new Date().toISOString();
+        await nextTick();
+
         const formData = new FormData(formEl);
         formData.set("form-name", "contact");
 
