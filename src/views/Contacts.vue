@@ -22,7 +22,7 @@
                max-md:p-7
                max-sm:p-5">
                 <form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field"
-                    :action="localizedPath(locale, 'contacts')" @submit.prevent="submitContact"
+                    action="/forms.html" @submit.prevent="submitContact"
                     class="flex flex-col gap-5 max-sm:gap-4">
                     <!-- Required by Netlify -->
                     <input type="hidden" name="form-name" value="contact" />

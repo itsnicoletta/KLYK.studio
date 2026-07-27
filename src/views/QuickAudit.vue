@@ -88,7 +88,7 @@
 
                 <form class="mt-7 flex flex-col gap-5 max-sm:mt-6 max-sm:gap-4" name="quick-audit-intake" method="POST"
                     data-netlify="true" data-netlify-honeypot="bot-field"
-                    :action="localizedPath(locale, 'quickAudit')" @submit.prevent="submitIntake">
+                    action="/forms.html" @submit.prevent="submitIntake">
                     <!-- Netlify honeypot -->
                     <input v-model="form.botField" type="text" name="bot-field" class="hidden" tabindex="-1"
                         autocomplete="off" />
