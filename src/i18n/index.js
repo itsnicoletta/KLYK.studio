@@ -19,7 +19,7 @@ export const pagePaths = {
 
 export const messages = {
   it: {
-    nav: { home: "Home", projects: "Progetti", about: "Chi siamo", contact: "Contatti", cta: "Contattaci" },
+    nav: { home: "Home", projects: "Progetti", about: "Chi siamo", contact: "Contatti", cta: "Contattami" },
     common: {
       bookCall: "Prenota una call di 15 min",
       connect: "Parliamone",
@@ -116,7 +116,7 @@ export const messages = {
     },
   },
   en: {
-    nav: { home: "Home", projects: "Projects", about: "About", contact: "Contact", cta: "Get in touch" },
+    nav: { home: "Home", projects: "Projects", about: "About", contact: "Contact", cta: "Contact me" },
     common: {
       bookCall: "Book a 15-min call",
       connect: "Let's connect",
