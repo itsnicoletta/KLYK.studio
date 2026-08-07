@@ -301,7 +301,18 @@ export function getProjects(locale) {
   return projects.map((project) => ({
     ...project,
     shortDescription: project.shortDescription,
-    ...(project.slug === "atlas-pro-social-media-management-content-strategy"
+    ...(project.slug === "ramzen-ramen-restaurant-conversion-website"
+      ? {
+          H2: "Un concept di sito per ristorante lanciato a maggio 2026, progettato per trasformare un'identità food anime-inspired in azioni chiare di prenotazione e takeaway.",
+          shortDescription:
+            "Concept di sito restaurant result-driven per un brand ramen, costruito attorno a identità visiva forte, menu interattivo, prenotazione tavolo e flusso order-to-go.",
+          description:
+            'Ramzen è stato pubblicato a maggio 2026 come concept di sito per ristorante con una direzione creativa molto marcata. Il progetto non comunica semplicemente "ristorante ramen": costruisce un immaginario riconoscibile attorno al brand attraverso una hero anime-style, una tipografia in stile Asimovian, una palette nero, bianco e rosso, UI bold e immagini food generate con AI. La strategia della pagina è semplice: rendere il brand memorabile prima, poi trasformare quell\'attenzione in azione utile. In un sito food, soprattutto da mobile o da traffico social, la prima vittoria è farsi ricordare. Ramzen usa l\'impatto visivo per creare desiderio e riconoscibilità, mentre la struttura accompagna l\'utente verso menu, prenotazione tavolo e ordine takeaway.',
+          secondDescription:
+            'La UX è costruita come una piccola esperienza interattiva da ristorante, non come una landing statica. Le chip di categoria rendono il menu facile da esplorare senza cambiare pagina, mentre le card prodotto combinano immagine, descrizione, spicy level, prezzo e segnale "Best appreciated" per aiutare l\'utente a confrontare i piatti velocemente. La parte più result-driven è il flusso ordine: selezione quantità, totale dinamico, pickup time, nome, telefono e conferma rendono il percorso takeaway concreto. Book your table segue la stessa logica, con un form breve e orari chiari. Il risultato è una pagina con identità forte, menu leggibile e percorsi di conversione chiari per prenotare e ordinare.',
+          buttonLabel: "Vedi live",
+        }
+      : project.slug === "atlas-pro-social-media-management-content-strategy"
       ? {
           H2: "Gestione social media e content strategy continuativa per un'associazione sportiva, con focus su campi estivi, fiducia dei genitori e community locale.",
           shortDescription:

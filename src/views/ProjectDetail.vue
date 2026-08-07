@@ -85,7 +85,7 @@
       <img
         v-else
         :src="project.coverImage"
-        class="w-full h-full object-cover rounded-4xl aspect-[16/9]"
+        class="w-full h-full object-cover rounded-4xl aspect-video"
         :alt="`Homepage del progetto ${project.title} progettata da KLYK Studio`"
       />
     </div>
@@ -114,7 +114,7 @@
   <div :class="sectionPad" ref="lineEl" class="w-full flex flex-col items-center">
     <div
       id="line"
-      class="w-full lg:w-6/8 mx-auto h-1 rounded-2xl bg-[var(--color-text-primary)]
+      class="w-full lg:w-6/8 mx-auto h-1 rounded-2xl bg-(--color-text-primary)
              my-10
              [@media(min-width:1000px)_and_(max-width:1600px)]:my-8
              max-md:my-8
@@ -135,11 +135,11 @@
       <div
         id="sliderGallery"
         ref="sliderGallery"
-        class="w-[45%] relative rounded-4xl overflow-hidden h-[440px]
-               [@media(min-width:1000px)_and_(max-width:1600px)]:h-[440px]
-               max-lg:w-full max-lg:h-[460px]
-               max-md:h-[380px]
-               max-sm:h-[320px]"
+        class="w-[45%] relative rounded-4xl overflow-hidden h-110
+               [@media(min-width:1000px)_and_(max-width:1600px)]:h-110
+               max-lg:w-full max-lg:h-115
+               max-md:h-95
+               max-sm:h-80"
       >
         <button
           v-for="(image, index) in project.galleryImages"
@@ -162,23 +162,23 @@
                     max-sm:bottom-3 max-sm:right-3 max-sm:gap-3">
           <button
             @click="prevBtn"
-            class="bg-[var(--color-bg-body)] text-[var(--color-text-primary)]
+            class="bg-bg-body text-(--color-text-primary)
                    px-3 py-1.5 pb-2 rounded-[100px] text-2xl
                    [@media(min-width:1000px)_and_(max-width:1600px)]:text-xl
                    [@media(min-width:1000px)_and_(max-width:1600px)]:px-2.5
                    [@media(min-width:1000px)_and_(max-width:1600px)]:py-1
-                   max-sm:px-2.5 max-sm:py-1 max-sm:text-xl cursor-pointer border-2 border-[var(--color-text-primary)]"
+                   max-sm:px-2.5 max-sm:py-1 max-sm:text-xl cursor-pointer border-2 border-(--color-text-primary)"
           >
             ←
           </button>
           <button
             @click="nextBtn"
-            class="bg-[var(--color-bg-body)] text-[var(--color-text-primary)]
+            class="bg-bg-body text-(--color-text-primary)
                    px-3 py-1.5 pb-2 rounded-[100px] text-2xl
                    [@media(min-width:1000px)_and_(max-width:1600px)]:text-xl
                    [@media(min-width:1000px)_and_(max-width:1600px)]:px-2.5
                    [@media(min-width:1000px)_and_(max-width:1600px)]:py-1
-                   max-sm:px-2.5 max-sm:py-1 max-sm:text-xl cursor-pointer border-2 border-[var(--color-text-primary)]"
+                   max-sm:px-2.5 max-sm:py-1 max-sm:text-xl cursor-pointer border-2 border-(--color-text-primary)"
           >
             →
           </button>
@@ -194,7 +194,7 @@
                min-w-0"
       >
         <p
-          class="w-full max-w-[42rem] text-xl leading-relaxed text-base-300 text-justify
+          class="w-full max-w-2xl text-xl leading-relaxed text-base-300 text-justify
                  [@media(min-width:1000px)_and_(max-width:1600px)]:text-lg
                   max-lg:w-full max-md:text-lg max-sm:text-base"
         >
@@ -222,9 +222,9 @@
             href="mailto:klyk.studio@gmail.com"
             target="_blank"
             :size="isMobileOrTablet ? 'small' : 'medium'"
-            class="text-[var(--color-bg-body)]! max-md:w-full"
+            class="text-bg-body! max-md:w-full"
           >
-            <span class="text-[var(--color-bg-body)]">{{ t("common.connect") }}</span>
+            <span class="text-bg-body">{{ t("common.connect") }}</span>
           </Button>
         </div>
       </div>
@@ -260,7 +260,7 @@
         <img
           :src="project.galleryImages[lightboxIndex]"
           :alt="`${project.title} gallery image ${lightboxIndex + 1}`"
-          class="max-h-[78vh] w-auto max-w-full rounded-[2rem] object-contain shadow-2xl"
+          class="max-h-[78vh] w-auto max-w-full rounded-4xl object-contain shadow-2xl"
         />
 
         <div class="flex items-center justify-between w-full max-w-3xl gap-4 text-white/80 max-sm:flex-col">
@@ -346,7 +346,7 @@ useSeo(() => ({
 }));
 
 /* ✅ padding laterale come negli altri dettagli */
-const sectionPad = "px-[88px] max-md:px-[64px] max-sm:px-[28px]";
+const sectionPad = "px-22 max-md:px-16 max-sm:px-7";
 
 // slider (0-based)
 const slideIndex = ref(0);

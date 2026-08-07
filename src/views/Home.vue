@@ -17,10 +17,10 @@
     />
 
     <div id="hero-text" class="relative z-10 w-full h-full flex justify-center items-center flex-row gap-20
-             px-[88px] py-20 pt-0
-             max-lg:flex-col max-lg:gap-8 max-lg:mt-[60px]
-             max-md:px-[64px] max-md:py-14
-             max-sm:px-[28px] max-sm:py-10 max-sm:pt-20
+             px-22 py-20 pt-0
+             max-lg:flex-col max-lg:gap-8 max-lg:mt-15
+             max-md:px-16 max-md:py-14
+             max-sm:px-7 max-sm:py-10 max-sm:pt-20
              pointer-events-none">
       <div class="w-full flex justify-center items-center max-lg:flex-col max-lg:items-center">
         <div id="hero-heading" class="w-1/2 max-w-2xl flex flex-col gap-2 items-start text-left
@@ -46,17 +46,17 @@
         </div>
 
         <div id="hero-3D-wrapper" ref="hero3dWrapperEl" class="relative w-1/2 h-[80vh]
-                 max-lg:w-full max-lg:h-[420px]
-                 max-md:h-[340px]
-                 max-sm:h-[280px] overflow-visible" />
+                 max-lg:w-full max-lg:h-105
+                 max-md:h-85
+                 max-sm:h-70 overflow-visible" />
       </div>
     </div>
   </section>
 
   <!-- SERVICES -->
-  <section id="services" class="px-[88px] py-20 mb-32 flex flex-col gap-8
-           max-md:px-[64px] max-md:py-16 max-md:mb-28 max-md:gap-8
-           max-sm:px-[28px] max-sm:py-14 max-sm:mb-0">
+  <section id="services" class="px-22 py-20 mb-32 flex flex-col gap-8
+           max-md:px-16 max-md:py-16 max-md:mb-28 max-md:gap-8
+           max-sm:px-7 max-sm:py-14 max-sm:mb-0">
     <div class="flex flex-col items-center pb-20 max-md:pb-14 max-sm:pb-10">
       <h3 ref="whyUsTitleEl" class="w-1/2 text-4xl font-display font-medium text-center
                max-lg:w-3/4
@@ -94,9 +94,9 @@
   </section>
 
   <!-- PROJECTS -->
-  <section id="projects" class="px-[88px] py-20 flex flex-col gap-8
-           max-md:px-[64px] max-md:py-16 max-md:gap-8
-           max-sm:px-[28px] max-sm:py-14">
+  <section id="projects" class="px-22 py-20 flex flex-col gap-8
+           max-md:px-16 max-md:py-16 max-md:gap-8
+           max-sm:px-7 max-sm:py-14">
     <div class="flex flex-col items-center pb-20 max-md:pb-14 max-sm:pb-10">
       <h4 ref="projectsTitleEl" class="w-1/2 text-4xl font-display font-medium text-center
                max-lg:w-3/4

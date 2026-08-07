@@ -89,10 +89,43 @@ import img13_1 from './projectsAssets/project13_1.webp'
 import img13_2 from './projectsAssets/project13_2.webp'
 import img13_3 from './projectsAssets/project13_3.webp'
 
+//progetto 14 assets
+import cover14 from './projectsAssets/project14_cover.webp'
+import img14_1 from './projectsAssets/project14_1.webp'
+import img14_2 from './projectsAssets/project14_2.webp'
+import img14_3 from './projectsAssets/project14_3.webp'
+
 
 
 
 export const projects = [
+    {
+        id: 14,
+        slug: 'ramzen-ramen-restaurant-conversion-website',
+        title: 'Ramzen - Ramen Restaurant Website',
+        H2: 'A bold restaurant website concept launched in May 2026, designed to turn a memorable anime-inspired food identity into clear booking and takeaway actions.',
+        year: '2026',
+        shortDescription:
+            'Result-driven restaurant website concept for a ramen brand, built around a strong visual identity, interactive menu browsing, table booking and an order-to-go flow.',
+        description: `Ramzen was released in May 2026 as a restaurant website concept with a deliberately strong direction. The project does not simply communicate "ramen restaurant"; it creates a recognizable world around the brand through an anime-inspired hero, Asimovian-style typography, a black, white and red palette, bold UI elements and AI-generated food imagery.
+    The strategy behind the page is simple: make the brand memorable first, then turn that attention into useful action. In a food experience, especially on mobile or from social traffic, the first win is being remembered. Ramzen uses visual impact to create appetite and recognition, while the structure keeps the user moving toward the menu, table booking and takeaway order paths.`,
+        secondDescription: `The UX is built as a compact interactive restaurant experience rather than a static landing page. Category chips make the menu easy to browse without page changes, while product cards combine image, description, spicy level, price and "Best appreciated" signals so visitors can compare dishes quickly.
+    The most result-driven part is the order flow: quantity selection, dynamic total, pickup time, name, phone number and confirmation make the takeaway path feel concrete. Book your table follows the same logic with a short form and clear time choices. The result is a concept that feels like a real brand, balancing a distinctive ramen/anime visual language with practical conversion paths for booking and ordering.`,
+        skills: [
+            'Web Design',
+            'UX/UI Design',
+            'Restaurant Website',
+            'Conversion Design',
+            'Art Direction',
+            'AI Visual Direction',
+            'Responsive Design',
+            'Interactive Menu'
+        ],
+        coverImage: cover14,
+        galleryImages: [img14_1, img14_2, img14_3],
+        link: 'https://thefroggystudio.com/demo/ramzen',
+        buttonLabel: 'View Live Demo'
+    },
     {
         id: 13,
         slug: 'atlas-pro-social-media-management-content-strategy',

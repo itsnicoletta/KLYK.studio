@@ -4,12 +4,12 @@
 
     <!-- TIMELINE -->
     <aside class="fixed top-0 left-0 h-screen
-           w-[160px] z-9
-           border-r-2 border-[var(--color-body-primary)]
+           w-40 z-9
+           border-r-2 border-(--color-body-primary)
            flex items-center justify-center
            pointer-events-none
-           max-lg:w-[140px]
-           max-sm:w-[30px] max-sm:border-none" aria-label="Projects years navigation">
+           max-lg:w-35
+           max-sm:w-7.5 max-sm:border-none" aria-label="Projects years navigation">
         <div class="relative h-full w-full flex items-center justify-center">
             <nav class="relative h-full w-full flex flex-col items-center justify-center
                py-10 gap-6 pointer-events-auto
@@ -21,8 +21,8 @@
                  max-sm:gap-6" @click="scrollToYear(year)">
                     <span class="h-3 w-3 rounded-full border-2 transition-transform duration-200 group-hover:scale-110
                    max-lg:h-2.5 max-lg:w-2.5" :class="activeYear === year
-                    ? 'bg-[var(--color-text-primary)] border-[var(--color-text-primary)]'
-                    : 'bg-[var(--color-bg-body)] border-[var(--color-text-primary)]'" aria-hidden="true"></span>
+                    ? 'bg-(--color-text-primary) border-(--color-text-primary)'
+                    : 'bg-bg-body border-(--color-text-primary)'" aria-hidden="true"></span>
 
                     <span class="text-sm font-medium tracking-wide transition-opacity duration-200
                    max-lg:text-[11px]
@@ -36,9 +36,9 @@
     </aside>
 
     <!-- ARCHIVE -->
-    <section id="projectsArchive" class="mt-40 px-[88px] py-20 flex flex-col gap-8
-           max-lg:mt-28 max-lg:px-[80px] max-lg:py-14 max-lg:gap-8
-           max-sm:mt-20 max-sm:px-[28px] max-sm:py-10 max-sm:gap-5">
+    <section id="projectsArchive" class="mt-40 px-22 py-20 flex flex-col gap-8
+           max-lg:mt-28 max-lg:px-20 max-lg:py-14 max-lg:gap-8
+           max-sm:mt-20 max-sm:px-7 max-sm:py-10 max-sm:gap-5">
         <header class="flex flex-col items-center pb-20 max-lg:pb-10 max-sm:pb-6">
             <h1 ref="projectsTitleEl" class="text-4xl font-display font-medium text-center w-1/2
                max-lg:w-3/4
@@ -51,8 +51,8 @@
         <div class="flex flex-col gap-16 max-lg:gap-14 max-sm:gap-8">
             <section v-for="group in projectsByYear" :key="group.year" :id="`year-${group.year}`"
                 :ref="setYearSectionRef(group.year)" class="scroll-mt-40 max-lg:scroll-mt-32 max-sm:scroll-mt-24">
-                <div class="flex items-end justify-between mb-8 pl-[190px]
-                 max-lg:mb-6 max-lg:pl-[140px]
+                <div class="flex items-end justify-between mb-8 pl-47.5
+                 max-lg:mb-6 max-lg:pl-35
                  max-sm:mb-4 max-sm:pl-0 max-sm:flex-col max-sm:items-end max-sm:gap-2">
                     <h5 class="text-3xl font-display font-medium max-md:text-4xl">
                         {{ group.year }}
